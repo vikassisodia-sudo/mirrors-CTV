@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mirrors CTV — Silverpush 2025–26</title>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -927,6 +928,17 @@ body{
 </div>
 <div class="progress-bar" id="progressBar"></div>
 
+<!-- Download PPT button -->
+<button onclick="downloadPPT()" style="position:fixed;bottom:24px;right:24px;z-index:200;
+  display:flex;align-items:center;gap:7px;padding:9px 18px;
+  background:#0f2044;color:white;border:none;border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,0,0,0.25);transition:all .2s;" id="pptBtn"
+  onmouseover="this.style.background='#4eaf9c'" onmouseout="this.style.background='#0f2044'">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+  Download PPT
+</button>
+
 <script>
 const slides = document.querySelectorAll('.slide');
 const total  = slides.length;
@@ -978,6 +990,156 @@ document.addEventListener('touchend',   e => {
 });
 
 updateUI();
+
+// ── PPT Download ──
+function downloadPPT() {
+  const btn = document.getElementById('pptBtn');
+  btn.textContent = 'Generating…'; btn.disabled = true;
+  const pptx = new PptxGenJS();
+  pptx.layout = 'LAYOUT_WIDE';
+  const SP='4eaf9c',NAVY='0f2044',MID='4b5563',DIM='9ca3af',WHITE='FFFFFF';
+  const W=13.33,H=7.5;
+
+  function shell(title,tag,sub){
+    const s=pptx.addSlide();
+    s.background={color:WHITE};
+    s.addShape(pptx.ShapeType.rect,{x:0,y:0,w:W,h:0.07,fill:{color:SP}});
+    s.addText('silverpush',{x:0.4,y:0.1,w:2.5,h:0.28,fontSize:12,bold:true,color:NAVY,fontFace:'Calibri'});
+    if(tag) s.addText(tag,{x:W-3.2,y:0.1,w:2.8,h:0.28,fontSize:10,color:SP,bold:true,align:'right',fontFace:'Calibri'});
+    s.addText(title,{x:0.4,y:0.45,w:W-0.8,h:0.65,fontSize:24,bold:true,color:NAVY,fontFace:'Calibri'});
+    if(sub) s.addText(sub,{x:0.4,y:1.05,w:W-0.8,h:0.24,fontSize:11,color:DIM,fontFace:'Calibri'});
+    s.addShape(pptx.ShapeType.rect,{x:0.4,y:sub?1.33:1.1,w:W-0.8,h:0.04,fill:{color:SP}});
+    s.addShape(pptx.ShapeType.rect,{x:0,y:H-0.22,w:W,h:0.22,fill:{color:NAVY}});
+    s.addText('Silverpush — Mirrors CTV  |  2025–26 Sales Presentation',{x:0.3,y:H-0.2,w:W-0.6,h:0.17,fontSize:8,color:WHITE,fontFace:'Calibri'});
+    return s;
+  }
+
+  // ── S1: Cover ──
+  const s0=pptx.addSlide(); s0.background={color:NAVY};
+  s0.addShape(pptx.ShapeType.rect,{x:0,y:0,w:0.1,h:H,fill:{color:SP}});
+  s0.addText('silverpush',{x:0.3,y:0.35,w:4,h:0.38,fontSize:14,bold:true,color:SP,fontFace:'Calibri'});
+  s0.addText('2025 – 26 Sales Presentation',{x:0.3,y:0.78,w:8,h:0.28,fontSize:11,color:'718096',fontFace:'Calibri'});
+  s0.addText('Mirrors CTV',{x:0.3,y:1.3,w:10,h:1.6,fontSize:64,bold:true,color:WHITE,fontFace:'Calibri'});
+  s0.addText('Programmatic CTV, made smarter.',{x:0.3,y:3.0,w:9,h:0.45,fontSize:18,color:SP,fontFace:'Calibri',italic:true});
+  s0.addShape(pptx.ShapeType.rect,{x:0.3,y:3.55,w:8,h:0.04,fill:{color:SP},transparency:60});
+  s0.addText('Silverpush Mirrors CTV delivers contextual enrichment at the signal layer — enabling smarter targeting, transparent reporting, and full-funnel efficiency across programmatic CTV inventory.',{x:0.3,y:3.75,w:8.5,h:1.4,fontSize:13,color:'a0aec0',fontFace:'Calibri',valign:'top',wrap:true});
+  s0.addShape(pptx.ShapeType.rect,{x:0,y:H-0.22,w:W,h:0.22,fill:{color:'111827'}});
+  s0.addText('Silverpush — Mirrors CTV  |  2025–26 Sales Presentation',{x:0.3,y:H-0.2,w:W-0.6,h:0.17,fontSize:8,color:'4b5563',fontFace:'Calibri'});
+
+  // ── S2: Agenda ──
+  const s1=shell('What We\'ll Cover Today','Agenda','Click any item to navigate during the presentation');
+  const ags=[{n:'1',t:'Introduction',s:'What is Mirrors CTV'},{n:'2',t:'Current Partnerships',s:'TTD · Pubmatic · IRIS.TV'},{n:'3',t:'Enrichment Flow',s:'Interactive live demo'},{n:'4',t:'Buying Methods',s:'4 activation models'},{n:'5',t:'Which Method for You?',s:'Decision guide'},{n:'6',t:'Reporting Dashboard',s:'Power BI overview'},{n:'7',t:'Reporting Challenges',s:'Why CTV data is hard'}];
+  const aW=5.92,aH=0.72,aGap=0.1,aY=1.48;
+  ags.forEach((ag,i)=>{
+    const col=i<4?0:1, row=i<4?i:i-4;
+    const ax=0.4+col*(aW+0.2), ay=aY+row*(aH+aGap);
+    s1.addShape(pptx.ShapeType.rect,{x:ax,y:ay,w:aW,h:aH,fill:{color:'f8fafc'},line:{color:'e5e7eb',pt:1}});
+    s1.addShape(pptx.ShapeType.rect,{x:ax,y:ay,w:0.45,h:aH,fill:{color:SP},transparency:15});
+    s1.addText(ag.n,{x:ax+0.02,y:ay+0.18,w:0.41,h:0.38,fontSize:18,bold:true,color:WHITE,align:'center',fontFace:'Calibri'});
+    s1.addText(ag.t,{x:ax+0.55,y:ay+0.1,w:aW-0.65,h:0.28,fontSize:13,bold:true,color:NAVY,fontFace:'Calibri'});
+    s1.addText(ag.s,{x:ax+0.55,y:ay+0.4,w:aW-0.65,h:0.22,fontSize:10,color:DIM,fontFace:'Calibri'});
+  });
+
+  // ── S3: Introduction ──
+  const s2=shell('Programmatic CTV, made smarter.','01 · Introduction');
+  s2.addText('Mirrors CTV is Silverpush\'s contextual intelligence layer for programmatic CTV advertising.\nIt enriches raw CTV ad requests with content metadata in real time — before the bid.',{x:0.4,y:1.22,w:7.5,h:0.65,fontSize:12,color:MID,fontFace:'Calibri',valign:'top',wrap:true});
+  s2.addText('What We Do',{x:0.4,y:2.0,w:7.5,h:0.3,fontSize:13,bold:true,color:NAVY,fontFace:'Calibri'});
+  ['Receive raw CTV bid requests from SSPs and DSPs','Run through Data Sanity → Content ID Model → AI Engine','Deliver enriched signals: Genre, Title, Series, Rating, Language','Enable contextual targeting without cookies or device IDs'].forEach((t,i)=>s2.addText(t,{x:0.6,y:2.38+i*0.38,w:7.2,h:0.33,fontSize:11.5,color:MID,fontFace:'Calibri',bullet:{type:'bullet',code:'25B8'}}));
+  s2.addText('Why It Matters',{x:0.4,y:3.95,w:7.5,h:0.3,fontSize:13,bold:true,color:NAVY,fontFace:'Calibri'});
+  s2.addText('CTV is the fastest-growing programmatic channel — but blind buying is still common. Mirrors turns every ad request into a context-aware signal.',{x:0.6,y:4.3,w:7.2,h:0.6,fontSize:11.5,color:MID,fontFace:'Calibri',wrap:true});
+  [{label:'Cookie-free',sub:'Context-aware targeting',bg:'eaf6f3',border:SP},{label:'Milliseconds',sub:'Enrichment at bid time',bg:'eff6ff',border:'2563eb'},{label:'100% Programmatic',sub:'No manual tagging',bg:'f5f3ff',border:'7c3aed'}].forEach((sc,i)=>{
+    const sx=8.3,sy=1.22+i*1.8,sw=4.6,sh=1.65;
+    s2.addShape(pptx.ShapeType.rect,{x:sx,y:sy,w:sw,h:sh,fill:{color:sc.bg},line:{color:sc.border,pt:1.5}});
+    s2.addShape(pptx.ShapeType.rect,{x:sx,y:sy,w:sw,h:0.06,fill:{color:sc.border}});
+    s2.addText(sc.label,{x:sx+0.15,y:sy+0.2,w:sw-0.3,h:0.55,fontSize:22,bold:true,color:NAVY,fontFace:'Calibri'});
+    s2.addText(sc.sub,{x:sx+0.15,y:sy+0.82,w:sw-0.3,h:0.3,fontSize:11,color:MID,fontFace:'Calibri'});
+  });
+
+  // ── S4: Partnerships ──
+  const s3=shell('Current Partnerships','02 · Partnerships','Mirrors CTV operates through an integrated network of DSP, SSP, and content data partners');
+  [{color:'2563eb',bg:'eff6ff',label:'DSP PARTNER',title:'The Trade Desk',desc:'Contextual segment activation via TTD Data Marketplace.\n\nSupports Method 1 (SSP Deal + TTD Segment) and Method 3 (Segment Only on TTD).',tag:'Trade Desk'},{color:'dc2626',bg:'fef2f2',label:'SSP PARTNER',title:'Pubmatic',desc:'Deal creation + contextual segment management on the SSP side.\n\nSupports 50+ DSPs through Pubmatic\'s buyer network.\nEnables Method 2 (Pubmatic Deal + Pubmatic Segment).',tag:'50+ DSPs'},{color:'d97706',bg:'fffbeb',label:'CONTENT DATA',title:'IRIS.TV',desc:'Content intelligence via IRIS-partnered SSPs.\nData margin only — IRIS retains media margin.\n\nAvailable SSPs: Pubmatic, Magnite, Equative, Xander, Beachfront.',tag:'Method 4'}].forEach((p,i)=>{
+    const px=0.4+i*(4.2+0.2),py=1.55,pw=4.2,ph=5.1;
+    s3.addShape(pptx.ShapeType.rect,{x:px,y:py,w:pw,h:ph,fill:{color:p.bg},line:{color:p.color,pt:1.5}});
+    s3.addShape(pptx.ShapeType.rect,{x:px,y:py,w:pw,h:0.06,fill:{color:p.color}});
+    s3.addText(p.label,{x:px+0.15,y:py+0.14,w:pw-0.3,h:0.22,fontSize:9,bold:true,color:p.color,fontFace:'Calibri',charSpacing:1.5});
+    s3.addText(p.title,{x:px+0.15,y:py+0.4,w:pw-0.3,h:0.5,fontSize:22,bold:true,color:NAVY,fontFace:'Calibri'});
+    s3.addShape(pptx.ShapeType.rect,{x:px+0.15,y:py+1.0,w:pw-0.3,h:0.03,fill:{color:p.color},transparency:50});
+    s3.addText(p.desc,{x:px+0.15,y:py+1.12,w:pw-0.3,h:3.5,fontSize:11,color:MID,fontFace:'Calibri',valign:'top',wrap:true});
+    s3.addShape(pptx.ShapeType.rect,{x:px+0.15,y:py+ph-0.4,w:1.6,h:0.26,fill:{color:p.color},transparency:80,line:{color:p.color,pt:1}});
+    s3.addText(p.tag,{x:px+0.15,y:py+ph-0.4,w:1.6,h:0.26,fontSize:9,bold:true,color:p.color,align:'center',fontFace:'Calibri'});
+  });
+
+  // ── S5: Enrichment Flow ──
+  const s4=shell('How Enrichment Works','03 · Enrichment Flow','From a raw CTV ad request to a fully enriched, context-ready signal — in milliseconds.');
+  [{phase:'PHASE 1',title:'CTV Device Signal',desc:'User turns on TV → CTV device generates ad request → Sent to Data Partners (TTD, Pubmatic, IRIS) simultaneously',color:'2563eb',bg:'eff6ff'},{phase:'DATA SANITY',title:'Validates Publisher Data',desc:'Checks content object quality:\nFull Data / Partial Data / Mixed-Up Fields / Bare Minimum\nOnly valid requests proceed.',color:'059669',bg:'ecfdf5'},{phase:'FORK',title:'Cache or New?',desc:'Already-processed: served from cache instantly.\nNew requests: routed to Content Identification Model.',color:'d97706',bg:'fffbeb'},{phase:'CONTENT ID',title:'Identification Model',desc:'Cross-references IMDb, TvDB, IRIS ID, Open Sources to identify title, series, episode, genre.',color:'7c3aed',bg:'f5f3ff'},{phase:'AI ENGINE',title:'Enrichment Output',desc:'Produces final enriched metadata:\nGenre · Rating · Series · Episode · Language · Content ID',color:'dc2626',bg:'fef2f2'}].forEach((p,i)=>{
+    const sx=0.4+i*2.56,sy=1.55,sw=2.36,sh=4.0;
+    s4.addShape(pptx.ShapeType.rect,{x:sx,y:sy,w:sw,h:sh,fill:{color:p.bg},line:{color:p.color,pt:1.5}});
+    s4.addShape(pptx.ShapeType.rect,{x:sx,y:sy,w:sw,h:0.06,fill:{color:p.color}});
+    s4.addText(p.phase,{x:sx+0.1,y:sy+0.12,w:sw-0.2,h:0.22,fontSize:8.5,bold:true,color:p.color,fontFace:'Calibri',charSpacing:1.2});
+    s4.addText(p.title,{x:sx+0.1,y:sy+0.38,w:sw-0.2,h:0.52,fontSize:13,bold:true,color:NAVY,fontFace:'Calibri',wrap:true});
+    s4.addShape(pptx.ShapeType.rect,{x:sx+0.1,y:sy+0.97,w:sw-0.2,h:0.03,fill:{color:p.color},transparency:50});
+    s4.addText(p.desc,{x:sx+0.1,y:sy+1.1,w:sw-0.2,h:2.75,fontSize:10.5,color:MID,fontFace:'Calibri',valign:'top',wrap:true});
+    if(i<4) s4.addShape(pptx.ShapeType.rect,{x:sx+sw+0.04,y:sy+sh/2-0.04,w:0.16,h:0.08,fill:{color:DIM}});
+  });
+  s4.addText('Output: Enriched signal → TTD (DSP)  ·  Pubmatic (SSP)  ·  IRIS Partnered SSP',{x:0.4,y:5.7,w:10,h:0.26,fontSize:11,bold:true,color:NAVY,fontFace:'Calibri'});
+  s4.addText('Interactive Demo: animation.html',{x:0.4,y:6.02,w:W-0.8,h:0.24,fontSize:10,color:'6b7280',fontFace:'Calibri',italic:true});
+
+  // ── S6: Buying Methods ──
+  const s5=shell('4 Activation Models','04 · Buying Methods','Choose the setup that fits your DSP, supply preference, and margin goals');
+  [{num:'1',color:'2563eb',bg:'eff6ff',title:'SSP Deal + TTD Segment',desc:'SP shares a deal from the client\'s preferred SSP; client activates SP contextual segments on TTD. Best for TTD clients wanting both margins.',t1:'The Trade Desk',t2:'Media + Data Margin'},{num:'2',color:'dc2626',bg:'fef2f2',title:'Pubmatic Deal + Pubmatic Segment',desc:'SP manages both deal and contextual segments on Pubmatic SSP side. Client activates deal on their DSP. Works across 50+ DSPs.',t1:'Pubmatic',t2:'Media + Data Margin'},{num:'3',color:'d97706',bg:'fffbeb',title:'Contextual Segment Only on TTD',desc:'Simplest setup. Client adds SP contextual segments on TTD and manages own supply. No deal involved — data margin only.',t1:'The Trade Desk',t2:'Data Margin Only'},{num:'4',color:'7c3aed',bg:'f5f3ff',title:'IRIS Deal + IRIS Segment',desc:'SP uses IRIS integration through an IRIS-partnered SSP. Note: IRIS does not share media margin with SP.',t1:'IRIS.TV',t2:'Data Margin Only'}].forEach((m,i)=>{
+    const mx=i%2===0?0.4:6.77,my=i<2?1.5:3.95,mw=6.16,mh=2.3;
+    s5.addShape(pptx.ShapeType.rect,{x:mx,y:my,w:mw,h:mh,fill:{color:m.bg},line:{color:m.color,pt:1}});
+    s5.addShape(pptx.ShapeType.rect,{x:mx,y:my,w:0.55,h:0.55,fill:{color:m.color}});
+    s5.addText(m.num,{x:mx,y:my+0.07,w:0.55,h:0.42,fontSize:20,bold:true,color:WHITE,align:'center',fontFace:'Calibri'});
+    s5.addText(m.title,{x:mx+0.65,y:my+0.1,w:mw-0.75,h:0.38,fontSize:12.5,bold:true,color:NAVY,fontFace:'Calibri',wrap:true});
+    s5.addText(m.desc,{x:mx+0.15,y:my+0.56,w:mw-0.25,h:1.05,fontSize:10.5,color:MID,fontFace:'Calibri',valign:'top',wrap:true});
+    s5.addShape(pptx.ShapeType.rect,{x:mx+0.15,y:my+mh-0.36,w:2.3,h:0.24,fill:{color:WHITE},line:{color:m.color,pt:1}});
+    s5.addText(m.t1,{x:mx+0.15,y:my+mh-0.36,w:2.3,h:0.24,fontSize:9,bold:true,color:m.color,align:'center',fontFace:'Calibri'});
+    s5.addShape(pptx.ShapeType.rect,{x:mx+2.6,y:my+mh-0.36,w:2.5,h:0.24,fill:{color:'d1fae5'},line:{color:'059669',pt:1}});
+    s5.addText(m.t2,{x:mx+2.6,y:my+mh-0.36,w:2.5,h:0.24,fontSize:9,bold:true,color:'065f46',align:'center',fontFace:'Calibri'});
+  });
+  s5.addText('Full guide + Advisor Tool: buying-methods.html',{x:0.4,y:6.42,w:W-0.8,h:0.24,fontSize:10,color:'6b7280',fontFace:'Calibri',italic:true});
+
+  // ── S7: Which Method ──
+  const s6=shell('Which Method is Right for You?','05 · Method Guide','Match your client\'s setup to the right activation model');
+  [{color:'2563eb',bg:'eff6ff',title:'Client uses The Trade Desk',rows:['Wants media + data margin → Method 1: SSP Deal + TTD Segment','Has own supply, data only → Method 3: Contextual Segment on TTD']},{color:'dc2626',bg:'fef2f2',title:'Client uses any of 50+ DSPs',rows:['Wants managed supply + data → Method 2: Pubmatic Deal + Segment','Non-TTD, data only → Method 4: IRIS Deal + Segment']},{color:SP,bg:'eaf6f3',title:'Revenue at a Glance',rows:['Methods 1 & 2 → Media + Data Margin','Methods 3 & 4 → Data Margin Only','TTD Clients → Methods 1, 3  |  Multi-DSP → Method 2']},{color:'d97706',bg:'fffbeb',title:'Key Constraints',rows:['Method 1: TTD only as DSP','Method 2: Pubmatic only as SSP','Method 4: IRIS-partnered SSPs only','Non-TTD + non-Pubmatic SSP → No method available']}].forEach((d,i)=>{
+    const dx=i%2===0?0.4:6.77,dy=i<2?1.52:3.97,dw=6.16,dh=2.3;
+    s6.addShape(pptx.ShapeType.rect,{x:dx,y:dy,w:dw,h:dh,fill:{color:d.bg},line:{color:d.color,pt:1.5}});
+    s6.addShape(pptx.ShapeType.rect,{x:dx,y:dy,w:0.06,h:dh,fill:{color:d.color}});
+    s6.addText(d.title,{x:dx+0.15,y:dy+0.1,w:dw-0.25,h:0.3,fontSize:13,bold:true,color:d.color,fontFace:'Calibri'});
+    d.rows.forEach((r,ri)=>s6.addText(r,{x:dx+0.25,y:dy+0.48+ri*0.42,w:dw-0.4,h:0.37,fontSize:10.5,color:MID,fontFace:'Calibri',bullet:{type:'bullet',code:'2192'}}));
+  });
+  s6.addText('Interactive Advisor Tool: buying-methods.html',{x:0.4,y:6.42,w:W-0.8,h:0.24,fontSize:10,color:'6b7280',fontFace:'Calibri',italic:true});
+
+  // ── S8: Reporting ──
+  const s7=shell('Reporting Dashboard','06 · Reporting','Real-time performance visibility across all campaigns and contextual segments');
+  s7.addShape(pptx.ShapeType.rect,{x:0.4,y:1.5,w:6.0,h:1.0,fill:{color:'eaf6f3'},line:{color:SP,pt:1}});
+  s7.addText('DIMENSIONS',{x:0.55,y:1.6,w:5.7,h:0.22,fontSize:9,bold:true,color:SP,fontFace:'Calibri',charSpacing:1.2});
+  s7.addText('Campaign  ·  Publisher  ·  Content Genre  ·  Rating  ·  Language  ·  Platform',{x:0.55,y:1.86,w:5.7,h:0.5,fontSize:11,color:NAVY,fontFace:'Calibri',wrap:true});
+  s7.addShape(pptx.ShapeType.rect,{x:6.6,y:1.5,w:6.3,h:1.0,fill:{color:'eff6ff'},line:{color:'2563eb',pt:1}});
+  s7.addText('METRICS',{x:6.75,y:1.6,w:6.0,h:0.22,fontSize:9,bold:true,color:'2563eb',fontFace:'Calibri',charSpacing:1.2});
+  s7.addText('Impressions  ·  Total Spend  ·  CPM  ·  VCR  ·  Win Rate  ·  Content Coverage %',{x:6.75,y:1.86,w:6.0,h:0.5,fontSize:11,color:NAVY,fontFace:'Calibri',wrap:true});
+  s7.addShape(pptx.ShapeType.rect,{x:0.4,y:2.65,w:W-0.8,h:3.88,fill:{color:'f8fafc'},line:{color:'e5e7eb',pt:1}});
+  s7.addShape(pptx.ShapeType.rect,{x:0.4,y:2.65,w:W-0.8,h:0.06,fill:{color:'2563eb'}});
+  s7.addText('Power BI Dashboard — Live Campaign Analytics',{x:0.55,y:2.77,w:11,h:0.38,fontSize:16,bold:true,color:NAVY,fontFace:'Calibri'});
+  [0.8,1.5,1.1,2.0,1.4,1.9,0.9,1.6,1.2,1.8].forEach((h2,i)=>s7.addShape(pptx.ShapeType.rect,{x:1.2+i*1.18,y:6.53-h2,w:0.85,h:h2,fill:{color:i%2===0?SP:'2563eb'},transparency:35}));
+  s7.addText('Dashboard link: app.powerbi.com/view?r=eyJrIjoiZTE1NDA3Y2UtZGFhZC00Yjk1LWFjMmEtNmEzNzBhMjI4ODE0IiwidCI6IjA0YjQ2NzEwLTU2NTktNGY0Mi04M2FhLTllYTUzMjhkYjJjNSJ9',{x:0.4,y:6.6,w:W-0.8,h:0.3,fontSize:9,color:'6b7280',fontFace:'Calibri',italic:true,wrap:true});
+
+  // ── S9: Challenges ──
+  const s8=shell('Why Content Reporting is Challenging','07 · Challenges','The structural complexity of CTV makes transparent reporting uniquely difficult');
+  [{color:'d97706',bg:'fffbeb',title:'Publisher Data Quality',desc:'Publishers vary in how they populate the OpenRTB content object: Full Data / Partial Data / Mixed-Up Fields / Bare Minimum'},{color:'7c3aed',bg:'f5f3ff',title:'Parameter Values Vary',desc:'Some publishers put Series + Episode inside the Title field; others leave Genre and Rating completely empty'},{color:'2563eb',bg:'eff6ff',title:'TTD Content Dimensions Limited',desc:'TTD supports Content as a reporting dimension — but missing publisher params prevent full impression mapping'},{color:'dc2626',bg:'fef2f2',title:'Only 2%–8% Content Coverage',desc:'From past campaigns analysed: only 2–8% of impressions have content details available'},{color:'059669',bg:'ecfdf5',title:'No Win/Loss Feedback',desc:'As a data partner, Silverpush does not receive impression win/loss reports — backtracking is not possible'},{color:SP,bg:'eaf6f3',title:'Our Approach',desc:'Mirrors Content ID Model recovers missing metadata via IMDb, TvDB, IRIS ID — expanding content-mappable inventory'}].forEach((c,i)=>{
+    const cx=0.4+(i%3)*(4.24+0.17),cy=1.5+Math.floor(i/3)*2.4,cw=4.24,ch=2.2;
+    s8.addShape(pptx.ShapeType.rect,{x:cx,y:cy,w:cw,h:ch,fill:{color:c.bg},line:{color:c.color,pt:1}});
+    s8.addShape(pptx.ShapeType.rect,{x:cx,y:cy,w:cw,h:0.06,fill:{color:c.color}});
+    s8.addText(c.title,{x:cx+0.15,y:cy+0.14,w:cw-0.25,h:0.34,fontSize:12.5,bold:true,color:NAVY,fontFace:'Calibri',wrap:true});
+    s8.addShape(pptx.ShapeType.rect,{x:cx+0.15,y:cy+0.55,w:cw-0.3,h:0.03,fill:{color:c.color},transparency:60});
+    s8.addText(c.desc,{x:cx+0.15,y:cy+0.68,w:cw-0.3,h:1.42,fontSize:10.5,color:MID,fontFace:'Calibri',valign:'top',wrap:true});
+  });
+
+  pptx.writeFile({fileName:'Mirrors-CTV-Sales-Presentation-2025-26.pptx'})
+    .then(()=>{btn.innerHTML='✓ Downloaded';setTimeout(()=>{btn.innerHTML='⬇ Download PPT';btn.disabled=false;},2000);})
+    .catch(()=>{btn.innerHTML='⬇ Download PPT';btn.disabled=false;});
+}
 </script>
 </body>
 </html>
