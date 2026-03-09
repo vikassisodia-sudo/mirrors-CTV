@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silverpush — CTV Buying Methods</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafbfd;
+    --white: #ffffff;
+    --ink: #111827;
+    --ink-mid: #4b5563;
+    --ink-light: #9ca3af;
+    --ink-faint: #d1d5db;
+    --border: #e5e7eb;
+    --border-light: #f3f4f6;
+
+    --m1: #2563eb; --m1-bg: #eff6ff; --m1-border: #bfdbfe; --m1-accent: #1d4ed8;
+    --m2: #059669; --m2-bg: #ecfdf5; --m2-border: #a7f3d0; --m2-accent: #047857;
+    --m3: #d97706; --m3-bg: #fffbeb; --m3-border: #fde68a; --m3-accent: #b45309;
+    --m4: #7c3aed; --m4-bg: #f5f3ff; --m4-border: #c4b5fd; --m4-accent: #6d28d9;
+
+    --green: #059669; --green-bg: #ecfdf5;
+    --red: #dc2626; --red-bg: #fef2f2;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:'Manrope',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+
+  .container { max-width:960px; margin:0 auto; padding:0 24px; }
+
+  /* ═══════════ HERO ═══════════ */
+  .hero { padding:52px 0 40px; text-align:center; position:relative; overflow:hidden; }
+  .hero::before {
+    content:''; position:absolute; top:-140px; left:50%; transform:translateX(-50%);
+    width:900px; height:900px;
+    background:radial-gradient(circle,rgba(37,99,235,0.035) 0%,rgba(5,150,105,0.02) 40%,transparent 70%);
+    pointer-events:none;
+  }
+
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:6px 16px 6px 8px; background:var(--white);
+    border:1px solid var(--border); border-radius:100px;
+    font-size:12px; font-weight:600; color:var(--ink-mid);
+    margin-bottom:18px; box-shadow:0 1px 3px rgba(0,0,0,0.04);
+    opacity:0; animation:fadeUp .7s .1s ease-out forwards;
+  }
+  .hero-badge .dot {
+    width:24px; height:24px; background:linear-gradient(135deg,#2563eb,#059669);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:11px; font-weight:800; font-family:'IBM Plex Mono',monospace;
+  }
+
+  .hero h1 {
+    font-family:'Fraunces',serif; font-size:clamp(28px,5vw,48px); font-weight:800;
+    letter-spacing:-.5px; line-height:1.1; color:var(--ink); margin-bottom:12px;
+    opacity:0; animation:fadeUp .7s .2s ease-out forwards;
+  }
+  .hero h1 em {
+    font-style:italic;
+    background:linear-gradient(135deg,#2563eb,#059669);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .hero p { font-size:16px; color:var(--ink-mid); max-width:540px; margin:0 auto; opacity:0; animation:fadeUp .7s .3s ease-out forwards; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ═══════════ NAV TABS ═══════════ */
+  .tabs {
+    display:flex; justify-content:center; gap:4px;
+    margin-bottom:40px; opacity:0; animation:fadeUp .6s .4s ease-out forwards;
+  }
+  .tab-btn {
+    padding:10px 28px; border:1.5px solid var(--border); border-radius:10px;
+    background:var(--white); color:var(--ink-mid);
+    font-family:'Manrope',sans-serif; font-size:14px; font-weight:700;
+    cursor:pointer; transition:all .2s;
+  }
+  .tab-btn:hover { border-color:var(--m1-border); color:var(--ink); }
+  .tab-btn.active {
+    background:var(--ink); color:#fff; border-color:var(--ink);
+  }
+
+  .tab-content { display:none; }
+  .tab-content.active { display:block; animation:fadeUp .4s ease-out; }
+
+  /* ═══════════ KEY CONCEPTS ═══════════ */
+  .concepts { display:flex; justify-content:center; gap:28px; flex-wrap:wrap; margin-bottom:36px; }
+  .concept { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-mid); }
+  .concept-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; }
+  .concept-icon.c1 { background:var(--m1-bg); }
+  .concept-icon.c2 { background:var(--m2-bg); }
+  .concept-icon.c3 { background:var(--m4-bg); }
+  .concept strong { color:var(--ink); font-weight:700; }
+
+  /* ═══════════ METHOD CARDS ═══════════ */
+  .methods-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:44px; }
+  @media(max-width:700px){ .methods-grid{grid-template-columns:1fr;} }
+
+  .mc {
+    background:var(--white); border:1.5px solid var(--border); border-radius:14px;
+    overflow:hidden; transition:all .3s; box-shadow:0 1px 3px rgba(0,0,0,0.03);
+  }
+  .mc:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(0,0,0,0.07); }
+  .mc.m1:hover{border-color:var(--m1-border);} .mc.m2:hover{border-color:var(--m2-border);}
+  .mc.m3:hover{border-color:var(--m3-border);} .mc.m4:hover{border-color:var(--m4-border);}
+
+  .mc-head { padding:20px 22px 0; display:flex; align-items:flex-start; gap:12px; }
+  .mc-num {
+    width:40px; height:40px; border-radius:10px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-size:18px; font-weight:800; color:#fff;
+  }
+  .m1 .mc-num{background:linear-gradient(135deg,#2563eb,#3b82f6);}
+  .m2 .mc-num{background:linear-gradient(135deg,#059669,#10b981);}
+  .m3 .mc-num{background:linear-gradient(135deg,#d97706,#f59e0b);}
+  .m4 .mc-num{background:linear-gradient(135deg,#7c3aed,#8b5cf6);}
+
+  .mc-label {
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:500;
+    text-transform:uppercase; letter-spacing:1.5px; margin-bottom:2px;
+  }
+  .m1 .mc-label{color:var(--m1);} .m2 .mc-label{color:var(--m2);}
+  .m3 .mc-label{color:var(--m3);} .m4 .mc-label{color:var(--m4);}
+
+  .mc-title { font-family:'Fraunces',serif; font-size:16px; font-weight:700; line-height:1.25; color:var(--ink); }
+
+  .mc-body { padding:14px 22px 18px; }
+  .mc-desc { font-size:13px; color:var(--ink-mid); line-height:1.6; margin-bottom:14px; }
+
+  .mc-flow {
+    display:flex; align-items:center; gap:0; flex-wrap:wrap;
+    padding:10px 12px; border-radius:8px; margin-bottom:14px;
+  }
+  .m1 .mc-flow{background:var(--m1-bg);} .m2 .mc-flow{background:var(--m2-bg);}
+  .m3 .mc-flow{background:var(--m3-bg);} .m4 .mc-flow{background:var(--m4-bg);}
+
+  .fs {
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:500;
+    padding:3px 8px; border-radius:5px; background:var(--white); white-space:nowrap;
+  }
+  .m1 .fs{color:var(--m1-accent);border:1px solid var(--m1-border);}
+  .m2 .fs{color:var(--m2-accent);border:1px solid var(--m2-border);}
+  .m3 .fs{color:var(--m3-accent);border:1px solid var(--m3-border);}
+  .m4 .fs{color:var(--m4-accent);border:1px solid var(--m4-border);}
+  .fa { margin:0 3px; font-size:10px; color:var(--ink-light); }
+
+  .mc-details { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  .di { display:flex; align-items:center; gap:5px; font-size:11.5px; color:var(--ink-mid); }
+  .dc { width:16px; height:16px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; flex-shrink:0; }
+  .dc.y { background:var(--green-bg); color:var(--green); }
+  .dc.n { background:var(--red-bg); color:var(--red); }
+
+  .mc-foot {
+    padding:12px 22px; border-top:1px solid var(--border-light);
+    display:flex; flex-wrap:wrap; gap:5px;
+  }
+  .pill {
+    font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:600;
+    padding:3px 9px; border-radius:100px; letter-spacing:.2px;
+  }
+  .pill-blue{background:var(--m1-bg);color:var(--m1);} .pill-green{background:var(--m2-bg);color:var(--m2);}
+  .pill-amber{background:var(--m3-bg);color:var(--m3);} .pill-purple{background:var(--m4-bg);color:var(--m4);}
+  .pill-gray{background:var(--border-light);color:var(--ink-light);}
+
+  /* ═══════════ REFERENCE TABLE ═══════════ */
+  .ref-title { font-family:'Fraunces',serif; font-size:22px; font-weight:700; text-align:center; margin-bottom:18px; }
+
+  .ref-table {
+    width:100%; background:var(--white); border:1.5px solid var(--border);
+    border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.03);
+    margin-bottom:20px;
+  }
+  .ref-table table { width:100%; border-collapse:collapse; }
+  .ref-table thead th {
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:600;
+    text-transform:uppercase; letter-spacing:1px; color:var(--ink-mid);
+    padding:13px 14px; text-align:left; border-bottom:1.5px solid var(--border); background:var(--bg);
+  }
+  .ref-table tbody td { padding:11px 14px; font-size:12.5px; color:var(--ink-mid); border-bottom:1px solid var(--border-light); vertical-align:middle; }
+  .ref-table tbody tr:last-child td { border-bottom:none; }
+  .ref-table tbody tr:hover { background:#fafbfd; }
+  .ref-table .sc { color:var(--ink); font-weight:600; }
+
+  .mp { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:600; padding:3px 8px; border-radius:5px; margin:1px 2px; }
+  .mp1{background:var(--m1-bg);color:var(--m1);} .mp2{background:var(--m2-bg);color:var(--m2);}
+  .mp3{background:var(--m3-bg);color:var(--m3);} .mp4{background:var(--m4-bg);color:var(--m4);}
+  .mpn{background:var(--red-bg);color:var(--red);}
+
+  /* ═══════════ REVENUE SHARE ═══════════ */
+  .rev-section { margin-bottom:48px; }
+  .rev-title { font-family:'Fraunces',serif; font-size:22px; font-weight:700; text-align:center; margin-bottom:6px; }
+  .rev-sub { text-align:center; font-size:13px; color:var(--ink-mid); margin-bottom:28px; }
+
+  .rev-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media(max-width:700px){ .rev-grid{grid-template-columns:1fr;} }
+
+  .rev-card {
+    background:var(--white); border:1.5px solid var(--border); border-radius:14px;
+    overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.04);
+  }
+  .rev-card-head {
+    padding:14px 18px 12px; display:flex; align-items:center; gap:10px;
+    border-bottom:1px solid var(--border-light);
+  }
+  .rev-badge {
+    width:28px; height:28px; border-radius:8px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-size:13px; font-weight:800; color:#fff;
+  }
+  .rv1 .rev-badge{background:linear-gradient(135deg,#2563eb,#3b82f6);}
+  .rv2 .rev-badge{background:linear-gradient(135deg,#059669,#10b981);}
+  .rv3 .rev-badge{background:linear-gradient(135deg,#d97706,#f59e0b);}
+  .rv4 .rev-badge{background:linear-gradient(135deg,#7c3aed,#8b5cf6);}
+  .rev-card-title { font-size:13px; font-weight:700; color:var(--ink); line-height:1.3; }
+  .rev-card-label {
+    font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:600;
+    text-transform:uppercase; letter-spacing:1px;
+  }
+  .rv1 .rev-card-label{color:var(--m1);} .rv2 .rev-card-label{color:var(--m2);}
+  .rv3 .rev-card-label{color:var(--m3);} .rv4 .rev-card-label{color:var(--m4);}
+
+  .rev-flow { padding:16px 18px; display:flex; flex-direction:column; gap:0; }
+
+  .rf-node {
+    display:flex; align-items:center; gap:10px; position:relative;
+  }
+  .rf-icon {
+    width:36px; height:36px; border-radius:10px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:15px;
+    border:1.5px solid var(--border); background:var(--bg);
+  }
+  .rf-info { flex:1; }
+  .rf-name { font-size:12px; font-weight:700; color:var(--ink); }
+  .rf-role { font-size:10.5px; color:var(--ink-light); }
+  .rf-margin {
+    font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:700;
+    padding:3px 8px; border-radius:6px; white-space:nowrap;
+  }
+  .mg-data { background:var(--m1-bg); color:var(--m1); }
+  .mg-media { background:var(--m2-bg); color:var(--m2); }
+  .mg-both { background:#fdf4ff; color:#7c3aed; }
+  .mg-none { background:var(--border-light); color:var(--ink-light); }
+  .mg-client { background:#fff7ed; color:#c2410c; }
+
+  .rf-connector {
+    display:flex; align-items:center; gap:10px; padding:3px 0;
+  }
+  .rf-line-wrap { width:36px; display:flex; justify-content:center; flex-shrink:0; }
+  .rf-line { width:2px; height:24px; background:var(--border); border-radius:1px; }
+  .rf-arrow-label { font-size:10px; color:var(--ink-light); font-style:italic; }
+
+  .rev-summary {
+    margin:10px 18px 16px; padding:9px 12px; border-radius:8px;
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .rv1 .rev-summary{background:var(--m1-bg);} .rv2 .rev-summary{background:var(--m2-bg);}
+  .rv3 .rev-summary{background:var(--m3-bg);} .rv4 .rev-summary{background:var(--m4-bg);}
+  .rs-item { font-size:11px; color:var(--ink-mid); display:flex; align-items:center; gap:4px; }
+  .rs-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .dot-data{background:var(--m1);} .dot-media{background:var(--m2);} .dot-none{background:var(--ink-faint);}
+
+  /* ═══════════ ADVISOR FORM ═══════════ */
+  .form-card {
+    background:var(--white); border:1.5px solid var(--border); border-radius:14px;
+    padding:26px; box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:600px){ .form-grid{grid-template-columns:1fr;} }
+
+  .fg {}
+  .fl {
+    font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.7px;
+    color:var(--ink-mid); margin-bottom:7px; display:flex; align-items:center; gap:5px;
+  }
+  .fl .ic { font-size:14px; }
+  .badge { font-size:8px; font-weight:700; padding:2px 6px; border-radius:3px; letter-spacing:.4px; margin-left:3px; }
+  .badge-r { background:var(--red-bg); color:var(--red); }
+  .badge-o { background:var(--border-light); color:var(--ink-light); }
+
+  .custom-select { position:relative; }
+  .sel-trigger {
+    width:100%; background:var(--bg); border:1.5px solid var(--border); border-radius:9px;
+    padding:10px 14px; color:var(--ink); font-family:'Manrope',sans-serif; font-size:14px; font-weight:500;
+    cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all .2s;
+  }
+  .sel-trigger:hover { border-color:var(--m1-border); }
+  .sel-trigger .arr { color:var(--ink-light); font-size:10px; transition:transform .2s; }
+  .sel-trigger.open .arr { transform:rotate(180deg); }
+  .sel-trigger .sv { color:var(--ink-light); }
+  .sel-trigger .sv.picked { color:var(--ink); }
+
+  .sel-dd {
+    position:absolute; top:calc(100% + 5px); left:0; right:0;
+    background:var(--white); border:1.5px solid var(--border); border-radius:9px;
+    max-height:230px; overflow-y:auto; z-index:50; display:none;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  }
+  .sel-dd.open { display:block; animation:dropIn .18s ease-out; }
+  @keyframes dropIn { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
+
+  .sel-opt { padding:9px 14px; font-size:13px; cursor:pointer; transition:background .12s; color:var(--ink-mid); }
+  .sel-opt:hover { background:var(--m1-bg); color:var(--ink); }
+  .sel-opt.picked { color:var(--m1); font-weight:600; background:var(--m1-bg); }
+  .sel-opt.clr { color:var(--ink-light); font-style:italic; border-bottom:1px solid var(--border-light); font-size:12px; }
+
+  .tgl-row { display:flex; gap:8px; }
+  .tgl {
+    flex:1; padding:10px; border:1.5px solid var(--border); border-radius:9px;
+    background:var(--bg); color:var(--ink-mid);
+    font-family:'Manrope',sans-serif; font-size:14px; font-weight:600;
+    cursor:pointer; transition:all .2s; text-align:center;
+  }
+  .tgl:hover { border-color:var(--m1-border); color:var(--ink); }
+  .tgl.ay { border-color:var(--green); background:var(--green-bg); color:var(--green); }
+  .tgl.an { border-color:var(--red); background:var(--red-bg); color:var(--red); }
+
+  .cta-wrap { margin-top:22px; }
+  .cta {
+    width:100%; padding:13px; background:var(--ink); border:none; border-radius:10px;
+    color:#fff; font-family:'Manrope',sans-serif; font-size:15px; font-weight:700;
+    cursor:pointer; transition:all .25s; box-shadow:0 2px 8px rgba(0,0,0,0.12);
+  }
+  .cta:hover { background:#1f2937; transform:translateY(-1px); box-shadow:0 4px 14px rgba(0,0,0,0.18); }
+
+  /* ═══════════ ADVISOR RESULTS ═══════════ */
+  .adv-results { margin-top:28px; display:none; }
+  .adv-results.show { display:block; animation:fadeUp .4s ease-out; }
+
+  .adv-header {
+    font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600;
+    text-transform:uppercase; letter-spacing:1.5px; color:var(--m1);
+    margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .adv-header .ln { flex:1; height:1px; background:var(--border); }
+
+  .rc {
+    background:var(--white); border:1.5px solid var(--border); border-radius:12px;
+    padding:20px 22px; margin-bottom:12px; position:relative; overflow:hidden;
+    transition:all .25s; animation:cardIn .4s ease-out backwards;
+    box-shadow:0 1px 3px rgba(0,0,0,0.03);
+  }
+  .rc:nth-child(2){animation-delay:.08s;} .rc:nth-child(3){animation-delay:.14s;}
+  @keyframes cardIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  .rc::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; border-radius:4px 0 0 4px; }
+  .rc.rk1::before{background:var(--m1);} .rc.rk2::before{background:var(--m2);} .rc.rk3::before{background:var(--m3);}
+  .rc:hover { border-color:var(--m1-border); box-shadow:0 6px 20px rgba(0,0,0,0.06); transform:translateY(-2px); }
+
+  .rc-rank { font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:3px; }
+  .rk1 .rc-rank{color:var(--m1);} .rk2 .rc-rank{color:var(--m2);} .rk3 .rc-rank{color:var(--m3);}
+  .rc-title { font-size:16px; font-weight:700; margin-bottom:8px; color:var(--ink); }
+  .rc-reason { font-size:13px; color:var(--ink-mid); line-height:1.6; margin-bottom:12px; }
+  .rc-reason strong { color:var(--m1); font-weight:700; }
+
+  .rc-flow {
+    display:flex; align-items:center; gap:0; flex-wrap:wrap;
+    padding:10px 12px; background:var(--bg); border:1px solid var(--border-light);
+    border-radius:8px; margin-bottom:12px;
+    font-family:'IBM Plex Mono',monospace; font-size:10px;
+  }
+  .rc-flow .st { padding:3px 8px; border-radius:5px; background:var(--white); border:1px solid var(--border); color:var(--m1); font-weight:500; white-space:nowrap; }
+  .rc-flow .ar { margin:0 4px; color:var(--ink-light); font-size:11px; }
+
+  .rc-tags { display:flex; flex-wrap:wrap; gap:5px; }
+  .rt { font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:600; padding:3px 9px; border-radius:5px; letter-spacing:.2px; }
+  .rt-d { background:var(--m1-bg); color:var(--m1); }
+  .rt-m { background:var(--m2-bg); color:var(--m2); }
+  .rt-n { background:var(--red-bg); color:var(--red); }
+  .rt-p { background:var(--m4-bg); color:var(--m4); }
+  .rt-w { background:var(--m3-bg); color:var(--m3); }
+  .rt-g { background:var(--border-light); color:var(--ink-light); }
+
+  .ssp-note {
+    margin-top:8px; padding:9px 12px; background:var(--m1-bg); border:1px solid var(--m1-border);
+    border-radius:7px; font-size:12px; color:var(--ink-mid);
+  }
+  .ssp-note strong { color:var(--m1); }
+
+  .no-result {
+    background:var(--white); border:1.5px solid #fecaca; border-radius:12px;
+    padding:32px 24px; text-align:center; animation:cardIn .4s ease-out;
+  }
+  .no-result .ni { font-size:32px; margin-bottom:10px; }
+  .no-result h3 { font-size:17px; font-weight:700; color:var(--red); margin-bottom:6px; }
+  .no-result p { font-size:13px; color:var(--ink-mid); max-width:460px; margin:0 auto; line-height:1.6; }
+
+  /* Footer */
+  .page-foot { text-align:center; padding:24px; font-size:11px; color:var(--ink-light); }
+  .page-foot strong { color:var(--ink-mid); }
+
+  ::-webkit-scrollbar{width:4px;} ::-webkit-scrollbar-track{background:transparent;} ::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <div class="hero-badge"><span class="dot">SP</span>Silverpush — CTV Contextual Targeting</div>
+    <h1>CTV <em>Buying Methods</em></h1>
+    <p>Everything your team needs — an overview of all methods and an interactive advisor to find the right one.</p>
+  </div>
+
+  <!-- ═══ TABS ═══ -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('overview')">📋 Overview</button>
+    <button class="tab-btn" onclick="switchTab('revenue')">💰 Revenue Share</button>
+    <button class="tab-btn" onclick="switchTab('advisor')">⚡ Advisor Tool</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- TAB 1: OVERVIEW -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="tab-content active" id="tab-overview">
+
+    <div class="concepts">
+      <div class="concept"><div class="concept-icon c1">📊</div><div><strong>Data Margin</strong> — from context</div></div>
+      <div class="concept"><div class="concept-icon c2">💰</div><div><strong>Media Margin</strong> — from deals</div></div>
+      <div class="concept"><div class="concept-icon c3">🔗</div><div><strong>3 Partners</strong> — Pubmatic · TTD · IRIS</div></div>
+    </div>
+
+    <div class="methods-grid">
+
+      <!-- M1 -->
+      <div class="mc m1">
+        <div class="mc-head">
+          <div class="mc-num">1</div>
+          <div><div class="mc-label">Method 1</div><div class="mc-title">Deal from SSP + Contextual Segment on TTD</div></div>
+        </div>
+        <div class="mc-body">
+          <p class="mc-desc">SP shares a deal from the client's preferred SSP, while the client activates SP contextual segments directly on The Trade Desk. Best for TTD clients wanting both margins.</p>
+          <div class="mc-flow">
+            <span class="fs">SSP</span><span class="fa">→</span>
+            <span class="fs">SP Deal</span><span class="fa">→</span>
+            <span class="fs">TTD</span><span class="fa">→</span>
+            <span class="fs">SP Segment</span><span class="fa">→</span>
+            <span class="fs">Ad Served</span>
+          </div>
+          <div class="mc-details">
+            <div class="di"><div class="dc y">✓</div>Data Margin</div>
+            <div class="di"><div class="dc y">✓</div>Media Margin</div>
+            <div class="di"><div class="dc y">✓</div>DSP: TTD only</div>
+            <div class="di"><div class="dc y">✓</div>SSP: Any</div>
+          </div>
+        </div>
+        <div class="mc-foot"><span class="pill pill-blue">TTD</span><span class="pill pill-green">Both Margins</span><span class="pill pill-gray">Any SSP</span></div>
+      </div>
+
+      <!-- M2 -->
+      <div class="mc m2">
+        <div class="mc-head">
+          <div class="mc-num">2</div>
+          <div><div class="mc-label">Method 2</div><div class="mc-title">Pubmatic Deal + Contextual Segment on Pubmatic</div></div>
+        </div>
+        <div class="mc-body">
+          <p class="mc-desc">SP manages both deal and contextual segments on the Pubmatic SSP side. Client activates the deal on their DSP. Works across 50+ DSPs Pubmatic supports.</p>
+          <div class="mc-flow">
+            <span class="fs">Pubmatic</span><span class="fa">→</span>
+            <span class="fs">SP Deal + Segment</span><span class="fa">→</span>
+            <span class="fs">Client DSP</span><span class="fa">→</span>
+            <span class="fs">Ad Served</span>
+          </div>
+          <div class="mc-details">
+            <div class="di"><div class="dc y">✓</div>Data Margin</div>
+            <div class="di"><div class="dc y">✓</div>Media Margin</div>
+            <div class="di"><div class="dc y">✓</div>DSP: 50+ supported</div>
+            <div class="di"><div class="dc y">✓</div>SSP: Pubmatic</div>
+          </div>
+        </div>
+        <div class="mc-foot"><span class="pill pill-green">Both Margins</span><span class="pill pill-blue">Pubmatic</span><span class="pill pill-gray">Wide DSP support</span></div>
+      </div>
+
+      <!-- M3 -->
+      <div class="mc m3">
+        <div class="mc-head">
+          <div class="mc-num">3</div>
+          <div><div class="mc-label">Method 3</div><div class="mc-title">Contextual Segment Only on TTD</div></div>
+        </div>
+        <div class="mc-body">
+          <p class="mc-desc">Simplest setup. Client adds SP contextual segments on TTD and manages own supply. No deal involved — data margin only, no media margin.</p>
+          <div class="mc-flow">
+            <span class="fs">Client Supply</span><span class="fa">→</span>
+            <span class="fs">TTD</span><span class="fa">→</span>
+            <span class="fs">SP Segment</span><span class="fa">→</span>
+            <span class="fs">Ad Served</span>
+          </div>
+          <div class="mc-details">
+            <div class="di"><div class="dc y">✓</div>Data Margin</div>
+            <div class="di"><div class="dc n">✗</div>No Media Margin</div>
+            <div class="di"><div class="dc y">✓</div>DSP: TTD only</div>
+            <div class="di"><div class="dc n">✗</div>No deal needed</div>
+          </div>
+        </div>
+        <div class="mc-foot"><span class="pill pill-amber">Data Only</span><span class="pill pill-blue">TTD</span><span class="pill pill-gray">Simplest</span></div>
+      </div>
+
+      <!-- M4 -->
+      <div class="mc m4">
+        <div class="mc-head">
+          <div class="mc-num">4</div>
+          <div><div class="mc-label">Method 4</div><div class="mc-title">IRIS Deal + Contextual Segment via IRIS</div></div>
+        </div>
+        <div class="mc-body">
+          <p class="mc-desc">SP uses IRIS integration through an IRIS-partnered SSP. Contextual enrichment via IRIS platform. Note: IRIS does not share media margin with SP.</p>
+          <div class="mc-flow">
+            <span class="fs">IRIS SSP</span><span class="fa">→</span>
+            <span class="fs">SP Segment</span><span class="fa">→</span>
+            <span class="fs">IRIS</span><span class="fa">→</span>
+            <span class="fs">Client DSP</span><span class="fa">→</span>
+            <span class="fs">Ad Served</span>
+          </div>
+          <div class="mc-details">
+            <div class="di"><div class="dc y">✓</div>Data Margin</div>
+            <div class="di"><div class="dc n">✗</div>No Media Margin</div>
+            <div class="di"><div class="dc y">✓</div>DSP: Any</div>
+            <div class="di"><div class="dc y">✓</div>IRIS SSPs only</div>
+          </div>
+        </div>
+        <div class="mc-foot"><span class="pill pill-amber">Data Only</span><span class="pill pill-purple">IRIS</span><span class="pill pill-gray">Pubmatic · Magnite · Equative · Xander · Beachfront</span></div>
+      </div>
+    </div>
+
+    <!-- Reference Table -->
+    <h3 class="ref-title">Quick Reference — When to Use What</h3>
+    <div class="ref-table">
+      <table>
+        <thead><tr><th>Scenario</th><th>Media Margin</th><th>SSP</th><th>Method</th></tr></thead>
+        <tbody>
+          <tr><td class="sc">TTD, wants both margins</td><td>Yes</td><td>None</td><td><span class="mp mp1">M1</span><span class="mp mp2">M2</span></td></tr>
+          <tr><td class="sc">TTD, prefers Pubmatic</td><td>Yes</td><td>Pubmatic</td><td><span class="mp mp1">M1</span><span class="mp mp2">M2</span></td></tr>
+          <tr><td class="sc">TTD, non-Pubmatic SSP</td><td>Yes</td><td>e.g. Magnite</td><td><span class="mp mp1">M1</span></td></tr>
+          <tr><td class="sc">TTD, data margin only</td><td>No</td><td>Any</td><td><span class="mp mp3">M3</span></td></tr>
+          <tr><td class="sc">Non-TTD, wants media margin</td><td>Yes</td><td>None</td><td><span class="mp mp2">M2</span></td></tr>
+          <tr><td class="sc">Non-TTD, prefers Pubmatic</td><td>Yes</td><td>Pubmatic</td><td><span class="mp mp2">M2</span></td></tr>
+          <tr><td class="sc">Non-TTD, non-Pubmatic SSP</td><td>Yes</td><td>e.g. Magnite</td><td><span class="mp mpn">None</span></td></tr>
+          <tr><td class="sc">Non-TTD, data margin only</td><td>No</td><td>Any</td><td><span class="mp mp4">M4</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- TAB 2: REVENUE SHARE -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="tab-content" id="tab-revenue">
+
+    <div class="rev-section">
+      <div class="rev-title">Revenue Share by Method</div>
+      <div class="rev-sub">How money flows from client spend to Silverpush across each activation model</div>
+
+      <div class="rev-grid">
+
+        <!-- Method 1 -->
+        <div class="rev-card rv1">
+          <div class="rev-card-head">
+            <div class="rev-badge">1</div>
+            <div>
+              <div class="rev-card-label">Method 1</div>
+              <div class="rev-card-title">SSP Deal + TTD Segment</div>
+            </div>
+          </div>
+          <div class="rev-flow">
+            <div class="rf-node">
+              <div class="rf-icon">🏢</div>
+              <div class="rf-info"><div class="rf-name">Client</div><div class="rf-role">Total ad spend</div></div>
+              <div class="rf-margin mg-client">100% spend</div>
+            </div>
+            <div class="rf-connector">
+              <div class="rf-line-wrap"><div class="rf-line"></div></div>
+              <div class="rf-arrow-label">Media buy via deal</div>
+            </div>
+            <div class="rf-node">
+              <div class="rf-icon">📡</div>
+              <div class="rf-info"><div class="rf-name">SSP (e.g. Pubmatic)</div><div class="rf-role">Deal inventory</div></div>
+              <div class="rf-margin mg-none">passes margin →</div>
+            </div>
+            <div class="rf-connector">
+              <div class="rf-line-wrap"><div class="rf-line"></div></div>
+              <div class="rf-arrow-label">deal revenue share</div>
+            </div>
+            <div class="rf-node">
+              <div class="rf-icon">🟢</div>
+              <div class="rf-info"><div class="rf-name">Silverpush</div><div class="rf-role">Data + Media</div></div>
+              <div class="rf-margin mg-both">Data + Media</div>
+            </div>
+            <div class="rf-connector">
+              <div class="rf-line-wrap"><div class="rf-line"></div></div>
+              <div class="rf-arrow-label">context segment fee</div>
+            </div>
+            <div class="rf-node">
+              <div class="rf-icon">🖥</div>
+              <div class="rf-info"><div class="rf-name">TTD</div><div class="rf-role">Activates SP segments</div></div>
+              <div class="rf-margin mg-none">platform fee</div>
+            </div>
+          </div>
+          <div class="rev-summary">
+            <div class="rs-item"><div class="rs-dot dot-data"></div>Data margin: from TTD segment activation</div>
+            <div class="rs-item"><div class="rs-dot dot-media"></div>Media margin: from SSP deal revenue share</div>
+          </div>
+        </div>
+
+        <!-- Method 2 -->
+        <div class="rev-card rv2">
+          <div class="rev-card-head">
+            <div class="rev-badge">2</div>
+            <div>
+              <div class="rev-card-label">Method 2</div>
+              <div class="rev-card-title">Pubmatic Deal + Segment</div>
+            </div>
+          </div>
+          <div class="rev-flow">
+            <div class="rf-node">
+              <div class="rf-icon">🏢</div>
+              <div class="rf-info"><div class="rf-name">Client</div><div class="rf-role">Total ad spend</div></div>
+              <div class="rf-margin mg-client">100% spend</div>
+            </div>
+            <div class="rf-connector">
+              <div class="rf-line-wrap"><div class="rf-line"></div></div>
+              <div class="rf-arrow-label">media buy via deal</div>
+            </div>
+            <div class="rf-node">
+              <div class="rf-icon">🟢</div>
+              <div class="rf-info"><div class="rf-name">Silverpush</div><div class="rf-role">Via Pubmatic Deal + Segment</div></div>
+              <div class="rf-margin mg-both">Data + Media</div>
+            </div>
+            <div class="rf-connector">
+              <div class="rf-line-wrap"><div class="rf-line"></div></div>
+              <div class="rf-arrow-label">deal managed on Pubmatic</div>
+            </div>
+            <div class="rf-node">
+              <div class="rf-icon">📡</div>
+              <div class="rf-info"><div class="rf-name">Pubmatic</div><div class="rf-role">SSP + deal infrastructure</div></div>
+              <div class="rf-margin mg-none">SSP take rate</div>
+            </div>
+            <div class="rf-connector">
+              <div class="rf-line-wrap"><div class="rf-line"></div></div>
+              <div class="rf-arrow-label">routes to client DSP</div>
+            </div>
+            <div class="rf-node">
+              <div class="rf-icon">🖥</div>
+              <div class="rf-info"><div class="rf-name">Client DSP (50+)</div><div class="rf-role">Activates deal</div></div>
+              <div class="rf-margin mg-none">platform fee</div>
+            </div>
+          </div>
+          <div class="rev-summary">
+            <div class="rs-item"><div class="rs-dot dot-data"></div>Data margin: from Pubmatic contextual segment</div>
+            <div class="rs-item"><div class="rs-dot dot-media"></div>Media margin: from Pubmatic deal revenue share</div>
+          </div>
+        </div>
+
+        <!-- Method 3 -->
+        <div class="rev-card rv3">
+          <div class="rev-card-head">
+            <div class="rev-badge">3</div>
+            <div>
+              <div class="rev-card-label">Method 3</div>
+              <div class="rev-card-title">TTD Segment Only</div>
+            </div>
+          </div>
+          <div class="rev-flow">
+            <div class="rf-node">
+              <div class="rf-icon">🏢</div>
+              <div class="rf-info"><div class="rf-name">Client</div><div class="rf-role">Total ad spend</div></div>
+              <div class="rf-margin mg-client">100% spend</div>
+            </div>
+            <div class="rf-connector">
+              <div class="rf-line-wrap"><div class="rf-line"></div></div>
+              <div class="rf-arrow-label">buys own supply on TTD</div>
+            </div>
+            <div class="rf-node">
+              <div class="rf-icon">🖥</div>
+              <div class="rf-info"><div class="rf-name">TTD</div><div class="rf-role">Client's own supply + SP segment</div></div>
+              <div class="rf-margin mg-none">platform fee</div>
+            </div>
+            <div class="rf-connector">
+              <div class="rf-line-wrap"><div class="rf-line"></div></div>
+              <div class="rf-arrow-label">context segment fee</div>
+            </div>
+            <div class="rf-node">
+              <div class="rf-icon">🟢</div>
+              <div class="rf-info"><div class="rf-name">Silverpush</div><div class="rf-role">Data only</div></div>
+              <div class="rf-margin mg-data">Data only</div>
+            </div>
+          </div>
+          <div class="rev-summary">
+            <div class="rs-item"><div class="rs-dot dot-data"></div>Data margin: from TTD segment activation fee</div>
+            <div class="rs-item"><div class="rs-dot dot-none"></div>No media margin — client manages own supply</div>
+          </div>
+        </div>
+
+        <!-- Method 4 -->
+        <div class="rev-card rv4">
+          <div class="rev-card-head">
+            <div class="rev-badge">4</div>
+            <div>
+              <div class="rev-card-label">Method 4</div>
+              <div class="rev-card-title">IRIS Deal + Segment</div>
+            </div>
+          </div>
+          <div class="rev-flow">
+            <div class="rf-node">
+              <div class="rf-icon">🏢</div>
+              <div class="rf-info"><div class="rf-name">Client</div><div class="rf-role">Total ad spend</div></div>
+              <div class="rf-margin mg-client">100% spend</div>
+            </div>
+            <div class="rf-connector">
+              <div class="rf-line-wrap"><div class="rf-line"></div></div>
+              <div class="rf-arrow-label">deal via IRIS SSP</div>
+            </div>
+            <div class="rf-node">
+              <div class="rf-icon">🔷</div>
+              <div class="rf-info"><div class="rf-name">IRIS.TV</div><div class="rf-role">Contextual platform (keeps media margin)</div></div>
+              <div class="rf-margin mg-media">keeps media</div>
+            </div>
+            <div class="rf-connector">
+              <div class="rf-line-wrap"><div class="rf-line"></div></div>
+              <div class="rf-arrow-label">context data fee only</div>
+            </div>
+            <div class="rf-node">
+              <div class="rf-icon">🟢</div>
+              <div class="rf-info"><div class="rf-name">Silverpush</div><div class="rf-role">Data only via IRIS</div></div>
+              <div class="rf-margin mg-data">Data only</div>
+            </div>
+          </div>
+          <div class="rev-summary">
+            <div class="rs-item"><div class="rs-dot dot-data"></div>Data margin: from IRIS contextual segment fee</div>
+            <div class="rs-item"><div class="rs-dot dot-none"></div>No media margin — IRIS retains deal revenue</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Summary comparison -->
+      <div style="margin-top:28px;">
+        <div class="ref-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>SP Data Margin</th>
+                <th>SP Media Margin</th>
+                <th>Who Holds Deal</th>
+                <th>Best Revenue Potential</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mp mp1">M1</span> SSP Deal + TTD Segment</td>
+                <td style="color:var(--green);font-weight:600;">✓ Yes</td>
+                <td style="color:var(--green);font-weight:600;">✓ Yes</td>
+                <td>SP via SSP deal</td>
+                <td style="color:var(--green);font-weight:700;">⬆ Highest</td>
+              </tr>
+              <tr>
+                <td><span class="mp mp2">M2</span> Pubmatic Deal + Segment</td>
+                <td style="color:var(--green);font-weight:600;">✓ Yes</td>
+                <td style="color:var(--green);font-weight:600;">✓ Yes</td>
+                <td>SP via Pubmatic</td>
+                <td style="color:var(--green);font-weight:700;">⬆ Highest</td>
+              </tr>
+              <tr>
+                <td><span class="mp mp3">M3</span> TTD Segment Only</td>
+                <td style="color:var(--green);font-weight:600;">✓ Yes</td>
+                <td style="color:var(--red);">✗ No</td>
+                <td>Client manages supply</td>
+                <td style="color:var(--m3);font-weight:600;">→ Moderate</td>
+              </tr>
+              <tr>
+                <td><span class="mp mp4">M4</span> IRIS Deal + Segment</td>
+                <td style="color:var(--green);font-weight:600;">✓ Yes</td>
+                <td style="color:var(--red);">✗ No</td>
+                <td>IRIS retains deal</td>
+                <td style="color:var(--m3);font-weight:600;">→ Moderate</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- TAB 3: ADVISOR -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="tab-content" id="tab-advisor">
+
+    <div class="form-card">
+      <div class="form-grid">
+        <div class="fg">
+          <div class="fl"><span class="ic">🖥</span>Client DSP<span class="badge badge-r">REQUIRED</span></div>
+          <div class="custom-select" id="dspSel">
+            <div class="sel-trigger" onclick="togDD('dspSel')">
+              <span class="sv">Select DSP...</span><span class="arr">▾</span>
+            </div>
+            <div class="sel-dd"></div>
+          </div>
+        </div>
+        <div class="fg">
+          <div class="fl"><span class="ic">📡</span>Preferred SSP<span class="badge badge-o">OPTIONAL</span></div>
+          <div class="custom-select" id="sspSel">
+            <div class="sel-trigger" onclick="togDD('sspSel')">
+              <span class="sv">None selected</span><span class="arr">▾</span>
+            </div>
+            <div class="sel-dd"></div>
+          </div>
+        </div>
+        <div class="fg">
+          <div class="fl"><span class="ic">📊</span>Data Margin<span class="badge badge-r">REQUIRED</span></div>
+          <div class="tgl-row">
+            <button class="tgl ay" onclick="setT('data',true,this)">Yes</button>
+            <button class="tgl" onclick="setT('data',false,this)">No</button>
+          </div>
+        </div>
+        <div class="fg">
+          <div class="fl"><span class="ic">💰</span>Media Margin<span class="badge badge-r">REQUIRED</span></div>
+          <div class="tgl-row">
+            <button class="tgl" onclick="setT('media',true,this)">Yes</button>
+            <button class="tgl" onclick="setT('media',false,this)">No</button>
+          </div>
+        </div>
+      </div>
+      <div class="cta-wrap"><button class="cta" onclick="recommend()">Get Recommended Buying Methods →</button></div>
+    </div>
+
+    <div class="adv-results" id="advRes"></div>
+
+  </div>
+
+</div>
+
+<div class="page-foot"><strong>Silverpush</strong> — CTV Contextual Enrichment · Internal Sales Reference</div>
+
+<script>
+// ═══ TABS ═══
+function switchTab(t){
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    const map={overview:'Overview',revenue:'Revenue',advisor:'Advisor'};
+    if(b.textContent.includes(map[t]))b.classList.add('active');
+  });
+}
+
+// ═══ DATA ═══
+const dspOpts=['The Trade Desk','DV360','Amazon DSP','Cadent','Viant','Xandr','StackAdapt','Yahoo DSP','Nexxen','Basis Technologies','Quantcast','MediaSmart','Beeswax','Other'];
+const sspOpts=['Pubmatic','Magnite','FreeWheel','OpenX','Equative','Viant','Other'];
+const pubDSPs=['Active Agent','Addictive Mobility','AdElement DSP','Adform','Adobe','AdRoll','AdTheorent','Amazon DSP','Basis Technologies','Beeswax','BidSwitch','Cadent','Cognitiv','Conversant','DeepIntent','DV360','Eskimi DSP','GumGum DSP','Hawk','illumin','Infillion DSP','InMobi DSP','IQM','Jampp','Loopme DSP','MadHive','MediaSmart','Nexxen','Octillion','OneView','Opera Ads','PubMatic Activate','PulsePoint DSP','Quantcast','Reset Digital','RTB House','Rumble','Samsung DSP','Simpli.fi','Smaato DSP','StackAdapt','SurfSide','TapTap DSP','The Trade Desk','Unity','Viant','Xandr','Yahoo DSP','Zemanta','Zeta DSP'];
+
+function nm(s){return s.toLowerCase().replace(/[^a-z0-9]/g,'');}
+function chkTTD(d){const n=nm(d);return n.includes('tradedesk')||n==='ttd';}
+function chkPub(d){const n=nm(d);return pubDSPs.some(p=>{const pn=nm(p);return pn===n||pn.includes(n)||n.includes(pn);});}
+
+// ═══ STATE ═══
+let S={dsp:null,ssp:null,dataMargin:true,mediaMargin:null};
+
+// ═══ DROPDOWNS ═══
+function buildDD(id,opts,key,hasClear){
+  const c=document.getElementById(id),dd=c.querySelector('.sel-dd');dd.innerHTML='';
+  if(hasClear){const cl=document.createElement('div');cl.className='sel-opt clr';cl.textContent='— None / Clear —';
+    cl.onclick=e=>{e.stopPropagation();S[key]=null;const v=c.querySelector('.sv');v.textContent='None selected';v.classList.remove('picked');dd.querySelectorAll('.sel-opt').forEach(o=>o.classList.remove('picked'));closeDD();};dd.appendChild(cl);}
+  opts.forEach(opt=>{const el=document.createElement('div');el.className='sel-opt';el.textContent=opt;
+    el.onclick=e=>{e.stopPropagation();S[key]=opt;const v=c.querySelector('.sv');v.textContent=opt;v.classList.add('picked');dd.querySelectorAll('.sel-opt').forEach(o=>o.classList.remove('picked'));el.classList.add('picked');closeDD();};dd.appendChild(el);});
+}
+function togDD(id){const c=document.getElementById(id),t=c.querySelector('.sel-trigger'),d=c.querySelector('.sel-dd');const o=d.classList.contains('open');closeDD();if(!o){d.classList.add('open');t.classList.add('open');}}
+function closeDD(){document.querySelectorAll('.sel-dd').forEach(d=>d.classList.remove('open'));document.querySelectorAll('.sel-trigger').forEach(t=>t.classList.remove('open'));}
+document.addEventListener('click',e=>{if(!e.target.closest('.custom-select'))closeDD();});
+function setT(type,val,btn){const r=btn.parentElement;r.querySelectorAll('.tgl').forEach(b=>b.classList.remove('ay','an'));btn.classList.add(val?'ay':'an');if(type==='data')S.dataMargin=val;else S.mediaMargin=val;}
+
+// ═══ ENGINE ═══
+function recommend(){
+  const{dsp,ssp,dataMargin,mediaMargin}=S;
+  if(!dsp){alert('Please select a Client DSP.');return;}
+  if(mediaMargin===null){alert('Please select whether Media Margin is needed.');return;}
+  const ttd=chkTTD(dsp),hasSsp=!!ssp,isPub=ssp==='Pubmatic',isNP=hasSsp&&!isPub,pubOk=chkPub(dsp);
+  const m=[];
+  if(ttd&&!mediaMargin){m.push(mkM3());return render(m);}
+  if(!ttd&&!mediaMargin){m.push(mkM4(dsp,ssp,hasSsp));return render(m);}
+  if(ttd&&!hasSsp){m.push(mkM1(dsp,null));if(pubOk)m.push(mkM2(dsp));return render(m);}
+  if(ttd&&isPub){m.push(mkM1(dsp,'Pubmatic'));m.push(pubOk?mkM2(dsp):mkM2V(dsp));return render(m);}
+  if(ttd&&isNP){m.push(mkM1(dsp,ssp));return render(m);}
+  if(!ttd&&!hasSsp){m.push(pubOk?mkM2(dsp):mkM2V(dsp));return render(m);}
+  if(!ttd&&isPub){m.push(pubOk?mkM2(dsp):mkM2V(dsp));return render(m);}
+  if(!ttd&&isNP){return render([]);}
+  return render([]);
+}
+
+function mkM1(dsp,ssp){const l=ssp||'Preferred SSP';return{title:'Deal from SSP + Contextual Segment on TTD',reason:`SP shares a deal from <strong>${l}</strong> SSP, client activates SP contextual segments on TTD. Provides <strong>data margin</strong> (context) and <strong>media margin</strong> (deal).`,flow:[l+' SSP','SP Deal','TTD','SP Segment','Ad Served'],d:true,m:true,tags:['TTD'],note:!ssp?'deal':null};}
+function mkM2(dsp){return{title:'Pubmatic Deal + Contextual Segment on Pubmatic',reason:`Pubmatic supports deals to <strong>${dsp}</strong>. SP manages both deal and context on Pubmatic. Provides <strong>data margin</strong> and <strong>media margin</strong>.`,flow:['Pubmatic','SP Deal + Segment',dsp,'Ad Served'],d:true,m:true,tags:['PUBMATIC'],note:null};}
+function mkM2V(dsp){return{title:'Pubmatic Deal + Contextual Segment on Pubmatic',reason:`Pubmatic may support deals to <strong>${dsp}</strong> — verify with Pubmatic team. If confirmed, provides <strong>data margin</strong> and <strong>media margin</strong>.`,flow:['Pubmatic','SP Deal + Segment',dsp+' ⚠','Ad Served'],d:true,m:true,tags:['PUBMATIC','VERIFY'],note:null};}
+function mkM3(){return{title:'Contextual Segment Only on TTD',reason:`Client adds SP segments on TTD, manages own supply. No deal = <strong>data margin only</strong>, no media margin.`,flow:['Client Supply','TTD','SP Segment','Ad Served'],d:true,m:false,tags:['TTD','CONTEXT ONLY'],note:null};}
+function mkM4(dsp,ssp,hasSsp){const l=ssp||'IRIS Partner SSP';return{title:'IRIS Deal + Contextual Segment via IRIS',reason:ssp?`<strong>${ssp}</strong> is IRIS-partnered. SP shares context via IRIS. <strong>Data margin only</strong> — IRIS does not share media margin with SP.`:`SP uses IRIS integration through a partnered SSP. <strong>Data margin only</strong> — IRIS does not share media margin with SP.`,flow:[l,'SP Segment','IRIS',dsp||'DSP','Ad Served'],d:true,m:false,tags:['IRIS'],note:!hasSsp?'iris':null};}
+
+function render(methods){
+  const c=document.getElementById('advRes');
+  if(!methods.length){c.innerHTML=`<div class="adv-header"><span>Results</span><div class="ln"></div></div><div class="no-result"><div class="ni">😔</div><h3>No Buying Method Available</h3><p>This combination doesn't have a direct SP method. Try <strong>The Trade Desk</strong> as DSP, <strong>Pubmatic</strong> as SSP, or an IRIS-partnered SSP.</p></div>`;c.classList.add('show');c.scrollIntoView({behavior:'smooth',block:'start'});return;}
+  let h=`<div class="adv-header"><span>Recommended Methods</span><div class="ln"></div></div>`;
+  methods.forEach((m,i)=>{
+    const rk=i+1,rl=rk===1?'★ Best Option':'#'+rk+' Alternative';
+    let mt=m.d?'<span class="rt rt-d">✓ Data Margin</span>':'<span class="rt rt-n">✗ No Data</span>';
+    mt+=m.m?'<span class="rt rt-m">✓ Media Margin</span>':'<span class="rt rt-n">✗ No Media</span>';
+    const pt=m.tags.map(t=>{let c='rt-g';if(t==='VERIFY')c='rt-w';if(t==='CONTEXT ONLY')c='rt-w';if(t==='TTD')c='rt-d';if(t==='PUBMATIC')c='rt-m';if(t==='IRIS')c='rt-p';return`<span class="rt ${c}">${t}</span>`;}).join('');
+    const fl=m.flow.map(s=>`<span class="st">${s}</span>`).join('<span class="ar">→</span>');
+    let nt='';if(m.note==='deal')nt=`<div class="ssp-note"><strong>Available SSPs:</strong> Pubmatic (widest support), Magnite, Equative, FreeWheel, OpenX</div>`;if(m.note==='iris')nt=`<div class="ssp-note"><strong>IRIS SSPs:</strong> Pubmatic, Magnite, Equative, Xander, Beachfront</div>`;
+    h+=`<div class="rc rk${Math.min(rk,3)}"><div class="rc-rank">${rl}</div><div class="rc-title">${m.title}</div><div class="rc-reason">${m.reason}</div><div class="rc-flow">${fl}</div><div class="rc-tags">${mt}</div><div class="rc-tags" style="margin-top:5px">${pt}</div>${nt}</div>`;
+  });
+  c.innerHTML=h;c.classList.add('show');setTimeout(()=>c.scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+
+// ═══ INIT ═══
+buildDD('dspSel',dspOpts,'dsp',false);
+buildDD('sspSel',sspOpts,'ssp',true);
+</script>
+</body>
+</html>
