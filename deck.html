@@ -25,19 +25,26 @@
 
 body{
   font-family:'DM Sans',sans-serif;
-  background:var(--bg);
+  background:#e8ecef;
   color:var(--ink);
   overflow:hidden;
   height:100vh;width:100vw;
 }
 
 /* ── Slide engine ── */
-.deck{position:relative;width:100%;height:100vh;overflow:hidden;}
+.deck{
+  position:relative;
+  width:1440px;height:810px;
+  overflow:hidden;
+  transform-origin:top left;
+  background:var(--bg);
+  box-shadow:0 8px 48px rgba(0,0,0,0.18);
+}
 
 .slide{
   position:absolute;inset:0;
   display:flex;flex-direction:column;
-  padding:46px 68px 80px;
+  padding:32px 60px 56px;
   opacity:0;pointer-events:none;
   transform:translateY(22px);
   transition:opacity .45s cubic-bezier(.4,0,.2,1),transform .45s cubic-bezier(.4,0,.2,1);
@@ -66,13 +73,13 @@ body{
 /* ── Slide top bar ── */
 .slide-topbar{
   display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:28px;
+  margin-bottom:14px;
 }
 .slide-tag{
-  font-family:'JetBrains Mono',monospace;font-size:10px;
-  letter-spacing:2px;text-transform:uppercase;
+  font-family:'DM Sans',sans-serif;font-size:12px;
+  letter-spacing:1px;text-transform:uppercase;
   color:var(--sp);background:var(--sp-light);
-  padding:5px 14px;border-radius:20px;font-weight:600;
+  padding:5px 16px;border-radius:20px;font-weight:700;
   border:1px solid var(--border);
 }
 
@@ -80,23 +87,23 @@ body{
 .sp-line{
   width:52px;height:4px;border-radius:2px;
   background:linear-gradient(90deg,var(--sp),var(--sp-mid));
-  margin-bottom:16px;
+  margin-bottom:10px;
 }
 
 /* ── Typography ── */
-.h1{font-size:50px;font-weight:800;letter-spacing:-1.5px;line-height:1.07;color:var(--navy);}
-.h2{font-size:34px;font-weight:800;letter-spacing:-1px;line-height:1.1;color:var(--navy);}
-.h3{font-size:19px;font-weight:700;color:var(--navy);}
-.sub{font-size:15px;color:var(--mid);font-weight:400;line-height:1.65;max-width:680px;}
-.body{font-size:14px;color:var(--mid);line-height:1.7;}
+.h1{font-size:52px;font-weight:800;letter-spacing:-1.5px;line-height:1.07;color:var(--navy);}
+.h2{font-size:36px;font-weight:800;letter-spacing:-1px;line-height:1.1;color:var(--navy);}
+.h3{font-size:21px;font-weight:700;color:var(--navy);}
+.sub{font-size:16px;color:#374151;font-weight:500;line-height:1.65;max-width:680px;}
+.body{font-size:15px;color:#374151;line-height:1.7;}
 
 /* ── Chips ── */
 .chip{
   display:inline-flex;align-items:center;gap:6px;
   padding:6px 15px;border-radius:20px;
   background:var(--sp-light);color:var(--sp-dark);
-  font-size:12px;font-weight:700;
-  font-family:'JetBrains Mono',monospace;letter-spacing:.4px;
+  font-size:13px;font-weight:700;
+  font-family:'DM Sans',sans-serif;letter-spacing:.2px;
   border:1px solid var(--border);
 }
 
@@ -144,7 +151,7 @@ body{
 }
 .mirrors-brand{margin-bottom:18px;}
 .cover-tagline{
-  font-size:17px;color:var(--mid);font-weight:400;
+  font-size:19px;color:#374151;font-weight:500;
   line-height:1.6;max-width:520px;margin-bottom:26px;
 }
 .cover-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:0;max-width:480px;}
@@ -154,9 +161,9 @@ body{
 }
 .cover-footer-l{font-size:11px;color:var(--dim);}
 .year-badge{
-  font-family:'JetBrains Mono',monospace;font-size:11px;
+  font-family:'DM Sans',sans-serif;font-size:13px;
   color:var(--sp);background:var(--sp-light);
-  padding:5px 14px;border-radius:20px;font-weight:600;
+  padding:5px 16px;border-radius:20px;font-weight:700;
   border:1px solid var(--border);
 }
 
@@ -165,26 +172,39 @@ body{
 ───────────────────────────────────────── */
 .agenda-grid{
   display:grid;grid-template-columns:repeat(4,1fr);
-  gap:13px;margin-top:10px;
+  grid-template-rows:1fr 1fr;gap:13px;margin-top:6px;flex:1;min-height:0;
 }
 .agenda-item{
   background:white;border:1.5px solid var(--border);
-  border-radius:14px;padding:16px 14px;
-  cursor:pointer;transition:all .2s ease;
-  display:flex;align-items:flex-start;gap:11px;
+  border-radius:16px;padding:20px 18px 158px;
+  cursor:pointer;transition:all .22s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
 }
 .agenda-item:hover,.agenda-item.active-ag{
   border-color:var(--sp);background:var(--sp-light);
-  transform:translateY(-2px);
+  transform:translateY(-3px);
+  box-shadow:0 10px 28px rgba(78,175,156,0.16);
 }
+.agenda-item.active-ag .ag-icon{ background:var(--sp); border-color:var(--sp); }
+.agenda-item.active-ag .ag-icon svg{ stroke:white; }
 .ag-num{
-  width:28px;height:28px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,var(--sp),var(--sp-mid));
-  color:white;font-weight:800;font-size:13px;
-  display:flex;align-items:center;justify-content:center;
+  position:absolute;right:12px;top:6px;
+  font-size:68px;font-weight:900;color:rgba(78,175,156,0.07);
+  line-height:1;font-family:'DM Sans',sans-serif;
+  pointer-events:none;user-select:none;
 }
-.ag-label{font-size:12px;font-weight:600;color:var(--navy);line-height:1.4;margin-top:2px;}
-.ag-label span{display:block;font-size:10px;color:var(--dim);font-weight:400;margin-top:3px;}
+.ag-icon{
+  width:38px;height:38px;border-radius:11px;flex-shrink:0;
+  background:var(--sp-light);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .22s ease;
+}
+.ag-meta{display:flex;flex-direction:column;gap:4px;position:absolute;bottom:18px;left:18px;right:18px;}
+.ag-label{font-size:26px;font-weight:800;color:var(--navy);line-height:1.2;font-family:'DM Sans',sans-serif;margin:0;min-height:62px;}
+.ag-label span{display:none;}
+.ag-desc{font-size:16.5px;color:var(--mid);font-weight:500;line-height:1.3;min-height:43px;}
+.ag-step{font-size:16px;font-weight:700;color:var(--sp);letter-spacing:.8px;text-transform:uppercase;margin:0;}
 
 /* ─────────────────────────────────────────
    PARTNERS
@@ -202,13 +222,13 @@ body{
   font-weight:800;font-size:17px;color:white;
 }
 .partner-role{
-  font-size:10px;font-family:'JetBrains Mono',monospace;
-  letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);
+  font-size:16px;font-family:'DM Sans',sans-serif;
+  letter-spacing:.5px;text-transform:uppercase;color:#374151;font-weight:600;
 }
-.partner-desc{font-size:12px;color:var(--mid);line-height:1.5;}
+.partner-desc{font-size:13px;color:#374151;line-height:1.55;}
 .partner-tag{
-  font-size:10px;padding:3px 10px;border-radius:10px;
-  font-family:'JetBrains Mono',monospace;font-weight:600;
+  font-size:12px;padding:4px 12px;border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-weight:700;
   background:var(--sp-light);color:var(--sp-dark);
   border:1px solid var(--border);
 }
@@ -232,7 +252,7 @@ body{
   display:inline-flex;align-items:center;gap:10px;
   padding:15px 38px;border-radius:14px;
   background:linear-gradient(135deg,var(--sp),var(--sp-mid));
-  color:white;font-size:15px;font-weight:700;
+  color:white;font-size:18px;font-weight:800;
   cursor:pointer;border:none;
   box-shadow:0 8px 30px rgba(78,175,156,.38);
   transition:all .2s ease;text-decoration:none;
@@ -243,7 +263,7 @@ body{
 .demo-step{
   background:white;border:1px solid var(--border);
   border-radius:8px;padding:5px 13px;
-  font-size:11px;font-weight:600;color:var(--sp-dark);
+  font-size:13px;font-weight:600;color:var(--sp-dark);
   font-family:'JetBrains Mono',monospace;
 }
 
@@ -264,12 +284,12 @@ body{
   display:flex;align-items:center;justify-content:center;
 }
 .method-header{display:flex;align-items:center;gap:10px;}
-.method-title{font-size:13px;font-weight:700;color:var(--navy);}
-.method-body{font-size:12px;color:var(--mid);line-height:1.55;}
+.method-title{font-size:15px;font-weight:800;color:var(--navy);}
+.method-body{font-size:13px;color:#374151;line-height:1.55;}
 .method-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;}
 .mtag{
-  font-size:10px;padding:3px 9px;border-radius:7px;font-weight:600;
-  font-family:'JetBrains Mono',monospace;border:1px solid;
+  font-size:11px;padding:4px 10px;border-radius:7px;font-weight:700;
+  font-family:'DM Sans',sans-serif;border:1px solid;
 }
 
 /* ─────────────────────────────────────────
@@ -281,9 +301,9 @@ body{
   padding:18px 16px;box-shadow:var(--shadow);
   display:flex;flex-direction:column;gap:7px;
 }
-.ch-icon{font-size:24px;}
-.ch-title{font-size:13px;font-weight:700;color:var(--navy);}
-.ch-body{font-size:11px;color:var(--mid);line-height:1.55;}
+.ch-icon{font-size:32px;}
+.ch-title{font-size:26px;font-weight:800;color:var(--navy);}
+.ch-body{font-size:18px;color:#374151;line-height:1.6;}
 
 /* ─────────────────────────────────────────
    NAVIGATION
@@ -312,6 +332,67 @@ body{
   background:linear-gradient(90deg,var(--sp),var(--sp-mid));
   transition:width .4s ease;z-index:101;border-radius:0 2px 0 0;
 }
+/* ── s0 TV & Remote ── */
+#s0-tv {
+  width:967px; height:580px; background:linear-gradient(160deg,#2e2e30,#1c1c1e);
+  border-radius:20px; padding:18px;
+  box-shadow:0 32px 90px rgba(0,0,0,0.28); position:relative;
+  transition:box-shadow 0.8s ease;
+}
+#s0-tv.on { box-shadow:0 32px 90px rgba(0,0,0,0.28),0 0 80px rgba(78,175,156,0.1); }
+#s0-tv-screen {
+  width:100%; height:100%; background:#0d1117;
+  border-radius:10px; overflow:hidden; position:relative;
+}
+.s0-tv-brand { position:absolute; bottom:8px; left:50%; transform:translateX(-50%); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.12); font-weight:600; }
+.s0-tv-led { position:absolute; bottom:12px; right:28px; width:8px; height:8px; border-radius:50%; background:#333; transition:all 0.5s ease; }
+#s0-tv.on .s0-tv-led { background:#4eaf9c; box-shadow:0 0 10px #4eaf9c; }
+.s0-stand-neck { width:70px; height:46px; background:linear-gradient(to right,#3a3a3c,#48484a,#3a3a3c); margin:0 auto; border-radius:0 0 3px 3px; }
+.s0-stand-base { width:280px; height:12px; background:linear-gradient(to bottom,#48484a,#3a3a3c); margin:0 auto; border-radius:7px; box-shadow:0 4px 14px rgba(0,0,0,0.2); }
+#s0-screen-content { width:100%; height:100%; display:none; position:relative; }
+#s0-tv.on #s0-screen-content { display:block; }
+.s0-content-bg { position:absolute; inset:0; background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460); animation:s0BgShift 10s ease-in-out infinite; }
+@keyframes s0BgShift {
+  0%,100% { background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460); }
+  33%     { background:linear-gradient(135deg,#0f3460,#0d1f44,#1a1a2e); }
+  66%     { background:linear-gradient(135deg,#0d1f44,#0f3460,#16213e); }
+}
+.s0-scanlines { position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px); z-index:5; pointer-events:none; opacity:0.45; }
+#s0-power-flash { position:absolute; inset:0; background:white; opacity:0; z-index:10; pointer-events:none; }
+.s0-phase { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:2; opacity:0; transition:opacity 0.6s ease; }
+#s0-remote-wrap {
+  width:100px; height:264px; background:linear-gradient(180deg,#2d2d30,#1c1c1e);
+  border-radius:18px 18px 26px 26px;
+  display:flex; flex-direction:column; align-items:center; padding-top:26px; gap:14px;
+  cursor:pointer; box-shadow:0 12px 34px rgba(0,0,0,0.22); position:relative;
+  transition:transform 0.2s ease,box-shadow 0.2s ease;
+}
+#s0-remote-wrap:hover { transform:translateY(-4px); box-shadow:0 18px 46px rgba(0,0,0,0.3); }
+#s0-remote-wrap:active { transform:translateY(0) scale(0.97); }
+.s0-ir { position:absolute; top:3px; left:50%; transform:translateX(-50%); width:14px; height:5px; background:#3a3a5a; border-radius:0 0 5px 5px; }
+.s0-pwr { width:52px; height:52px; border-radius:50%; background:radial-gradient(circle,#e94560,#c62840); border:2px solid rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; box-shadow:0 0 18px rgba(233,69,96,0.32); transition:box-shadow 0.3s ease; }
+#s0-remote-wrap:hover .s0-pwr { box-shadow:0 0 30px rgba(233,69,96,0.7); }
+.s0-pwr svg { width:24px; height:24px; stroke:white; stroke-width:2.5; fill:none; }
+.s0-rbtns { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; padding:0 13px; }
+.s0-rbtn { width:20px; height:20px; border-radius:4px; background:rgba(255,255,255,0.08); }
+.s0-rlabel { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.2); margin-top:auto; margin-bottom:14px; }
+.s0-hint { position:absolute; bottom:-38px; left:50%; transform:translateX(-50%); font-size:13px; font-weight:600; color:#4eaf9c; white-space:nowrap; opacity:0.9; animation:s0Bounce 1.5s ease infinite; }
+@keyframes s0Bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-5px)} }
+#s0-remote-wrap.used .s0-hint { display:none; }
+
+@keyframes wave-hand {
+  0%   { transform: rotate(0deg); }
+  10%  { transform: rotate(18deg); }
+  20%  { transform: rotate(-12deg); }
+  30%  { transform: rotate(18deg); }
+  40%  { transform: rotate(-8deg); }
+  50%  { transform: rotate(14deg); }
+  60%  { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+#s9-wave.waving {
+  animation: wave-hand 1.4s ease-in-out infinite;
+}
 </style>
 </head>
 <body>
@@ -332,149 +413,77 @@ body{
     <span class="year-badge">2025 – 26 Sales Presentation</span>
   </div>
 
-  <!-- Black TV with stand + remote (right side of cover) -->
-  <div style="position:absolute;right:72px;bottom:54px;display:flex;align-items:flex-end;gap:18px;pointer-events:none;">
-    <svg width="340" height="310" viewBox="0 0 340 310" fill="none">
-      <defs>
-        <linearGradient id="screenG" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#1a1a2e"/>
-          <stop offset="100%" stop-color="#0f2044"/>
-        </linearGradient>
-        <radialGradient id="glowG" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="rgba(78,175,156,0.18)"/>
-          <stop offset="100%" stop-color="rgba(78,175,156,0)"/>
-        </radialGradient>
-      </defs>
+  <!-- TV + Remote centered -->
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:60px;z-index:1;padding-top:48px;padding-bottom:36px;box-sizing:border-box;">
 
-      <!-- TV outer shell (black) -->
-      <rect x="0" y="0" width="280" height="178" rx="14" fill="#1c1c1e"/>
-      <!-- screen area -->
-      <rect x="10" y="9" width="260" height="152" rx="8" fill="url(#screenG)"/>
-      <!-- screen glow -->
-      <rect x="10" y="9" width="260" height="152" rx="8" fill="url(#glowG)"/>
-      <!-- streaming content hints on screen -->
-      <rect x="22" y="22" width="120" height="6" rx="3" fill="rgba(255,255,255,.12)"/>
-      <rect x="22" y="32" width="80" height="4" rx="2" fill="rgba(255,255,255,.07)"/>
-      <!-- Play button -->
-      <circle cx="140" cy="85" r="26" fill="rgba(78,175,156,0.15)" stroke="#4eaf9c" stroke-width="1.5"/>
-      <polygon points="132,74 132,96 156,85" fill="#4eaf9c" opacity=".85"/>
-      <!-- Progress bar on screen -->
-      <rect x="22" y="148" width="236" height="3" rx="1.5" fill="rgba(255,255,255,.1)"/>
-      <rect x="22" y="148" width="110" height="3" rx="1.5" fill="#4eaf9c" opacity=".7"/>
-      <!-- Power LED dot -->
-      <circle cx="140" cy="170" r="2.5" fill="#4eaf9c" opacity=".9"/>
-      <!-- thin bottom bezel -->
-      <rect x="0" y="168" width="280" height="10" rx="0" fill="#161616"/>
-      <rect x="0" y="172" width="280" height="6" rx="0" fill="#111"/>
+    <!-- TV column -->
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div id="s0-tv">
+        <div id="s0-tv-screen">
+          <div id="s0-screen-content">
+            <div class="s0-content-bg"></div>
 
-      <!-- Stand neck -->
-      <rect x="122" y="178" width="36" height="52" rx="3" fill="#1a1a1a"/>
-      <rect x="123" y="179" width="34" height="50" rx="2" fill="#222"/>
+            <!-- Phase 1: Welcome to India -->
+            <div class="s0-phase" id="s0-p1">
+              <div style="text-align:center;">
+                <div style="font-size:72px;font-weight:800;color:white;line-height:1.15;letter-spacing:-1px;">Welcome to <span style="color:#4eaf9c;">India</span></div>
+              </div>
+            </div>
 
-      <!-- Stand base -->
-      <rect x="72" y="228" width="136" height="14" rx="7" fill="#1a1a1a"/>
-      <rect x="74" y="229" width="132" height="12" rx="6" fill="#242424"/>
-      <!-- base highlight -->
-      <rect x="82" y="230" width="116" height="3" rx="1.5" fill="rgba(255,255,255,.06)"/>
-    </svg>
+            <!-- Phase 2: Let's start -->
+            <div class="s0-phase" id="s0-p2">
+              <div style="text-align:center;">
+                <div style="font-size:72px;font-weight:800;color:white;line-height:1.15;letter-spacing:-1px;">Let's <span style="color:#f87171;">start</span></div>
+              </div>
+            </div>
 
-    <!-- Remote control -->
-    <svg width="54" height="180" viewBox="0 0 54 180" fill="none" style="margin-bottom:14px;">
-      <!-- body -->
-      <rect x="2" y="2" width="50" height="176" rx="14" fill="#1c1c1e"/>
-      <rect x="3" y="3" width="48" height="174" rx="13" fill="#222"/>
-      <!-- top highlight -->
-      <rect x="10" y="4" width="34" height="3" rx="1.5" fill="rgba(255,255,255,.07)"/>
-      <!-- IR sensor -->
-      <rect x="20" y="6" width="14" height="5" rx="2.5" fill="#111"/>
-      <!-- Power button (red) -->
-      <circle cx="27" cy="28" r="10" fill="#2a0a0a"/>
-      <circle cx="27" cy="28" r="7" fill="#e94560"/>
-      <circle cx="27" cy="28" r="4" fill="#c62840"/>
-      <!-- power icon -->
-      <path d="M27 24 v5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M23.5 25.5 Q22 28 23.5 30.5 Q25.5 33 27 33 Q28.5 33 30.5 30.5 Q32 28 30.5 25.5" stroke="white" stroke-width="1.2" fill="none"/>
-      <!-- separator line -->
-      <rect x="10" y="44" width="34" height="1" rx=".5" fill="rgba(255,255,255,.08)"/>
-      <!-- D-pad -->
-      <!-- center -->
-      <circle cx="27" cy="72" r="10" fill="#2d2d2d"/>
-      <!-- up -->
-      <rect x="23" y="55" width="8" height="14" rx="4" fill="#333"/>
-      <polygon points="23,62 31,62 27,56" fill="#555"/>
-      <!-- down -->
-      <rect x="23" y="81" width="8" height="14" rx="4" fill="#333"/>
-      <polygon points="23,86 31,86 27,93" fill="#555"/>
-      <!-- left -->
-      <rect x="10" y="68" width="14" height="8" rx="4" fill="#333"/>
-      <polygon points="17,68 17,76 11,72" fill="#555"/>
-      <!-- right -->
-      <rect x="30" y="68" width="14" height="8" rx="4" fill="#333"/>
-      <polygon points="37,68 37,76 43,72" fill="#555"/>
-      <!-- center OK -->
-      <circle cx="27" cy="72" r="5" fill="#1c1c1e"/>
-      <text x="27" y="75.5" text-anchor="middle" font-size="5" fill="rgba(255,255,255,.5)" font-family="DM Sans,sans-serif">OK</text>
-      <!-- separator -->
-      <rect x="10" y="102" width="34" height="1" rx=".5" fill="rgba(255,255,255,.08)"/>
-      <!-- Button grid (3×3) -->
-      <circle cx="14" cy="116" r="5.5" fill="#2d2d2d"/>
-      <circle cx="27" cy="116" r="5.5" fill="#2d2d2d"/>
-      <circle cx="40" cy="116" r="5.5" fill="#2d2d2d"/>
-      <circle cx="14" cy="131" r="5.5" fill="#2d2d2d"/>
-      <circle cx="27" cy="131" r="5.5" fill="#2d2d2d"/>
-      <circle cx="40" cy="131" r="5.5" fill="#2d2d2d"/>
-      <circle cx="14" cy="146" r="5.5" fill="#2d2d2d"/>
-      <circle cx="27" cy="146" r="5.5" fill="#2d2d2d"/>
-      <circle cx="40" cy="146" r="5.5" fill="#2d2d2d"/>
-      <!-- number hints -->
-      <text x="14" y="118.5" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.35)" font-family="DM Sans,sans-serif">1</text>
-      <text x="27" y="118.5" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.35)" font-family="DM Sans,sans-serif">2</text>
-      <text x="40" y="118.5" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.35)" font-family="DM Sans,sans-serif">3</text>
-      <text x="14" y="133.5" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.35)" font-family="DM Sans,sans-serif">4</text>
-      <text x="27" y="133.5" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.35)" font-family="DM Sans,sans-serif">5</text>
-      <text x="40" y="133.5" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.35)" font-family="DM Sans,sans-serif">6</text>
-      <text x="14" y="148.5" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.35)" font-family="DM Sans,sans-serif">7</text>
-      <text x="27" y="148.5" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.35)" font-family="DM Sans,sans-serif">8</text>
-      <text x="40" y="148.5" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.35)" font-family="DM Sans,sans-serif">9</text>
-      <!-- teal accent bar at bottom -->
-      <rect x="10" y="160" width="34" height="4" rx="2" fill="#4eaf9c" opacity=".4"/>
-    </svg>
-  </div>
+            <!-- Phase 3: Mirrors CTV — stays -->
+            <div class="s0-phase" id="s0-p3">
+              <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;">
+                <svg viewBox="0 0 460 112" style="height:136px;width:auto;" fill="none">
+                  <polygon points="12,10 60,22 60,90 12,100" fill="#4eaf9c"/>
+                  <polygon points="72,22 120,10 120,100 72,90" fill="rgba(78,175,156,0.30)"/>
+                  <text x="132" y="84" font-family="DM Sans,sans-serif" font-weight="800" font-size="72" fill="#ffffff" letter-spacing="-2">irrors</text>
+                </svg>
+                <div style="font-size:115px;font-weight:800;color:#4eaf9c;letter-spacing:28px;margin-left:28px;line-height:1;">CTV</div>
+                <div style="width:220px;height:3px;background:rgba(78,175,156,0.45);border-radius:2px;"></div>
+              </div>
+            </div>
 
-  <!-- Main cover content -->
-  <div class="cover-inner">
-    <!-- Mirrors M icon + wordmark -->
-    <div class="mirrors-brand">
-      <svg width="340" height="120" viewBox="0 0 370 112" overflow="visible">
-        <!-- M icon – left panel teal -->
-        <polygon points="12,10 60,22 60,90 12,100" fill="#4eaf9c"/>
-        <!-- M icon – right panel (lighter) -->
-        <polygon points="72,22 120,10 120,100 72,90" fill="rgba(78,175,156,0.22)"/>
-        <!-- irrors -->
-        <text x="132" y="84" font-family="DM Sans,sans-serif" font-weight="800" font-size="72" fill="#0f2044" letter-spacing="-2">irrors</text>
-      </svg>
-      <!-- CTV label -->
-      <div style="display:flex;justify-content:center;margin-top:-2px;">
-        <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:30px;letter-spacing:14px;color:#4eaf9c;text-transform:uppercase;">CTV</span>
+            <!-- Static noise canvas -->
+            <canvas id="s0-static" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;z-index:3;"></canvas>
+            <div class="s0-scanlines" style="z-index:4;"></div>
+            <div id="s0-power-flash"></div>
+          </div>
+        </div>
+        <div class="s0-tv-brand">SMARTVIEW</div>
+        <div class="s0-tv-led"></div>
+      </div>
+      <div class="s0-stand-neck"></div>
+      <div class="s0-stand-base"></div>
+    </div>
+
+    <!-- Remote column -->
+    <div style="margin-top:130px;">
+      <div id="s0-remote-wrap" onclick="handleS0Remote()">
+        <div class="s0-ir"></div>
+        <div class="s0-pwr">
+          <svg viewBox="0 0 24 24"><path d="M12 2v10"/><path d="M18.36 6.64A9 9 0 1 1 5.64 6.64"/></svg>
+        </div>
+        <div class="s0-rbtns">
+          <div class="s0-rbtn"></div><div class="s0-rbtn"></div><div class="s0-rbtn"></div>
+          <div class="s0-rbtn"></div><div class="s0-rbtn"></div><div class="s0-rbtn"></div>
+        </div>
+        <div class="s0-rlabel">remote</div>
+        <div class="s0-hint">↑ Click to power on</div>
       </div>
     </div>
 
-    <p class="cover-tagline">
-      AI-powered, pre-bid contextual targeting for Connected TV — smarter reach at scale.
-    </p>
-
-    <div class="cover-chips">
-      <span class="chip">55+ Contextual Segments</span>
-      <span class="chip">Pre-bid Targeting</span>
-      <span class="chip">AI-Powered Enrichment</span>
-      <span class="chip">Brand Safe</span>
-    </div>
   </div>
 
   <div class="cover-footer">
     <span class="cover-footer-l">Copyright 2025. Silverpush. All rights reserved.</span>
     <div style="display:flex;align-items:center;gap:8px;">
-      <!-- small TV icon in footer -->
       <svg width="16" height="12" viewBox="0 0 24 18" fill="none" stroke="#4eaf9c" stroke-width="2">
         <rect x="1" y="1" width="22" height="14" rx="2"/>
         <path d="M8 17h8M12 15v2"/>
@@ -493,142 +502,211 @@ body{
     <img src="https://silverpushcdn.s3.amazonaws.com/static/sp-logo.svg" height="22" alt="Silverpush" style="display:block;">
     <span class="slide-tag">Agenda</span>
   </div>
-  <div class="sp-line"></div>
-  <div class="h2" style="margin-bottom:5px;">What we'll cover today</div>
-  <p style="font-size:13px;color:var(--dim);margin-bottom:16px;">Click any item to jump directly to that section</p>
-
-  <div class="agenda-grid">
-    <div class="agenda-item" onclick="goTo(2)">
-      <div class="ag-num">1</div>
-      <div class="ag-label">Introduction<span>What is Mirrors CTV</span></div>
-    </div>
-    <div class="agenda-item" onclick="goTo(3)">
-      <div class="ag-num">2</div>
-      <div class="ag-label">Current Partnerships<span>TTD · Pubmatic · IRIS.TV</span></div>
-    </div>
-    <div class="agenda-item" onclick="goTo(4)">
-      <div class="ag-num">3</div>
-      <div class="ag-label">Enrichment Flow<span>Interactive live demo</span></div>
-    </div>
-    <div class="agenda-item" onclick="goTo(5)">
-      <div class="ag-num">4</div>
-      <div class="ag-label">Buying Methods<span>4 activation models</span></div>
-    </div>
-    <div class="agenda-item" onclick="goTo(6)">
-      <div class="ag-num">5</div>
-      <div class="ag-label">Which Method for You?<span>Decision guide</span></div>
-    </div>
-    <div class="agenda-item" onclick="goTo(7)">
-      <div class="ag-num">6</div>
-      <div class="ag-label">Reporting Dashboard<span>Power BI overview</span></div>
-    </div>
-    <div class="agenda-item" onclick="goTo(8)">
-      <div class="ag-num">7</div>
-      <div class="ag-label">Reporting Challenges<span>Why CTV data is hard</span></div>
-    </div>
+  <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:2px;">
+    <div class="sp-line" style="margin-bottom:0;flex-shrink:0;align-self:center;"></div>
+    <div class="h2" style="margin-bottom:0;">What we'll cover today</div>
+    <p style="font-size:13px;color:var(--dim);font-weight:500;margin-left:auto;flex-shrink:0;">Click any topic to navigate ›</p>
   </div>
 
-  <!-- small CTV icons decoration -->
-  <div style="position:absolute;bottom:50px;right:68px;opacity:.06;pointer-events:none;">
-    <svg width="140" height="90" viewBox="0 0 140 90" fill="none" stroke="#4eaf9c" stroke-width="2">
-      <rect x="2" y="2" width="136" height="68" rx="10"/>
-      <circle cx="70" cy="36" r="18"/><polygon points="62,27 62,45 82,36" fill="#4eaf9c"/>
-      <rect x="58" y="70" width="24" height="12" rx="2"/><rect x="46" y="81" width="48" height="6" rx="3"/>
-    </svg>
+  <div class="agenda-grid" style="margin-top:10px;">
+
+    <!-- 1 · Introduction -->
+    <div class="agenda-item" onclick="goTo(2)">
+      <div class="ag-num">1</div>
+      <div class="ag-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sp)" stroke-width="2.2" stroke-linecap="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+        </svg>
+      </div>
+      <div class="ag-meta">
+        <div class="ag-step">Topic 01</div>
+        <div class="ag-label">Introduction</div>
+        <div class="ag-desc">What is Mirrors CTV and how it works</div>
+      </div>
+    </div>
+
+    <!-- 2 · Current Partnerships -->
+    <div class="agenda-item" onclick="goTo(2)">
+      <div class="ag-num">2</div>
+      <div class="ag-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sp)" stroke-width="2.2" stroke-linecap="round">
+          <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+        </svg>
+      </div>
+      <div class="ag-meta">
+        <div class="ag-step">Topic 02</div>
+        <div class="ag-label">Current Partnerships</div>
+        <div class="ag-desc">TTD, Pubmatic SSP &amp; IRIS.TV ecosystem</div>
+      </div>
+    </div>
+
+    <!-- 3 · Enrichment Flow -->
+    <div class="agenda-item" onclick="goTo(3)">
+      <div class="ag-num">3</div>
+      <div class="ag-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sp)" stroke-width="2.2" stroke-linecap="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+      <div class="ag-meta">
+        <div class="ag-step">Topic 03</div>
+        <div class="ag-label">Enrichment Flow</div>
+        <div class="ag-desc">AI content tagging &amp; data pipeline</div>
+      </div>
+    </div>
+
+    <!-- 4 · Buying Methods -->
+    <div class="agenda-item" onclick="goTo(4)">
+      <div class="ag-num">4</div>
+      <div class="ag-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sp)" stroke-width="2.2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="var(--sp)"/>
+        </svg>
+      </div>
+      <div class="ag-meta">
+        <div class="ag-step">Topic 04</div>
+        <div class="ag-label">Buying Methods</div>
+        <div class="ag-desc">PMPs, Programmatic Guaranteed &amp; more</div>
+      </div>
+    </div>
+
+    <!-- 5 · Which Method for You? -->
+    <div class="agenda-item" onclick="goTo(5)">
+      <div class="ag-num">5</div>
+      <div class="ag-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sp)" stroke-width="2.2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9 9a3 3 0 115.83 1c0 2-3 3-3 3"/>
+          <circle cx="12" cy="17" r="1" fill="var(--sp)" stroke="none"/>
+        </svg>
+      </div>
+      <div class="ag-meta">
+        <div class="ag-step">Topic 05</div>
+        <div class="ag-label">Which Method for You?</div>
+        <div class="ag-desc">Advisor tool — find your ideal approach</div>
+      </div>
+    </div>
+
+    <!-- 6 · Reporting Dashboard -->
+    <div class="agenda-item" onclick="goTo(6)">
+      <div class="ag-num">6</div>
+      <div class="ag-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sp)" stroke-width="2.2" stroke-linecap="round">
+          <rect x="3" y="14" width="4" height="7"/><rect x="10" y="9" width="4" height="12"/><rect x="17" y="4" width="4" height="17"/>
+        </svg>
+      </div>
+      <div class="ag-meta">
+        <div class="ag-step">Topic 06</div>
+        <div class="ag-label">Reporting Dashboard</div>
+        <div class="ag-desc">Live campaign metrics &amp; segment insights</div>
+      </div>
+    </div>
+
+    <!-- 7 · Reporting Challenges -->
+    <div class="agenda-item" onclick="goTo(7)">
+      <div class="ag-num">7</div>
+      <div class="ag-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sp)" stroke-width="2.2" stroke-linecap="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="1" fill="var(--sp)" stroke="none"/>
+        </svg>
+      </div>
+      <div class="ag-meta">
+        <div class="ag-step">Topic 07</div>
+        <div class="ag-label">Reporting Challenges</div>
+        <div class="ag-desc">Cross-platform attribution &amp; dedupe</div>
+      </div>
+    </div>
+
+    <!-- 8 · Start CTA card -->
+    <div class="agenda-item" onclick="goTo(2)" style="background:linear-gradient(140deg,var(--sp-dark) 0%,var(--sp) 100%);border-color:transparent;justify-content:flex-end;padding-bottom:20px;">
+      <div style="position:absolute;right:14px;top:10px;font-size:68px;font-weight:900;color:rgba(255,255,255,0.08);line-height:1;pointer-events:none;user-select:none;">→</div>
+      <!-- mini TV icon -->
+      <svg width="36" height="28" viewBox="0 0 36 28" fill="none" style="position:absolute;top:18px;left:18px;opacity:0.5;">
+        <rect x="1" y="1" width="34" height="20" rx="3" stroke="white" stroke-width="1.5"/>
+        <rect x="14" y="21" width="8" height="4" rx="1" fill="white" fill-opacity=".5"/>
+        <rect x="10" y="25" width="16" height="2.5" rx="1.25" fill="white" fill-opacity=".4"/>
+      </svg>
+      <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.65);letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px;">Mirrors CTV · 2025–26</div>
+      <div style="font-size:19px;font-weight:800;color:white;line-height:1.2;margin-bottom:12px;">Ready to<br>begin?</div>
+      <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);color:white;padding:9px 15px;border-radius:30px;font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,0.25);">
+        Start presentation
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+
   </div>
 </div>
 
 
 <!-- ══════════════════════════════════════
-     SLIDE 3 · INTRODUCTION
+     SLIDE 3 · INTRODUCTION & PARTNERSHIPS
 ══════════════════════════════════════ -->
 <div class="slide" id="s2">
   <div class="slide-topbar">
     <img src="https://silverpushcdn.s3.amazonaws.com/static/sp-logo.svg" height="22" alt="Silverpush" style="display:block;">
-    <span class="slide-tag">01 · Introduction</span>
+    <span class="slide-tag">01 · Introduction &amp; Partnerships</span>
   </div>
   <div class="sp-line"></div>
 
-  <div style="display:flex;gap:56px;align-items:flex-start;flex:1;">
-    <div style="flex:1;">
-      <div class="h2" style="margin-bottom:14px;">Programmatic CTV,<br>made smarter.</div>
-      <p class="body" style="max-width:600px;margin-bottom:18px;">
-        Mirrors by Silverpush makes programmatic CTV smarter — using <strong>AI-powered, pre-bid contextual targeting</strong>.<br><br>
-        In partnership with top DSPs like <strong>The Trade Desk</strong>, <strong>Pubmatic SSP</strong> and data partners like <strong>IRIS.TV</strong>, we analyze video content to create curated, brand-safe contextual segments.<br><br>
-        A faster, more precise way to reach engaged viewers at scale.
-      </p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <span class="chip">Pre-bid Targeting</span>
-        <span class="chip">AI-Powered</span>
-        <span class="chip">Brand Safe</span>
-        <span class="chip">Custom Segments</span>
-      </div>
-    </div>
+  <div style="display:flex;gap:32px;flex:1;min-height:0;">
 
-    <div style="display:flex;flex-direction:column;gap:12px;width:260px;">
-      <!-- Stat cards -->
-      <div style="background:white;border:1.5px solid var(--border);border-radius:14px;padding:18px 22px;text-align:center;box-shadow:var(--shadow);">
-        <div style="font-size:38px;font-weight:800;color:var(--sp);letter-spacing:-1px;">55+</div>
-        <div style="font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Contextual Segments</div>
+    <!-- Left: intro text + partner cards -->
+    <div style="flex:1;display:flex;flex-direction:column;min-height:0;">
+
+      <div class="h2" style="font-size:64px;margin-bottom:22px;">Mirrors Programmatic CTV</div>
+
+      <p style="font-size:32px;font-weight:400;color:#374151;font-family:'DM Sans',sans-serif;line-height:1.8;margin-bottom:22px;">
+        Mirrors by Silverpush uses <strong style="color:var(--navy);">AI-powered, pre-bid contextual targeting</strong> — analysing CTV video content to build curated, brand-safe segments. Delivered via <strong style="color:var(--navy);">The Trade Desk</strong>, <strong style="color:var(--navy);">Pubmatic SSP</strong> and <strong style="color:var(--navy);">IRIS.TV</strong> for precise reach at scale.
+      </p>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <span class="chip" style="font-size:18px;padding:10px 22px;">Pre-bid Targeting</span>
+        <span class="chip" style="font-size:18px;padding:10px 22px;">AI-Powered</span>
+        <span class="chip" style="font-size:18px;padding:10px 22px;">Brand Safe</span>
+        <span class="chip" style="font-size:18px;padding:10px 22px;">Custom Segments</span>
       </div>
-      <div style="background:white;border:1.5px solid var(--border);border-radius:14px;padding:18px 22px;text-align:center;box-shadow:var(--shadow);">
-        <div style="font-size:28px;font-weight:800;color:var(--sp);">Custom</div>
-        <div style="font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:1px;margin-top:4px;">Segment Creation</div>
-      </div>
-      <!-- CTV flow mini card -->
-      <div style="background:linear-gradient(135deg,var(--sp),var(--sp-mid));border-radius:14px;padding:16px 18px;">
-        <div style="font-size:11px;color:rgba(255,255,255,.8);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:1px;">How it works</div>
-        <div style="font-size:12px;color:white;line-height:1.7;">
-          CTV Request →<br>
-          Content Enrichment →<br>
-          Contextual Segment →<br>
-          Pre-bid DSP Activation
+
+      <!-- Partner cards — pushed to bottom, taller -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:auto;padding-top:20px;">
+        <div style="background:white;border:2px solid rgba(37,99,235,.2);border-radius:16px;padding:30px 24px;display:flex;align-items:center;gap:18px;box-shadow:var(--shadow);">
+          <div style="width:72px;height:72px;border-radius:16px;background:#2563eb;color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;flex-shrink:0;box-shadow:0 6px 18px rgba(37,99,235,.3);">TT</div>
+          <div>
+            <div style="font-size:24px;font-weight:800;color:var(--navy);font-family:'DM Sans',sans-serif;margin-bottom:6px;">The Trade Desk</div>
+            <div class="partner-role">DSP · Demand-Side Platform</div>
+          </div>
+        </div>
+        <div style="background:white;border:2px solid rgba(220,38,38,.2);border-radius:16px;padding:30px 24px;display:flex;align-items:center;gap:18px;box-shadow:var(--shadow);">
+          <div style="width:72px;height:72px;border-radius:16px;background:#dc2626;color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;flex-shrink:0;box-shadow:0 6px 18px rgba(220,38,38,.3);">PM</div>
+          <div>
+            <div style="font-size:24px;font-weight:800;color:var(--navy);font-family:'DM Sans',sans-serif;margin-bottom:6px;">Pubmatic SSP</div>
+            <div class="partner-role">SSP · Supply-Side Platform</div>
+          </div>
+        </div>
+        <div style="background:white;border:2px solid rgba(217,119,6,.2);border-radius:16px;padding:30px 24px;display:flex;align-items:center;gap:18px;box-shadow:var(--shadow);">
+          <div style="width:72px;height:72px;border-radius:16px;background:#d97706;color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;flex-shrink:0;box-shadow:0 6px 18px rgba(217,119,6,.3);">IR</div>
+          <div>
+            <div style="font-size:24px;font-weight:800;color:var(--navy);font-family:'DM Sans',sans-serif;margin-bottom:6px;">IRIS.TV</div>
+            <div class="partner-role">Data Partner</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-
-<!-- ══════════════════════════════════════
-     SLIDE 4 · PARTNERSHIPS
-══════════════════════════════════════ -->
-<div class="slide" id="s3">
-  <div class="slide-topbar">
-    <img src="https://silverpushcdn.s3.amazonaws.com/static/sp-logo.svg" height="22" alt="Silverpush" style="display:block;">
-    <span class="slide-tag">02 · Partnerships</span>
-  </div>
-  <div class="sp-line"></div>
-  <div class="h2" style="margin-bottom:5px;">Current Partnerships</div>
-  <p class="sub" style="font-size:13px;margin-bottom:20px;">Mirrors CTV operates through an integrated network of DSP, SSP, and data partners</p>
-
-  <div class="partners-grid">
-    <div class="partner-card" style="border-color:rgba(37,99,235,.2);">
-      <div class="partner-logo" style="background:#2563eb;">TT</div>
-      <div style="font-size:15px;font-weight:700;color:var(--navy);">The Trade Desk</div>
-      <div class="partner-role">DSP · Demand-Side Platform</div>
-      <div class="partner-desc">Primary DSP for activating Mirrors CTV contextual segments. Clients on TTD get pre-bid targeting with full segment access and both media + data margins.</div>
-      <span class="partner-tag" style="background:#eff6ff;color:#1d4ed8;border-color:rgba(37,99,235,.2);">Segment Activation</span>
+    <!-- Right: stat cards only, no green box -->
+    <div style="width:280px;display:flex;flex-direction:column;gap:14px;flex-shrink:0;">
+      <div style="background:white;border:1.5px solid var(--border);border-radius:16px;padding:28px 24px;text-align:center;box-shadow:var(--shadow);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <div style="font-size:64px;font-weight:800;color:var(--sp);letter-spacing:-2px;line-height:1;">55+</div>
+        <div style="font-size:14px;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-top:10px;font-family:'DM Sans',sans-serif;font-weight:700;">Contextual Segments</div>
+        <div style="font-size:18px;color:var(--mid);margin-top:8px;line-height:1.5;">Ready-made segments created by Silverpush for immediate activation</div>
+      </div>
+      <div style="background:white;border:1.5px solid var(--border);border-radius:16px;padding:28px 24px;text-align:center;box-shadow:var(--shadow);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <div style="font-size:44px;font-weight:800;color:var(--sp);line-height:1;">Custom</div>
+        <div style="font-size:14px;color:#374151;text-transform:uppercase;letter-spacing:1px;margin-top:10px;font-family:'DM Sans',sans-serif;font-weight:700;">Segment Creation</div>
+        <div style="font-size:18px;color:var(--mid);margin-top:8px;line-height:1.5;">Bespoke segments built to your brand's exact targeting brief</div>
+      </div>
     </div>
-    <div class="partner-card" style="border-color:rgba(220,38,38,.2);">
-      <div class="partner-logo" style="background:#dc2626;">PM</div>
-      <div style="font-size:15px;font-weight:700;color:var(--navy);">Pubmatic SSP</div>
-      <div class="partner-role">SSP · Supply-Side Platform</div>
-      <div class="partner-desc">Supply-side partner supporting 50+ DSPs. Mirrors manages both deal and contextual segments on the Pubmatic side for broader cross-DSP reach.</div>
-      <span class="partner-tag" style="background:#fef2f2;color:#b91c1c;border-color:rgba(220,38,38,.2);">Deal + Segment Management</span>
-    </div>
-    <div class="partner-card" style="border-color:rgba(217,119,6,.2);">
-      <div class="partner-logo" style="background:#d97706;">IR</div>
-      <div style="font-size:15px;font-weight:700;color:var(--navy);">IRIS.TV</div>
-      <div class="partner-role">Data Partner</div>
-      <div class="partner-desc">IRIS.TV has partnered with various SSPs and sends CTV ad requests to Silverpush for content enrichment. IRIS contextual segments can be activated by creating a deal on any IRIS-partnered SSP — such as Pubmatic, Magnite, Equative, Xander, or Beachfront.</div>
-      <span class="partner-tag" style="background:#fffbeb;color:#92400e;border-color:rgba(217,119,6,.2);">Data Partner</span>
-    </div>
-  </div>
-
-  <div style="margin-top:16px;padding:12px 18px;background:var(--sp-light);border-radius:12px;border:1px solid var(--border);display:flex;align-items:center;gap:10px;">
-    <svg width="18" height="14" viewBox="0 0 24 18" fill="none" stroke="#4eaf9c" stroke-width="2"><rect x="1" y="1" width="22" height="14" rx="2"/><path d="M8 17h8M12 15v2"/></svg>
-    <span style="font-size:13px;color:var(--sp-dark);font-weight:500;">These three partnerships power the complete enrichment flow — from raw CTV request to context-ready ad delivery.</span>
   </div>
 </div>
 
@@ -639,11 +717,11 @@ body{
 <div class="slide" id="s4">
   <div class="slide-topbar">
     <img src="https://silverpushcdn.s3.amazonaws.com/static/sp-logo.svg" height="22" alt="Silverpush" style="display:block;">
-    <span class="slide-tag">03 · Enrichment Flow</span>
+    <span class="slide-tag">02 · Enrichment Flow</span>
   </div>
   <div class="sp-line"></div>
-  <div class="h2" style="margin-bottom:5px;">How Enrichment Works</div>
-  <p class="sub" style="font-size:13px;margin-bottom:0;">From a raw CTV ad request to a fully enriched, context-ready signal.</p>
+  <div class="h2" style="font-size:64px;font-weight:800;margin-bottom:8px;">How Enrichment Works</div>
+  <p class="sub" style="font-size:14px;margin-bottom:0;">From a raw CTV ad request to a fully enriched, context-ready signal.</p>
 
   <div class="demo-card">
     <svg width="56" height="44" viewBox="0 0 56 44" fill="none" stroke="#4eaf9c" stroke-width="2">
@@ -653,7 +731,7 @@ body{
       <rect x="22" y="36" width="12" height="6" rx="2"/>
       <rect x="16" y="41" width="24" height="3" rx="1.5"/>
     </svg>
-    <div style="font-size:14px;color:var(--mid);max-width:520px;line-height:1.65;">
+    <div style="font-size:22px;font-weight:300;color:var(--mid);max-width:520px;line-height:1.8;">
       The interactive demo walks through the complete journey — from CTV device through Data Sanity, Content Identification, and the AI Engine — to a context-ready signal delivered to your DSP.
     </div>
     <div class="demo-steps">
@@ -681,91 +759,79 @@ body{
 <div class="slide" id="s5">
   <div class="slide-topbar">
     <img src="https://silverpushcdn.s3.amazonaws.com/static/sp-logo.svg" height="22" alt="Silverpush" style="display:block;">
-    <span class="slide-tag">04 · Buying Methods</span>
+    <span class="slide-tag">03 · Buying Methods</span>
   </div>
   <div class="sp-line"></div>
-  <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:4px;">
-    <div class="h2">4 Activation Models</div>
-    <span style="font-size:12px;color:var(--mid);">Revenue Share: <strong style="color:#065f46;">M1, M2 → Media + Data</strong> &nbsp;·&nbsp; <strong style="color:#92400e;">M3, M4 → Data Only</strong></span>
+  <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:6px;">
+    <div class="h2" style="font-size:64px;font-weight:800;">4 Activation Models</div>
+    <span style="font-size:18px;color:var(--mid);">Revenue Share: <strong style="color:#065f46;">M1, M2 → Media + Data</strong> &nbsp;·&nbsp; <strong style="color:#92400e;">M3, M4 → Data Only</strong></span>
   </div>
-  <p class="sub" style="font-size:12px;margin-bottom:12px;">Choose the setup that fits your client's DSP, SSP preference, and margin goals</p>
+  <p class="sub" style="font-size:14px;margin-bottom:14px;">Choose the setup that fits your client's DSP, SSP preference, and margin goals</p>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;min-height:0;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1;min-height:0;">
     <!-- M1 -->
-    <div style="background:white;border:1.5px solid #bfdbfe;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
-      <div style="background:linear-gradient(135deg,#2563eb,#3b82f6);padding:14px 18px;display:flex;align-items:center;gap:10px;">
-        <div style="width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:16px;flex-shrink:0;">1</div>
-        <div style="color:white;font-size:14px;font-weight:800;line-height:1.2;">SSP Deal + TTD Contextual Segment</div>
+    <div style="background:white;border:1.5px solid #bfdbfe;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
+      <div style="background:linear-gradient(135deg,#2563eb,#3b82f6);padding:22px 24px;display:flex;align-items:center;gap:14px;">
+        <div style="width:44px;height:44px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:22px;flex-shrink:0;">1</div>
+        <div style="color:white;font-size:30px;font-weight:800;line-height:1.2;font-family:'DM Sans',sans-serif;">SSP Deal + TTD Contextual Segment</div>
       </div>
-      <div style="padding:14px 18px;flex:1;display:flex;flex-direction:column;gap:10px;">
-        <p style="font-size:11.5px;color:var(--mid);line-height:1.6;margin:0;">SP creates a deal via client's preferred SSP. Client activates SP contextual segments on TTD. Earns both <strong style="color:var(--navy);">media</strong> (deal) and <strong style="color:var(--navy);">data</strong> (segment) margin.</p>
-        <div style="display:flex;flex-direction:column;gap:5px;margin-top:auto;">
-          <div style="display:flex;gap:5px;">
-            <span style="font-size:10px;padding:3px 8px;border-radius:6px;background:#eff6ff;color:#1d4ed8;font-weight:700;border:1px solid #bfdbfe;">DSP · TTD Only</span>
-            <span style="font-size:10px;padding:3px 8px;border-radius:6px;background:#f8fafc;color:var(--mid);font-weight:600;border:1px solid var(--border);">SSP · Any</span>
-          </div>
-          <span style="font-size:10px;padding:3px 9px;border-radius:6px;background:#ecfdf5;color:#065f46;font-weight:700;border:1px solid #a7f3d0;align-self:start;">Margin · Media + Data ✓</span>
+      <div style="padding:20px 24px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#eff6ff;color:#1d4ed8;font-weight:700;border:1.5px solid #bfdbfe;font-family:'DM Sans',sans-serif;">DSP · TTD Only</span>
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#f8fafc;color:var(--mid);font-weight:600;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;">SSP · Any</span>
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#ecfdf5;color:#065f46;font-weight:700;border:1.5px solid #a7f3d0;font-family:'DM Sans',sans-serif;">Margin · Media + Data ✓</span>
         </div>
       </div>
     </div>
 
     <!-- M2 -->
-    <div style="background:white;border:1.5px solid #fecaca;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
-      <div style="background:linear-gradient(135deg,#dc2626,#ef4444);padding:14px 18px;display:flex;align-items:center;gap:10px;">
-        <div style="width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:16px;flex-shrink:0;">2</div>
-        <div style="color:white;font-size:14px;font-weight:800;line-height:1.2;">Pubmatic Deal + Pubmatic Segment</div>
+    <div style="background:white;border:1.5px solid #fecaca;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
+      <div style="background:linear-gradient(135deg,#dc2626,#ef4444);padding:22px 24px;display:flex;align-items:center;gap:14px;">
+        <div style="width:44px;height:44px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:22px;flex-shrink:0;">2</div>
+        <div style="color:white;font-size:30px;font-weight:800;line-height:1.2;font-family:'DM Sans',sans-serif;">Pubmatic Deal + Pubmatic Segment</div>
       </div>
-      <div style="padding:14px 18px;flex:1;display:flex;flex-direction:column;gap:10px;">
-        <p style="font-size:11.5px;color:var(--mid);line-height:1.6;margin:0;">SP manages deal + segment entirely on Pubmatic. Client activates from their DSP. Works with <strong style="color:var(--navy);">50+ DSPs</strong>. Earns both <strong style="color:var(--navy);">media</strong> and <strong style="color:var(--navy);">data</strong> margin.</p>
-        <div style="display:flex;flex-direction:column;gap:5px;margin-top:auto;">
-          <div style="display:flex;gap:5px;">
-            <span style="font-size:10px;padding:3px 8px;border-radius:6px;background:#eff6ff;color:#1d4ed8;font-weight:700;border:1px solid #bfdbfe;">DSP · 50+ Supported</span>
-            <span style="font-size:10px;padding:3px 8px;border-radius:6px;background:#fef2f2;color:#b91c1c;font-weight:700;border:1px solid #fecaca;">SSP · Pubmatic</span>
-          </div>
-          <span style="font-size:10px;padding:3px 9px;border-radius:6px;background:#ecfdf5;color:#065f46;font-weight:700;border:1px solid #a7f3d0;align-self:start;">Margin · Media + Data ✓</span>
+      <div style="padding:20px 24px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#eff6ff;color:#1d4ed8;font-weight:700;border:1.5px solid #bfdbfe;font-family:'DM Sans',sans-serif;">DSP · 50+ Supported</span>
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#fef2f2;color:#b91c1c;font-weight:700;border:1.5px solid #fecaca;font-family:'DM Sans',sans-serif;">SSP · Pubmatic</span>
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#ecfdf5;color:#065f46;font-weight:700;border:1.5px solid #a7f3d0;font-family:'DM Sans',sans-serif;">Margin · Media + Data ✓</span>
         </div>
       </div>
     </div>
 
     <!-- M3 -->
-    <div style="background:white;border:1.5px solid #fde68a;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
-      <div style="background:linear-gradient(135deg,#d97706,#f59e0b);padding:14px 18px;display:flex;align-items:center;gap:10px;">
-        <div style="width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:16px;flex-shrink:0;">3</div>
-        <div style="color:white;font-size:14px;font-weight:800;line-height:1.2;">Contextual Segment Only on TTD</div>
+    <div style="background:white;border:1.5px solid #fde68a;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
+      <div style="background:linear-gradient(135deg,#d97706,#f59e0b);padding:22px 24px;display:flex;align-items:center;gap:14px;">
+        <div style="width:44px;height:44px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:22px;flex-shrink:0;">3</div>
+        <div style="color:white;font-size:30px;font-weight:800;line-height:1.2;font-family:'DM Sans',sans-serif;">Contextual Segment Only on TTD</div>
       </div>
-      <div style="padding:14px 18px;flex:1;display:flex;flex-direction:column;gap:10px;">
-        <p style="font-size:11.5px;color:var(--mid);line-height:1.6;margin:0;">Simplest setup — no deal needed. Client adds SP contextual segments directly on TTD and manages their own supply. SP earns <strong style="color:var(--navy);">data margin only</strong>.</p>
-        <div style="display:flex;flex-direction:column;gap:5px;margin-top:auto;">
-          <div style="display:flex;gap:5px;">
-            <span style="font-size:10px;padding:3px 8px;border-radius:6px;background:#eff6ff;color:#1d4ed8;font-weight:700;border:1px solid #bfdbfe;">DSP · TTD Only</span>
-            <span style="font-size:10px;padding:3px 8px;border-radius:6px;background:#f8fafc;color:var(--mid);font-weight:600;border:1px solid var(--border);">No Deal Required</span>
-          </div>
-          <span style="font-size:10px;padding:3px 9px;border-radius:6px;background:#fffbeb;color:#92400e;font-weight:700;border:1px solid #fde68a;align-self:start;">Margin · Data Only</span>
+      <div style="padding:20px 24px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#eff6ff;color:#1d4ed8;font-weight:700;border:1.5px solid #bfdbfe;font-family:'DM Sans',sans-serif;">DSP · TTD Only</span>
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#f8fafc;color:var(--mid);font-weight:600;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;">No Deal Required</span>
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#fffbeb;color:#92400e;font-weight:700;border:1.5px solid #fde68a;font-family:'DM Sans',sans-serif;">Margin · Data Only</span>
         </div>
       </div>
     </div>
 
     <!-- M4 -->
-    <div style="background:white;border:1.5px solid #c4b5fd;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
-      <div style="background:linear-gradient(135deg,#7c3aed,#8b5cf6);padding:14px 18px;display:flex;align-items:center;gap:10px;">
-        <div style="width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:16px;flex-shrink:0;">4</div>
-        <div style="color:white;font-size:14px;font-weight:800;line-height:1.2;">IRIS Deal + Contextual Segment via IRIS</div>
+    <div style="background:white;border:1.5px solid #c4b5fd;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
+      <div style="background:linear-gradient(135deg,#7c3aed,#8b5cf6);padding:22px 24px;display:flex;align-items:center;gap:14px;">
+        <div style="width:44px;height:44px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:22px;flex-shrink:0;">4</div>
+        <div style="color:white;font-size:30px;font-weight:800;line-height:1.2;font-family:'DM Sans',sans-serif;">IRIS Deal + Contextual Segment via IRIS</div>
       </div>
-      <div style="padding:14px 18px;flex:1;display:flex;flex-direction:column;gap:10px;">
-        <p style="font-size:11.5px;color:var(--mid);line-height:1.6;margin:0;">Via IRIS-partnered SSP (Pubmatic, Magnite, Equative, Xander, Beachfront). IRIS retains media margin — SP earns <strong style="color:var(--navy);">data margin only</strong>. Works with any DSP.</p>
-        <div style="display:flex;flex-direction:column;gap:5px;margin-top:auto;">
-          <div style="display:flex;gap:5px;">
-            <span style="font-size:10px;padding:3px 8px;border-radius:6px;background:#eff6ff;color:#1d4ed8;font-weight:700;border:1px solid #bfdbfe;">DSP · Any</span>
-            <span style="font-size:10px;padding:3px 8px;border-radius:6px;background:#f5f3ff;color:#6d28d9;font-weight:700;border:1px solid #c4b5fd;">SSP · IRIS-partnered</span>
-          </div>
-          <span style="font-size:10px;padding:3px 9px;border-radius:6px;background:#fffbeb;color:#92400e;font-weight:700;border:1px solid #fde68a;align-self:start;">Margin · Data Only</span>
+      <div style="padding:20px 24px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#eff6ff;color:#1d4ed8;font-weight:700;border:1.5px solid #bfdbfe;font-family:'DM Sans',sans-serif;">DSP · Any</span>
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#f5f3ff;color:#6d28d9;font-weight:700;border:1.5px solid #c4b5fd;font-family:'DM Sans',sans-serif;">SSP · IRIS-partnered</span>
+          <span style="font-size:22px;padding:8px 16px;border-radius:8px;background:#fffbeb;color:#92400e;font-weight:700;border:1.5px solid #fde68a;font-family:'DM Sans',sans-serif;">Margin · Data Only</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="text-align:center;">
-    <a href="buying-methods.html" target="_blank" class="demo-btn">
+  <div style="text-align:center;margin-top:14px;">
+    <a href="buying-methods.html" target="_blank" class="demo-btn" style="font-size:20px;">
       <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       Full Guide, Revenue Share &amp; Advisor Tool
     </a>
@@ -779,71 +845,71 @@ body{
 <div class="slide" id="s6">
   <div class="slide-topbar">
     <img src="https://silverpushcdn.s3.amazonaws.com/static/sp-logo.svg" height="22" alt="Silverpush" style="display:block;">
-    <span class="slide-tag">05 · Method Guide</span>
+    <span class="slide-tag">04 · Method Guide</span>
   </div>
   <div class="sp-line"></div>
-  <div class="h2" style="margin-bottom:5px;">Which Method is Right for You?</div>
-  <p class="sub" style="font-size:13px;margin-bottom:12px;">Answer 3 questions to find the right activation model for your client</p>
+  <div class="h2" style="font-size:64px;font-weight:800;margin-bottom:8px;">Which Method is Right for You?</div>
+  <p class="sub" style="font-size:14px;margin-bottom:14px;">Answer 3 questions to find the right activation model for your client</p>
 
   <!-- 3 factor pills -->
   <div style="display:flex;gap:10px;margin-bottom:14px;">
     <div style="flex:1;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px;">
       <span style="font-size:20px;">🖥</span>
-      <div><div style="font-size:11px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.5px;">Factor 1</div><div style="font-size:13px;font-weight:700;color:var(--navy);">Which DSP does the client use?</div><div style="font-size:11px;color:var(--mid);margin-top:2px;">The Trade Desk vs. any other DSP (50+ supported via Pubmatic)</div></div>
+      <div><div style="font-size:14px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.5px;font-family:'DM Sans',sans-serif;">Factor 1</div><div style="font-size:22px;font-weight:800;color:var(--navy);font-family:'DM Sans',sans-serif;">Which DSP does the client use?</div><div style="font-size:16px;color:#374151;margin-top:2px;font-family:'DM Sans',sans-serif;">The Trade Desk vs. any other DSP (50+ supported via Pubmatic)</div></div>
     </div>
     <div style="flex:1;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px;">
       <span style="font-size:20px;">📡</span>
-      <div><div style="font-size:11px;font-weight:700;color:#b91c1c;text-transform:uppercase;letter-spacing:.5px;">Factor 2</div><div style="font-size:13px;font-weight:700;color:var(--navy);">Is there a preferred SSP?</div><div style="font-size:11px;color:var(--mid);margin-top:2px;">Pubmatic / IRIS-partnered SSP / Any / None</div></div>
+      <div><div style="font-size:14px;font-weight:700;color:#b91c1c;text-transform:uppercase;letter-spacing:.5px;font-family:'DM Sans',sans-serif;">Factor 2</div><div style="font-size:22px;font-weight:800;color:var(--navy);font-family:'DM Sans',sans-serif;">Is there a preferred SSP?</div><div style="font-size:16px;color:#374151;margin-top:2px;font-family:'DM Sans',sans-serif;">Pubmatic / IRIS-partnered SSP / Any / None</div></div>
     </div>
     <div style="flex:1;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px;">
       <span style="font-size:20px;">💰</span>
-      <div><div style="font-size:11px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.5px;">Factor 3</div><div style="font-size:13px;font-weight:700;color:var(--navy);">What margin is needed?</div><div style="font-size:11px;color:var(--mid);margin-top:2px;">Media + Data Margin vs. Data Margin Only</div></div>
+      <div><div style="font-size:14px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.5px;font-family:'DM Sans',sans-serif;">Factor 3</div><div style="font-size:22px;font-weight:800;color:var(--navy);font-family:'DM Sans',sans-serif;">What margin is needed?</div><div style="font-size:16px;color:#374151;margin-top:2px;font-family:'DM Sans',sans-serif;">Media + Data Margin vs. Data Margin Only</div></div>
     </div>
   </div>
 
   <!-- Decision table -->
-  <div style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;font-size:11.5px;">
-    <div style="display:grid;grid-template-columns:2fr 2fr 2fr 1.5fr;background:var(--navy);color:white;font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;">
-      <div style="padding:8px 12px;">DSP</div>
-      <div style="padding:8px 12px;">Preferred SSP</div>
-      <div style="padding:8px 12px;">Margin Goal</div>
-      <div style="padding:8px 12px;">Use Method</div>
+  <div style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;font-size:18px;">
+    <div style="display:grid;grid-template-columns:2fr 2fr 2fr 1.5fr;background:var(--navy);color:white;font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:.5px;font-family:'DM Sans',sans-serif;">
+      <div style="padding:12px 16px;">DSP</div>
+      <div style="padding:12px 16px;">Preferred SSP</div>
+      <div style="padding:12px 16px;">Margin Goal</div>
+      <div style="padding:12px 16px;">Use Method</div>
     </div>
     <div style="display:grid;grid-template-columns:2fr 2fr 2fr 1.5fr;background:#eff6ff;border-bottom:1px solid #bfdbfe;">
-      <div style="padding:9px 12px;font-weight:600;color:#1d4ed8;">The Trade Desk</div>
-      <div style="padding:9px 12px;color:var(--mid);">Any SSP</div>
-      <div style="padding:9px 12px;color:var(--mid);">Media + Data</div>
-      <div style="padding:9px 12px;"><span style="background:#2563eb;color:white;padding:2px 9px;border-radius:20px;font-weight:700;font-size:11px;">M1</span></div>
+      <div style="padding:12px 16px;font-size:18px;font-weight:600;color:#1d4ed8;">The Trade Desk</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Any SSP</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Media + Data</div>
+      <div style="padding:12px 16px;"><span style="background:#2563eb;color:white;padding:4px 12px;border-radius:20px;font-weight:700;font-size:15px;">M1</span></div>
     </div>
     <div style="display:grid;grid-template-columns:2fr 2fr 2fr 1.5fr;background:#ecfdf5;border-bottom:1px solid #a7f3d0;">
-      <div style="padding:9px 12px;font-weight:600;color:#1d4ed8;">The Trade Desk</div>
-      <div style="padding:9px 12px;color:var(--mid);">Pubmatic</div>
-      <div style="padding:9px 12px;color:var(--mid);">Media + Data</div>
-      <div style="padding:9px 12px;"><span style="background:#2563eb;color:white;padding:2px 9px;border-radius:20px;font-weight:700;font-size:11px;">M1</span> <span style="background:#dc2626;color:white;padding:2px 9px;border-radius:20px;font-weight:700;font-size:11px;">M2</span></div>
+      <div style="padding:12px 16px;font-size:18px;font-weight:600;color:#1d4ed8;">The Trade Desk</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Pubmatic</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Media + Data</div>
+      <div style="padding:12px 16px;display:flex;gap:6px;"><span style="background:#2563eb;color:white;padding:4px 12px;border-radius:20px;font-weight:700;font-size:15px;">M1</span> <span style="background:#dc2626;color:white;padding:4px 12px;border-radius:20px;font-weight:700;font-size:15px;">M2</span></div>
     </div>
     <div style="display:grid;grid-template-columns:2fr 2fr 2fr 1.5fr;background:#fffbeb;border-bottom:1px solid #fde68a;">
-      <div style="padding:9px 12px;font-weight:600;color:#1d4ed8;">The Trade Desk</div>
-      <div style="padding:9px 12px;color:var(--mid);">Any / None</div>
-      <div style="padding:9px 12px;color:var(--mid);">Data Only</div>
-      <div style="padding:9px 12px;"><span style="background:#d97706;color:white;padding:2px 9px;border-radius:20px;font-weight:700;font-size:11px;">M3</span></div>
+      <div style="padding:12px 16px;font-size:18px;font-weight:600;color:#1d4ed8;">The Trade Desk</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Any / None</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Data Only</div>
+      <div style="padding:12px 16px;"><span style="background:#d97706;color:white;padding:4px 12px;border-radius:20px;font-weight:700;font-size:15px;">M3</span></div>
     </div>
     <div style="display:grid;grid-template-columns:2fr 2fr 2fr 1.5fr;background:#fef2f2;border-bottom:1px solid #fecaca;">
-      <div style="padding:9px 12px;font-weight:600;color:#b91c1c;">Other DSP (50+)</div>
-      <div style="padding:9px 12px;color:var(--mid);">Pubmatic</div>
-      <div style="padding:9px 12px;color:var(--mid);">Media + Data</div>
-      <div style="padding:9px 12px;"><span style="background:#dc2626;color:white;padding:2px 9px;border-radius:20px;font-weight:700;font-size:11px;">M2</span></div>
+      <div style="padding:12px 16px;font-size:18px;font-weight:600;color:#b91c1c;">Other DSP (50+)</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Pubmatic</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Media + Data</div>
+      <div style="padding:12px 16px;"><span style="background:#dc2626;color:white;padding:4px 12px;border-radius:20px;font-weight:700;font-size:15px;">M2</span></div>
     </div>
     <div style="display:grid;grid-template-columns:2fr 2fr 2fr 1.5fr;background:#f5f3ff;border-bottom:1px solid #c4b5fd;">
-      <div style="padding:9px 12px;font-weight:600;color:#b91c1c;">Other DSP (50+)</div>
-      <div style="padding:9px 12px;color:var(--mid);">IRIS-partnered SSP</div>
-      <div style="padding:9px 12px;color:var(--mid);">Data Only</div>
-      <div style="padding:9px 12px;"><span style="background:#7c3aed;color:white;padding:2px 9px;border-radius:20px;font-weight:700;font-size:11px;">M4</span></div>
+      <div style="padding:12px 16px;font-size:18px;font-weight:600;color:#b91c1c;">Other DSP (50+)</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">IRIS-partnered SSP</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Data Only</div>
+      <div style="padding:12px 16px;"><span style="background:#7c3aed;color:white;padding:4px 12px;border-radius:20px;font-weight:700;font-size:15px;">M4</span></div>
     </div>
     <div style="display:grid;grid-template-columns:2fr 2fr 2fr 1.5fr;background:#fef2f2;">
-      <div style="padding:9px 12px;font-weight:600;color:#b91c1c;">Other DSP (50+)</div>
-      <div style="padding:9px 12px;color:var(--mid);">Non-Pubmatic SSP</div>
-      <div style="padding:9px 12px;color:var(--mid);">Media + Data</div>
-      <div style="padding:9px 12px;"><span style="background:#dc2626;color:white;padding:2px 9px;border-radius:20px;font-weight:700;font-size:11px;">❌ None</span></div>
+      <div style="padding:12px 16px;font-size:18px;font-weight:600;color:#b91c1c;">Other DSP (50+)</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Non-Pubmatic SSP</div>
+      <div style="padding:12px 16px;font-size:18px;color:var(--mid);">Media + Data</div>
+      <div style="padding:12px 16px;"><span style="background:#dc2626;color:white;padding:4px 12px;border-radius:20px;font-weight:700;font-size:15px;">❌ None</span></div>
     </div>
   </div>
 
@@ -862,86 +928,110 @@ body{
 <div class="slide" id="s7">
   <div class="slide-topbar">
     <img src="https://silverpushcdn.s3.amazonaws.com/static/sp-logo.svg" height="22" alt="Silverpush" style="display:block;">
-    <span class="slide-tag">06 · Reporting</span>
+    <span class="slide-tag">05 · Reporting</span>
   </div>
   <div class="sp-line"></div>
-  <div class="h2" style="margin-bottom:4px;">Reporting Dashboard</div>
-  <p class="sub" style="font-size:12px;margin-bottom:14px;">Real-time performance visibility powered by Power BI</p>
+  <div class="h2" style="font-size:64px;font-weight:800;margin-bottom:8px;">Reporting Dashboard</div>
+  <p class="sub" style="font-size:14px;margin-bottom:14px;">Real-time performance visibility powered by Power BI</p>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;min-height:0;">
-    <!-- Dimensions card -->
-    <div style="background:linear-gradient(160deg,var(--sp-light) 0%,white 60%);border:1.5px solid rgba(78,175,156,.3);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(78,175,156,.2);">
-        <div style="width:36px;height:36px;background:var(--sp);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(78,175,156,.3);">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+
+    <!-- ── DIMENSIONS ── -->
+    <div style="background:linear-gradient(160deg,rgba(78,175,156,.08) 0%,white 50%);border:1.5px solid rgba(78,175,156,.35);border-radius:18px;padding:18px 20px 16px;display:flex;flex-direction:column;">
+      <!-- Header -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:10px;border-bottom:1.5px solid rgba(78,175,156,.18);">
+        <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--sp),var(--sp-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(78,175,156,.35);flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         </div>
         <div>
-          <div style="font-size:18px;font-weight:800;color:var(--sp-dark);line-height:1;">Dimensions</div>
-          <div style="font-size:10.5px;color:var(--sp);font-weight:600;margin-top:1px;">Slice &amp; filter your data by</div>
+          <div style="font-size:30px;font-weight:800;color:var(--sp-dark);line-height:1;">Dimensions</div>
+          <div style="font-size:13px;color:var(--sp);font-weight:600;letter-spacing:.3px;margin-top:2px;">Slice &amp; filter your data by</div>
         </div>
-        <span style="margin-left:auto;font-size:11px;background:var(--sp);color:white;padding:2px 9px;border-radius:20px;font-weight:700;">8 total</span>
+        <span style="margin-left:auto;font-size:15px;font-weight:800;background:var(--sp);color:white;padding:5px 14px;border-radius:20px;letter-spacing:.5px;">8 TOTAL</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:1;">
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(78,175,156,.18);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">📅</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Campaign Daily Data</span>
+      <!-- Tiles 4×2 -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;flex:1;">
+        <div style="background:linear-gradient(145deg,rgba(78,175,156,.15),rgba(78,175,156,.06));border:1px solid rgba(78,175,156,.3);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">📅</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Campaign Daily Data</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(78,175,156,.18);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">🎯</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Context Segment</span>
+        <div style="background:linear-gradient(145deg,rgba(78,175,156,.15),rgba(78,175,156,.06));border:1px solid rgba(78,175,156,.3);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">🎯</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Context Segment</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(78,175,156,.18);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">🖼️</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Creative</span>
+        <div style="background:linear-gradient(145deg,rgba(78,175,156,.15),rgba(78,175,156,.06));border:1px solid rgba(78,175,156,.3);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">🖼️</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Creative</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(78,175,156,.18);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">📡</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Publisher</span>
+        <div style="background:linear-gradient(145deg,rgba(78,175,156,.15),rgba(78,175,156,.06));border:1px solid rgba(78,175,156,.3);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">📡</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Publisher</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(78,175,156,.18);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">🔗</span><span style="font-size:12px;font-weight:700;color:var(--navy);">SSP</span>
+        <div style="background:linear-gradient(145deg,rgba(78,175,156,.15),rgba(78,175,156,.06));border:1px solid rgba(78,175,156,.3);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">🔗</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">SSP</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(78,175,156,.18);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">👥</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Demographics</span>
+        <div style="background:linear-gradient(145deg,rgba(78,175,156,.15),rgba(78,175,156,.06));border:1px solid rgba(78,175,156,.3);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">👥</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Demographics</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(78,175,156,.18);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">🌍</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Geo</span>
+        <div style="background:linear-gradient(145deg,rgba(78,175,156,.15),rgba(78,175,156,.06));border:1px solid rgba(78,175,156,.3);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">🌍</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Geo</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(78,175,156,.18);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">📺</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Device Make</span>
+        <div style="background:linear-gradient(145deg,rgba(78,175,156,.15),rgba(78,175,156,.06));border:1px solid rgba(78,175,156,.3);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">📺</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Device Make</span>
         </div>
       </div>
     </div>
 
-    <!-- Metrics card -->
-    <div style="background:linear-gradient(160deg,#eff6ff 0%,white 60%);border:1.5px solid rgba(37,99,235,.2);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(37,99,235,.15);">
-        <div style="width:36px;height:36px;background:#2563eb;border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(37,99,235,.3);">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <!-- ── METRICS ── -->
+    <div style="background:linear-gradient(160deg,rgba(37,99,235,.07) 0%,white 50%);border:1.5px solid rgba(37,99,235,.25);border-radius:18px;padding:18px 20px 16px;display:flex;flex-direction:column;">
+      <!-- Header -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:10px;border-bottom:1.5px solid rgba(37,99,235,.15);">
+        <div style="width:44px;height:44px;background:linear-gradient(135deg,#2563eb,#1e40af);border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(37,99,235,.35);flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <div>
-          <div style="font-size:18px;font-weight:800;color:#1d4ed8;line-height:1;">Metrics</div>
-          <div style="font-size:10.5px;color:#3b82f6;font-weight:600;margin-top:1px;">Measure performance with</div>
+          <div style="font-size:30px;font-weight:800;color:#1d4ed8;line-height:1;">Metrics</div>
+          <div style="font-size:13px;color:#3b82f6;font-weight:600;letter-spacing:.3px;margin-top:2px;">Measure performance with</div>
         </div>
-        <span style="margin-left:auto;font-size:11px;background:#2563eb;color:white;padding:2px 9px;border-radius:20px;font-weight:700;">7 total</span>
+        <span style="margin-left:auto;font-size:15px;font-weight:800;background:#2563eb;color:white;padding:5px 14px;border-radius:20px;letter-spacing:.5px;">7 TOTAL</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:1;">
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(37,99,235,.12);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">📊</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Impressions</span>
+      <!-- Tiles 4×2 (7 items: 4 top, 3 bottom — last spans full row) -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;flex:1;">
+        <div style="background:linear-gradient(145deg,rgba(37,99,235,.12),rgba(37,99,235,.05));border:1px solid rgba(37,99,235,.22);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">📊</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Impressions</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(37,99,235,.12);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">✅</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Completed Views</span>
+        <div style="background:linear-gradient(145deg,rgba(37,99,235,.12),rgba(37,99,235,.05));border:1px solid rgba(37,99,235,.22);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">✅</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Completed Views</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(37,99,235,.12);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">▶️</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Quartiles</span>
+        <div style="background:linear-gradient(145deg,rgba(37,99,235,.12),rgba(37,99,235,.05));border:1px solid rgba(37,99,235,.22);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">▶️</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Quartiles</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(37,99,235,.12);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">👁️</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Reach</span>
+        <div style="background:linear-gradient(145deg,rgba(37,99,235,.12),rgba(37,99,235,.05));border:1px solid rgba(37,99,235,.22);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">👁️</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Reach</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(37,99,235,.12);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">🔁</span><span style="font-size:12px;font-weight:700;color:var(--navy);">Frequency</span>
+        <div style="background:linear-gradient(145deg,rgba(37,99,235,.12),rgba(37,99,235,.05));border:1px solid rgba(37,99,235,.22);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">🔁</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">Frequency</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 11px;background:white;border-radius:9px;border:1px solid rgba(37,99,235,.12);box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">⭐</span><span style="font-size:12px;font-weight:700;color:var(--navy);">TVQI Rating</span>
+        <div style="background:linear-gradient(145deg,rgba(37,99,235,.12),rgba(37,99,235,.05));border:1px solid rgba(37,99,235,.22);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;">
+          <span style="font-size:32px;line-height:1;">⭐</span>
+          <span style="font-size:20px;font-weight:800;color:var(--navy);line-height:1.25;">TVQI Rating</span>
         </div>
-        <div style="grid-column:1/-1;display:flex;align-items:center;gap:8px;padding:8px 11px;background:linear-gradient(135deg,#ecfdf5,white);border-radius:9px;border:1px solid #a7f3d0;box-shadow:0 1px 3px rgba(0,0,0,.04);">
-          <span style="font-size:16px;flex-shrink:0;">💰</span><span style="font-size:12px;font-weight:700;color:#065f46;">Budget Consumed</span>
+        <!-- Budget Consumed spans 2 cols, stands out -->
+        <div style="grid-column:span 2;background:linear-gradient(135deg,rgba(78,175,156,.18),rgba(37,99,235,.1));border:1.5px solid rgba(78,175,156,.4);border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:16px;">
+          <span style="font-size:36px;line-height:1;flex-shrink:0;">💰</span>
+          <div>
+            <div style="font-size:18px;font-weight:800;color:var(--navy);">Budget Consumed</div>
+            <div style="font-size:12px;color:var(--sp-dark);font-weight:600;margin-top:2px;">Real-time spend tracking</div>
+          </div>
         </div>
       </div>
     </div>
@@ -949,7 +1039,7 @@ body{
 
   <!-- Open Dashboard button -->
   <div style="text-align:center;">
-    <button onclick="openReportingPopup()" class="demo-btn" style="background:linear-gradient(135deg,var(--navy),#1e3a5f);">
+    <button onclick="openReportingPopup()" class="demo-btn" style="background:linear-gradient(135deg,var(--navy),#1e3a5f);font-size:20px;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
       Open Live Dashboard (Full Screen)
     </button>
@@ -979,61 +1069,89 @@ body{
 <div class="slide" id="s8">
   <div class="slide-topbar">
     <img src="https://silverpushcdn.s3.amazonaws.com/static/sp-logo.svg" height="22" alt="Silverpush" style="display:block;">
-    <span class="slide-tag">07 · Challenges</span>
+    <span class="slide-tag">06 · Challenges</span>
   </div>
   <div class="sp-line"></div>
-  <div class="h2" style="margin-bottom:5px;">Why Content Reporting is Challenging</div>
-  <p class="sub" style="font-size:13px;margin-bottom:12px;">Understanding the structural limitations behind CTV content reporting</p>
+  <div class="h2" style="font-size:64px;font-weight:800;margin-bottom:8px;">Why Content Reporting is Challenging</div>
+  <p class="sub" style="font-size:14px;margin-bottom:12px;">Despite having contextual data, structural limitations prevent full content reporting</p>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;">
+  <!-- Step 1: The Data Gap stat bar -->
+  <div id="s8-step-1" style="opacity:0;transform:translateY(10px) scale(0.97);pointer-events:none;transition:opacity 0.5s ease,transform 0.5s ease;background:linear-gradient(135deg,#fef2f2,#fff5f5);border:1.5px solid rgba(220,38,38,.28);border-radius:14px;padding:16px 24px;display:flex;align-items:center;gap:24px;">
+    <div style="font-size:64px;font-weight:900;color:#dc2626;line-height:1;flex-shrink:0;letter-spacing:-2px;">2–8%</div>
+    <div style="flex:1;">
+      <div style="font-size:20px;font-weight:700;color:#7f1d1d;margin-bottom:10px;">of managed campaign impressions carry content details</div>
+      <div style="height:10px;background:#fecaca;border-radius:5px;overflow:hidden;margin-bottom:6px;"><div style="width:5%;height:100%;background:linear-gradient(90deg,#dc2626,#ef4444);border-radius:5px;"></div></div>
+      <div style="font-size:13px;color:#ef4444;font-weight:600;">~92–98% of impressions have NO content metadata in the bid request</div>
+    </div>
+  </div>
 
-    <!-- Card 1: Publisher Data Quality — clickable -->
-    <div class="challenge-card" onclick="openDeckDsPopup()" style="cursor:pointer;border-color:#fcd34d;background:linear-gradient(135deg,#fffbeb,white);position:relative;">
-      <div style="position:absolute;top:10px;right:10px;font-size:9px;font-weight:700;color:#d97706;background:#fef3c7;padding:2px 8px;border-radius:20px;border:1px solid #fcd34d;">Click to explore</div>
-      <div class="ch-icon">🛡️</div>
-      <div class="ch-title" style="color:#92400e;">Publisher Data Quality Varies</div>
-      <div class="ch-body">Publishers differ in how they populate the OpenRTB content object — some share complete metadata (Full Data), others share only IDs (Bare Minimum), or put Series + Episode inside the wrong fields (Mixed-Up).</div>
-      <div style="margin-top:8px;display:flex;gap:5px;flex-wrap:wrap;">
-        <span style="font-size:10px;background:#d1fae5;color:#065f46;padding:2px 7px;border-radius:4px;font-weight:700;">✓ Full Data</span>
-        <span style="font-size:10px;background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:4px;font-weight:700;">⚡ Partial</span>
-        <span style="font-size:10px;background:#ffedd5;color:#9a3412;padding:2px 7px;border-radius:4px;font-weight:700;">⚠ Mixed-Up</span>
-        <span style="font-size:10px;background:#fee2e2;color:#991b1b;padding:2px 7px;border-radius:4px;font-weight:700;">🚫 Bare Min</span>
+  <!-- Steps 2–4: 3-column row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;flex:1;min-height:0;">
+
+    <!-- Step 2: TTD Reporting Gap -->
+    <div id="s8-step-2" style="opacity:0;transform:translateY(10px) scale(0.97);pointer-events:none;transition:opacity 0.5s ease,transform 0.5s ease;background:linear-gradient(135deg,#eff6ff,white);border:1.5px solid rgba(37,99,235,.25);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;">
+      <div style="font-size:32px;">🖥️</div>
+      <div style="font-size:20px;font-weight:800;color:#1d4ed8;line-height:1.2;">TTD Reporting Gap</div>
+      <div style="font-size:13px;color:#6b7280;">TTD DSP exposes two content dimensions — but the key identifier is absent</div>
+      <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px;">
+        <div style="padding:9px 13px;background:#dbeafe;border-radius:9px;font-size:14px;font-weight:700;color:#1e40af;">✅ Content Title</div>
+        <div style="padding:9px 13px;background:#dbeafe;border-radius:9px;font-size:14px;font-weight:700;color:#1e40af;">✅ Content Series</div>
+        <div style="padding:9px 13px;background:#fee2e2;border-radius:9px;font-size:14px;font-weight:700;color:#dc2626;">❌ Content ID — Missing</div>
+      </div>
+      <div style="margin-top:auto;font-size:12px;color:#6b7280;line-height:1.5;padding-top:8px;border-top:1px solid #e5e7eb;">Publisher-dependent — each sends data in a different format</div>
+    </div>
+
+    <!-- Step 3: 4 Publisher Scenarios -->
+    <div id="s8-step-3" style="opacity:0;transform:translateY(10px) scale(0.97);pointer-events:none;transition:opacity 0.5s ease,transform 0.5s ease;background:linear-gradient(135deg,#fffbeb,white);border:1.5px solid rgba(245,158,11,.3);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;">
+      <div style="font-size:32px;">🔀</div>
+      <div style="font-size:20px;font-weight:800;color:#92400e;line-height:1.2;">4 Publisher Scenarios</div>
+      <div style="font-size:13px;color:#6b7280;">How content data arrives (or doesn't) in the bid request</div>
+      <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px;">
+        <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;background:#d1fae5;border-radius:9px;font-size:14px;font-weight:700;color:#065f46;">✅ Full Data — ID + Title + Series</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;background:#fef3c7;border-radius:9px;font-size:14px;font-weight:700;color:#92400e;">⚡ Non-Standard Field</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;background:#ffedd5;border-radius:9px;font-size:14px;font-weight:700;color:#9a3412;">⚠️ Title/Series Only, No ID</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:9px 12px;background:#fee2e2;border-radius:9px;font-size:14px;font-weight:700;color:#991b1b;">🚫 No Content Details</div>
       </div>
     </div>
 
-    <!-- Card 2: TTD Content Dimensions -->
-    <div class="challenge-card" style="border-color:rgba(37,99,235,.3);background:linear-gradient(135deg,#eff6ff,white);">
-      <div class="ch-icon">🖥️</div>
-      <div class="ch-title" style="color:#1d4ed8;">TTD Content Dimensions — Publisher Dependent</div>
-      <div class="ch-body">TTD DSP supports <strong>Title</strong> and <strong>Series</strong> as reporting dimensions. However, since most publishers do not share complete or correctly structured content parameters, values are incomplete or unavailable for a large share of impressions.</div>
-      <div style="margin-top:8px;padding:7px 10px;background:#dbeafe;border-radius:7px;font-size:11px;color:#1e40af;">
-        <strong>Result:</strong> Content dimensions exist in TTD but cannot be reliably populated without publisher cooperation.
+    <!-- Step 4: Why Silverpush Can't Report -->
+    <div id="s8-step-4" style="opacity:0;transform:translateY(10px) scale(0.97);pointer-events:none;transition:opacity 0.5s ease,transform 0.5s ease;background:linear-gradient(135deg,#f5f3ff,white);border:1.5px solid rgba(124,58,237,.25);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;">
+      <div style="font-size:32px;">🔍</div>
+      <div style="font-size:20px;font-weight:800;color:#6d28d9;line-height:1.2;">Why Can't Silverpush Report It?</div>
+      <div style="font-size:13px;color:#6b7280;">We have the bid request. We've decoded Content ID. So why not?</div>
+      <div style="padding:12px 14px;background:#ede9fe;border-radius:10px;text-align:center;font-size:15px;font-weight:800;color:#5b21b6;margin-top:4px;">Integrated as Data Partner</div>
+      <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px;">
+        <div style="display:flex;align-items:flex-start;gap:7px;font-size:14px;color:#374151;line-height:1.4;"><span style="color:#dc2626;font-weight:800;flex-shrink:0;">✗</span>No win/loss signals from TTD</div>
+        <div style="display:flex;align-items:flex-start;gap:7px;font-size:14px;color:#374151;line-height:1.4;"><span style="color:#dc2626;font-weight:800;flex-shrink:0;">✗</span>No impression win confirmation</div>
+        <div style="display:flex;align-items:flex-start;gap:7px;font-size:14px;color:#374151;line-height:1.4;"><span style="color:#dc2626;font-weight:800;flex-shrink:0;">✗</span>No reporting feedback loop</div>
       </div>
     </div>
+  </div>
 
-    <!-- Card 3: No Win/Loss Reporting -->
-    <div class="challenge-card" style="border-color:rgba(124,58,237,.3);background:linear-gradient(135deg,#f5f3ff,white);">
-      <div class="ch-icon">🔍</div>
-      <div class="ch-title" style="color:#6d28d9;">No Win/Loss Reporting for Data Partners</div>
-      <div class="ch-body">As a data partner, Silverpush does not receive impression win/loss reports from TTD for every bid request. This means it is not possible to back-map and confirm the actual content of impressions that were won — making content-level attribution fundamentally limited.</div>
-      <div style="margin-top:8px;padding:7px 10px;background:#ede9fe;border-radius:7px;font-size:11px;color:#5b21b6;">
-        <strong>Impact:</strong> Cannot reconcile enrichment signals with actual delivered impressions.
+  <!-- Step 5: Root Cause callout -->
+  <div id="s8-step-5" style="opacity:0;transform:translateY(10px) scale(0.97);pointer-events:none;transition:opacity 0.5s ease,transform 0.5s ease;background:linear-gradient(135deg,#0f2044,#1e3a5f);border-radius:14px;padding:18px 24px;display:flex;align-items:center;gap:20px;">
+    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+      <div style="text-align:center;padding:12px 16px;background:rgba(78,175,156,.2);border:1px solid rgba(78,175,156,.3);border-radius:12px;">
+        <div style="font-size:24px;">📡</div>
+        <div style="font-size:11px;color:#4eaf9c;font-weight:700;margin-top:4px;line-height:1.3;">Bid Request<br>Enriched ✓</div>
+      </div>
+      <div style="font-size:22px;color:rgba(255,255,255,.25);">→</div>
+      <div style="text-align:center;padding:12px 16px;background:rgba(220,38,38,.12);border:1.5px dashed rgba(220,38,38,.35);border-radius:12px;">
+        <div style="font-size:24px;opacity:.5;">🏆</div>
+        <div style="font-size:11px;color:#f87171;font-weight:700;margin-top:4px;line-height:1.3;">Win/Loss<br>Signal ✗</div>
+      </div>
+      <div style="font-size:22px;color:rgba(255,255,255,.25);">→</div>
+      <div style="text-align:center;padding:12px 16px;background:rgba(220,38,38,.12);border:1.5px dashed rgba(220,38,38,.35);border-radius:12px;">
+        <div style="font-size:24px;opacity:.5;">📊</div>
+        <div style="font-size:11px;color:#f87171;font-weight:700;margin-top:4px;line-height:1.3;">Content<br>Reporting ✗</div>
       </div>
     </div>
+    <div style="font-size:15px;color:rgba(255,255,255,.82);line-height:1.75;font-style:italic;">"Silverpush enriches the bid request with contextual signals — but as a <strong style="color:#4eaf9c;font-style:normal;">data partner</strong>, it sits outside the reporting chain. <strong style="color:white;font-style:normal;">Win/loss signals</strong> and impression confirmations never flow back."</div>
+  </div>
 
-    <!-- Card 4: Low Coverage Stat -->
-    <div class="challenge-card" style="border-color:rgba(220,38,38,.3);background:linear-gradient(135deg,#fef2f2,white);">
-      <div class="ch-icon">📊</div>
-      <div class="ch-title" style="color:#b91c1c;">Only 2–8% Impressions Have Content Details</div>
-      <div class="ch-body">Based on past campaign analysis, only <strong style="font-size:16px;color:#dc2626;">2% – 8%</strong> of all impressions received content details. The remaining 92–98% lacked the necessary parameters to identify the content being played at the time of the ad.</div>
-      <div style="margin-top:8px;display:flex;gap:6px;align-items:center;">
-        <div style="flex:1;height:8px;background:#fee2e2;border-radius:4px;overflow:hidden;">
-          <div style="width:5%;height:100%;background:#dc2626;border-radius:4px;"></div>
-        </div>
-        <span style="font-size:10px;font-weight:700;color:#dc2626;white-space:nowrap;">~2–8% content mapped</span>
-      </div>
-    </div>
-
+  <!-- ── Full-slide popup overlay for step reveals ── -->
+  <div id="s8-overlay" style="position:absolute;inset:0;background:rgba(8,14,36,.94);border-radius:20px;z-index:50;display:none;align-items:center;justify-content:center;">
+    <div id="s8-overlay-inner" style="width:100%;max-width:960px;"></div>
   </div>
 </div>
 
@@ -1120,10 +1238,10 @@ body{
 
     <!-- Main content -->
     <div style="text-align:center;position:relative;z-index:1;">
-      <!-- Teal accent line -->
-      <div style="width:60px;height:4px;background:var(--sp);border-radius:2px;margin:0 auto 28px;"></div>
+      <!-- Animated waving hand -->
+      <div id="s9-wave" style="font-size:96px;line-height:1;margin-bottom:16px;display:inline-block;transform-origin:70% 80%;">👋</div>
 
-      <div style="font-size:62px;font-weight:800;color:white;letter-spacing:-1px;line-height:1.05;margin-bottom:10px;">Thank You</div>
+      <div style="font-size:64px;font-weight:800;line-height:1.2;margin-bottom:10px;"><span style="color:white;">Thank</span> <span style="color:#f87171;">You</span></div>
       <div style="font-size:20px;color:rgba(78,175,156,0.9);font-style:italic;margin-bottom:36px;">Mirrors CTV · 2025–26</div>
 
       <!-- Contact row -->
@@ -1198,15 +1316,272 @@ slides.forEach((_, i) => {
 
 function goTo(n) {
   if (n < 0 || n >= total) return;
+  // Reset s8 reveal state when entering s8 from another slide
+  if (slides[n].id === 's8' && slides[cur].id !== 's8') resetS8();
+  // Reset s0 TV when navigating back to cover slide
+  if (slides[n].id === 's0') setTimeout(_resetS0Phases, 350);
   slides[cur].classList.remove('active');
   slides[cur].classList.add('prev');
   cur = n;
   slides[cur].classList.add('active');
   setTimeout(() => document.querySelectorAll('.slide.prev').forEach(s => s.classList.remove('prev')), 500);
+  // Start waving hand when s9 is shown
+  if (slides[cur].id === 's9') {
+    setTimeout(() => {
+      const hand = document.getElementById('s9-wave');
+      if (hand) hand.classList.add('waving');
+    }, 400);
+  }
   updateUI();
 }
-function next() { goTo(cur + 1); }
-function prev() { goTo(cur - 1); }
+
+// ── s8 step-reveal state machine ──
+let s8CurrentStep = 0;
+const S8_TOTAL_STEPS = 5;
+
+const s8PopupHTML = [
+  // Step 1 — The Data Gap
+  `<div style="text-align:center;padding:40px 80px;">
+    <div style="font-size:148px;font-weight:900;color:#ef4444;line-height:1;text-shadow:0 0 80px rgba(220,38,38,.5);">2–8%</div>
+    <div style="font-size:29px;font-weight:600;color:rgba(255,255,255,.9);margin-top:16px;line-height:1.5;">of the Impressions in the Managed Services Campaign<br>carry content details</div>
+    <div style="margin-top:28px;background:rgba(255,255,255,.07);border-radius:12px;padding:14px 24px;font-size:22px;color:rgba(255,255,255,.55);">The remaining <strong style="color:white;">92–98%</strong> had no content metadata in the bid request</div>
+  </div>`,
+  // Step 2 — TTD Reporting Gap
+  `<div style="padding:40px 80px;max-width:1100px;width:100%;">
+    <div style="font-size:49px;font-weight:800;color:white;margin-bottom:32px;line-height:1.2;">TTD DSP has content dimensions<br>but <span style="color:#f87171;">no Content ID dimensions</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:20px;padding-left:28px;">
+      <!-- What TTD Has — big tick hanging over left edge -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:#16a34a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 16px rgba(22,163,74,.5);z-index:1;">✅</div>
+        <div style="background:rgba(16,185,129,.15);border:1.5px solid rgba(16,185,129,.4);border-radius:14px;padding:28px 28px 28px 44px;height:100%;box-sizing:border-box;">
+          <div style="font-size:13px;font-weight:700;color:#4ade80;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;">What TTD Has</div>
+          <div style="font-size:28px;font-weight:800;color:white;margin-bottom:10px;">Content Title</div>
+          <div style="font-size:28px;font-weight:800;color:white;">Content Series</div>
+        </div>
+      </div>
+      <!-- What's Missing — big cross hanging over left edge -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:#dc2626;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:white;box-shadow:0 4px 16px rgba(220,38,38,.5);z-index:1;line-height:1;">✕</div>
+        <div style="background:rgba(220,38,38,.15);border:1.5px solid rgba(220,38,38,.4);border-radius:14px;padding:28px 28px 28px 44px;height:100%;box-sizing:border-box;">
+          <div style="font-size:13px;font-weight:700;color:#f87171;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;">What's Missing</div>
+          <div style="font-size:28px;font-weight:800;color:rgba(255,255,255,.9);text-decoration:line-through;margin-bottom:12px;">Content ID</div>
+          <div style="font-size:17px;color:rgba(255,255,255,.8);line-height:1.6;">Without Content ID, cross-publisher content mapping is impossible</div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:14px 20px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);border-radius:10px;font-size:16px;color:rgba(255,255,255,.65);">⚠️ Whether this data arrives correctly depends entirely on each publisher's implementation</div>
+  </div>`,
+  // Step 3 — 4 Publisher Scenarios
+  `<div style="padding:40px 80px;max-width:1100px;width:100%;">
+    <div style="font-size:49px;font-weight:800;color:white;margin-bottom:36px;line-height:1.2;">4 Ways Publishers Send<br>Content Data</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;padding-left:28px;">
+
+      <!-- Full Data -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:#16a34a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 16px rgba(22,163,74,.5);z-index:1;">✅</div>
+        <div style="background:rgba(16,185,129,.15);border:1.5px solid rgba(16,185,129,.4);border-radius:14px;padding:28px 28px 28px 44px;height:100%;box-sizing:border-box;">
+          <div style="font-size:13px;font-weight:700;color:#4ade80;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;">Full Data</div>
+          <div style="font-size:26px;font-weight:800;color:white;margin-bottom:8px;">All correct</div>
+          <div style="font-size:16px;color:rgba(255,255,255,.75);line-height:1.6;">Content ID + Title + Series in correct OpenRTB fields</div>
+        </div>
+      </div>
+
+      <!-- Partial Data -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:#ca8a04;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 16px rgba(202,138,4,.5);z-index:1;">⚡</div>
+        <div style="background:rgba(245,158,11,.15);border:1.5px solid rgba(245,158,11,.4);border-radius:14px;padding:28px 28px 28px 44px;height:100%;box-sizing:border-box;">
+          <div style="font-size:13px;font-weight:700;color:#fde047;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;">Partial Data</div>
+          <div style="font-size:26px;font-weight:800;color:white;margin-bottom:8px;">Core fields only</div>
+          <div style="font-size:16px;color:rgba(255,255,255,.75);line-height:1.6;">Content ID present but placed in a custom or non-standard field</div>
+        </div>
+      </div>
+
+      <!-- Mixed-Up Fields -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:#c2410c;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 16px rgba(194,65,12,.5);z-index:1;">⚠️</div>
+        <div style="background:rgba(249,115,22,.15);border:1.5px solid rgba(249,115,22,.4);border-radius:14px;padding:28px 28px 28px 44px;height:100%;box-sizing:border-box;">
+          <div style="font-size:13px;font-weight:700;color:#fdba74;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;">Mixed-Up Fields</div>
+          <div style="font-size:26px;font-weight:800;color:white;margin-bottom:8px;">Wrong field boxes</div>
+          <div style="font-size:16px;color:rgba(255,255,255,.75);line-height:1.6;">Title &amp; Series present but crammed into the wrong OpenRTB fields</div>
+        </div>
+      </div>
+
+      <!-- Bare Minimum -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:#dc2626;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 16px rgba(220,38,38,.5);z-index:1;">🚫</div>
+        <div style="background:rgba(220,38,38,.15);border:1.5px solid rgba(220,38,38,.4);border-radius:14px;padding:28px 28px 28px 44px;height:100%;box-sizing:border-box;">
+          <div style="font-size:13px;font-weight:700;color:#fca5a5;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;">Bare Minimum</div>
+          <div style="font-size:26px;font-weight:800;color:white;margin-bottom:8px;">ID only</div>
+          <div style="font-size:16px;color:rgba(255,255,255,.75);line-height:1.6;">Bid request has zero descriptive content metadata</div>
+        </div>
+      </div>
+
+    </div>
+  </div>`,
+  // Step 4 — Why Silverpush Can't
+  `<div style="padding:44px 90px;max-width:1240px;width:100%;">
+
+    <!-- Big Q + Question -->
+    <div style="display:flex;align-items:flex-start;gap:32px;margin-bottom:40px;">
+      <div style="flex-shrink:0;width:100px;height:100px;background:linear-gradient(135deg,#ef4444,#dc2626);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:62px;font-weight:900;color:white;box-shadow:0 8px 28px rgba(239,68,68,.45);font-family:'DM Sans',sans-serif;line-height:1;">Q</div>
+      <div>
+        <div style="font-size:19px;font-weight:700;color:#f87171;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">The Core Question</div>
+        <div style="font-size:47px;font-weight:800;line-height:1.2;"><span style="color:white;">Why Silverpush cannot</span><br><span style="color:#f87171;">provide content reporting?</span></div>
+      </div>
+    </div>
+
+    <!-- Answer box — two reasons, same card format as Step 2/3 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-left:28px;">
+
+      <!-- Reason 1: No Content ID dimension from DSP -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:linear-gradient(135deg,#ef4444,#dc2626);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:white;box-shadow:0 4px 16px rgba(239,68,68,.5);z-index:1;">1</div>
+        <div style="background:rgba(239,68,68,.12);border:1.5px solid rgba(239,68,68,.4);border-radius:14px;padding:30px 30px 30px 48px;height:100%;box-sizing:border-box;">
+          <div style="font-size:29px;font-weight:800;color:white;margin-bottom:12px;">Back-Mapping Not Possible</div>
+          <div style="font-size:19px;color:rgba(255,255,255,.8);line-height:1.7;">TTD DSP does not provide a <strong style="color:#f87171;">Content ID dimension</strong> in reporting — so we cannot back-map the enriched bid request to an actual delivered impression.</div>
+        </div>
+      </div>
+
+      <!-- Reason 2: No win/loss as data partner -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:linear-gradient(135deg,#ef4444,#dc2626);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:white;box-shadow:0 4px 16px rgba(239,68,68,.5);z-index:1;">2</div>
+        <div style="background:rgba(239,68,68,.12);border:1.5px solid rgba(239,68,68,.4);border-radius:14px;padding:30px 30px 30px 48px;height:100%;box-sizing:border-box;">
+          <div style="font-size:29px;font-weight:800;color:white;margin-bottom:12px;">No Win/Loss Signal</div>
+          <div style="font-size:19px;color:rgba(255,255,255,.8);line-height:1.7;">As a <strong style="color:#f87171;">data partner</strong>, Silverpush does not receive the impression win/loss for each ad request — making content-level attribution fundamentally impossible.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>`,
+  // Step 5 — Root Cause
+  `<div style="padding:44px 90px;max-width:1240px;width:100%;">
+
+    <!-- Heading -->
+    <div style="font-size:47px;font-weight:800;line-height:1.2;margin-bottom:32px;">
+      <span style="color:white;">Silverpush sits</span> <span style="color:#f87171;">outside the reporting chain</span>
+    </div>
+
+    <!-- Quote block -->
+    <div style="background:rgba(239,68,68,.1);border-left:4px solid #ef4444;border-radius:0 14px 14px 0;padding:22px 32px;margin-bottom:36px;">
+      <div style="font-size:22px;color:rgba(255,255,255,.85);line-height:1.7;">Silverpush enriches the request with content signals — but as a <strong style="color:#f87171;">data partner</strong>, content reporting is outside our reporting chain in present condition.</div>
+    </div>
+
+    <!-- 3 flow cards with hanging icons -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;padding-left:28px;">
+
+      <!-- Bid Request Enriched — teal/green (we see this) -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:#16a34a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 16px rgba(22,163,74,.5);z-index:1;">✅</div>
+        <div style="background:rgba(16,185,129,.15);border:1.5px solid rgba(16,185,129,.4);border-radius:14px;padding:28px 28px 28px 44px;height:100%;box-sizing:border-box;">
+          <div style="font-size:29px;font-weight:800;color:white;margin-bottom:10px;">Bid Request<br>Enriched</div>
+          <div style="font-size:19px;color:rgba(255,255,255,.8);line-height:1.6;">Silverpush adds contextual signals to every bid request</div>
+          <div style="margin-top:14px;font-size:17px;font-weight:700;color:#4ade80;">✓ We see this</div>
+        </div>
+      </div>
+
+      <!-- Win/Loss Signal — missing -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:#dc2626;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:white;box-shadow:0 4px 16px rgba(220,38,38,.5);z-index:1;line-height:1;">✕</div>
+        <div style="background:rgba(220,38,38,.15);border:1.5px solid rgba(220,38,38,.4);border-radius:14px;padding:28px 28px 28px 44px;height:100%;box-sizing:border-box;">
+          <div style="font-size:29px;font-weight:800;color:white;margin-bottom:10px;">Win/Loss<br>Signal</div>
+          <div style="font-size:19px;color:rgba(255,255,255,.8);line-height:1.6;">DSP never sends bid outcome back to Silverpush as a data partner</div>
+          <div style="margin-top:14px;font-size:17px;font-weight:700;color:#f87171;">✗ Never received</div>
+        </div>
+      </div>
+
+      <!-- Content Reporting — impossible -->
+      <div style="position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:56px;height:56px;background:#dc2626;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:white;box-shadow:0 4px 16px rgba(220,38,38,.5);z-index:1;line-height:1;">✕</div>
+        <div style="background:rgba(220,38,38,.15);border:1.5px solid rgba(220,38,38,.4);border-radius:14px;padding:28px 28px 28px 44px;height:100%;box-sizing:border-box;">
+          <div style="font-size:29px;font-weight:800;color:white;margin-bottom:10px;">No Content<br>ID</div>
+          <div style="font-size:19px;color:rgba(255,255,255,.8);line-height:1.6;">Without win/loss, content-level attribution is fundamentally impossible</div>
+          <div style="margin-top:14px;font-size:17px;font-weight:700;color:#f87171;">✗ Not possible</div>
+        </div>
+      </div>
+
+    </div>
+  </div>`
+];
+
+let s8ActivePopupStep = -1; // -1 = no popup open
+
+function revealS8Step(i) {
+  const overlay = document.getElementById('s8-overlay');
+  const inner   = document.getElementById('s8-overlay-inner');
+  inner.innerHTML = s8PopupHTML[i];
+  inner.style.transition = 'none';
+  inner.style.opacity = '0';
+  inner.style.transform = 'scale(0.9)';
+  overlay.style.display = 'flex';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    inner.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    inner.style.opacity = '1';
+    inner.style.transform = 'scale(1)';
+  }));
+  s8ActivePopupStep = i;
+}
+
+function settleS8Step(i) {
+  const overlay = document.getElementById('s8-overlay');
+  const inner   = document.getElementById('s8-overlay-inner');
+  inner.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  inner.style.opacity = '0';
+  inner.style.transform = 'scale(1.05)';
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    const el = document.getElementById('s8-step-' + (i + 1));
+    if (el) { el.style.opacity = '1'; el.style.transform = 'none'; el.style.pointerEvents = 'auto'; }
+  }, 300);
+  s8ActivePopupStep = -1;
+}
+
+function resetS8() {
+  s8CurrentStep = 0;
+  s8ActivePopupStep = -1;
+  for (let i = 1; i <= S8_TOTAL_STEPS; i++) {
+    const el = document.getElementById('s8-step-' + i);
+    if (el) { el.style.opacity = '0'; el.style.transform = 'translateY(10px) scale(0.97)'; el.style.pointerEvents = 'none'; }
+  }
+  const ov = document.getElementById('s8-overlay');
+  if (ov) ov.style.display = 'none';
+}
+
+function next() {
+  if (slides[cur].id === 's8') {
+    if (s8ActivePopupStep >= 0) {
+      // Capture before settleS8Step resets s8ActivePopupStep to -1
+      const settled = s8ActivePopupStep;
+      settleS8Step(settled);
+      s8CurrentStep = settled + 1;
+    } else if (s8CurrentStep < S8_TOTAL_STEPS) {
+      // Next press: open popup for the next step
+      revealS8Step(s8CurrentStep);
+    } else {
+      goTo(cur + 1);
+    }
+    return;
+  }
+  goTo(cur + 1);
+}
+function prev() {
+  if (slides[cur].id === 's8') {
+    if (s8ActivePopupStep >= 0) {
+      // Close popup without settling (dismiss it)
+      document.getElementById('s8-overlay').style.display = 'none';
+      s8ActivePopupStep = -1;
+      return;
+    }
+    if (s8CurrentStep > 0) {
+      s8CurrentStep--;
+      const el = document.getElementById('s8-step-' + (s8CurrentStep + 1));
+      if (el) { el.style.opacity = '0'; el.style.transform = 'translateY(10px) scale(0.97)'; el.style.pointerEvents = 'none'; }
+      return;
+    }
+    goTo(cur - 1);
+    return;
+  }
+  goTo(cur - 1);
+}
 
 function updateUI() {
   document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('on', i === cur));
@@ -1233,6 +1608,20 @@ document.addEventListener('touchend',   e => {
 });
 
 updateUI();
+
+// ── Auto-scale deck to fit any screen ──
+function fitDeck() {
+  const deck   = document.querySelector('.deck');
+  const scaleX = window.innerWidth  / 1440;
+  const scaleY = window.innerHeight / 810;
+  const scale  = Math.min(scaleX, scaleY);
+  const offsetX = (window.innerWidth  - 1440 * scale) / 2;
+  const offsetY = (window.innerHeight - 810  * scale) / 2;
+  deck.style.transformOrigin = 'top left';
+  deck.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+}
+fitDeck();
+window.addEventListener('resize', fitDeck);
 
 // ── Reporting fullscreen popup ──
 function openReportingPopup(){
@@ -1405,6 +1794,95 @@ function downloadPPT() {
   pptx.writeFile({fileName:'Mirrors-CTV-Sales-Presentation-2025-26.pptx'})
     .then(()=>{btn.innerHTML='✓ Downloaded';setTimeout(()=>{btn.innerHTML='⬇ Download PPT';btn.disabled=false;},2000);})
     .catch(()=>{btn.innerHTML='⬇ Download PPT';btn.disabled=false;});
+}
+
+// ── s0 TV intro animation ──
+let _s0Timers = [];
+let _s0StaticRaf = null;
+
+function _s0t(ms, fn) { _s0Timers.push(setTimeout(fn, ms)); }
+
+function _drawStatic() {
+  const c = document.getElementById('s0-static');
+  if (!c) return;
+  c.width  = c.offsetWidth  || 760;
+  c.height = c.offsetHeight || 372;
+  const ctx = c.getContext('2d');
+  const img = ctx.createImageData(c.width, c.height);
+  const d = img.data;
+  for (let i = 0; i < d.length; i += 4) {
+    const v = (Math.random() * 220) | 0;
+    d[i] = d[i+1] = d[i+2] = v;
+    d[i+3] = 210;
+  }
+  ctx.putImageData(img, 0, 0);
+}
+
+function _stopStatic() {
+  cancelAnimationFrame(_s0StaticRaf);
+  _s0StaticRaf = null;
+  clearInterval(_s0StaticInt);
+  _s0StaticInt = null;
+  const c = document.getElementById('s0-static');
+  if (c) { c.style.opacity = '0'; const ctx = c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height); }
+  const sl = document.getElementById('s0-scanlines');
+  if (sl) { sl.style.transition = 'opacity 0.3s'; sl.style.opacity = '0'; }
+}
+let _s0StaticInt = null;
+
+function _s0FadeIn(id, dur) {
+  const el = document.getElementById(id); if (!el) return;
+  el.style.transition = `opacity ${dur}s ease`; el.style.opacity = '1';
+}
+function _s0FadeOut(id, dur) {
+  const el = document.getElementById(id); if (!el) return;
+  el.style.transition = `opacity ${dur}s ease`; el.style.opacity = '0';
+}
+
+function _resetS0Phases() {
+  _s0Timers.forEach(clearTimeout); _s0Timers = [];
+  _stopStatic();
+  ['s0-p1','s0-p2','s0-p3'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.transition = 'none'; el.style.opacity = '0'; }
+  });
+  const tv = document.getElementById('s0-tv');
+  if (tv) tv.classList.remove('on');
+  const rem = document.getElementById('s0-remote-wrap');
+  if (rem) rem.classList.remove('used');
+}
+
+function handleS0Remote() {
+  const rem = document.getElementById('s0-remote-wrap');
+  if (rem && rem.classList.contains('used')) return;
+  if (rem) rem.classList.add('used');
+
+  // Turn on TV with white flash
+  const tv    = document.getElementById('s0-tv');
+  const flash = document.getElementById('s0-power-flash');
+  if (tv) tv.classList.add('on');
+  if (flash) {
+    flash.style.transition = 'none'; flash.style.opacity = '1';
+    _s0t(80, () => { flash.style.transition = 'opacity 0.55s ease'; flash.style.opacity = '0'; });
+  }
+
+  // Static noise
+  _s0t(200, () => {
+    const c = document.getElementById('s0-static');
+    if (c) { c.style.transition = 'opacity 0.1s'; c.style.opacity = '1'; }
+    _s0StaticInt = setInterval(_drawStatic, 40);
+  });
+
+  // "Welcome to India"
+  _s0t(1000, () => { _stopStatic(); _s0FadeIn('s0-p1', 0.55); });
+  _s0t(2600, () => _s0FadeOut('s0-p1', 0.4));
+
+  // "Let's start"
+  _s0t(3100, () => _s0FadeIn('s0-p2', 0.55));
+  _s0t(4600, () => _s0FadeOut('s0-p2', 0.4));
+
+  // Mirrors CTV — stays
+  _s0t(5100, () => _s0FadeIn('s0-p3', 0.85));
 }
 </script>
 </body>

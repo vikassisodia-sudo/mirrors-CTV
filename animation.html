@@ -109,36 +109,40 @@ body::before {
 .popup-overlay.show { opacity:1; pointer-events:all; }
 .popup {
   background:var(--card-bg); border:1px solid rgba(0,119,237,0.15);
-  border-radius:20px; padding:40px; width:680px; max-width:90vw;
-  max-height:90vh; overflow-y:auto; position:relative;
-  transform:scale(0.9) translateY(20px); transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  border-radius:20px; padding:48px 64px; width:1360px; max-width:96vw; max-height:88vh;
+  overflow-y:auto; position:relative;
+  transform:scale(0.95); transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
   box-shadow:0 40px 100px rgba(0,0,0,0.15);
 }
-.popup-overlay.show .popup { transform:scale(1) translateY(0); }
-.popup-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:30px; }
-.popup-title { display:flex; align-items:center; gap:12px; }
-.popup-title-icon { width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; }
-.popup-title-icon svg { width:20px; height:20px; stroke:white; fill:none; stroke-width:2; }
-.popup-title h2 { font-size:20px; font-weight:700; letter-spacing:-0.5px; }
-.popup-title p { font-size:12px; color:var(--text-dim); margin-top:2px; }
-.close-btn { width:36px; height:36px; border-radius:10px; background:rgba(0,0,0,0.04); border:1px solid rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s ease; color:var(--text-dim); font-size:18px; flex-shrink:0; }
+.popup-overlay.show .popup { transform:scale(1); }
+.popup-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:32px; }
+.popup-title { display:flex; align-items:center; gap:20px; }
+.popup-title-icon { width:64px; height:64px; border-radius:16px; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; }
+.popup-title-icon svg { width:34px; height:34px; stroke:white; fill:none; stroke-width:2; }
+.popup-title h2 { font-size:46px; font-weight:800; letter-spacing:-0.5px; }
+.popup-title p { font-size:24px; color:var(--text-dim); margin-top:4px; }
+.close-btn { width:52px; height:52px; border-radius:12px; background:rgba(0,0,0,0.04); border:1px solid rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s ease; color:var(--text-dim); font-size:26px; flex-shrink:0; }
 .close-btn:hover { background:rgba(233,69,96,0.1); border-color:rgba(233,69,96,0.3); color:#e94560; }
-.params-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-.param-item { background:rgba(0,0,0,0.02); border:1px solid rgba(0,0,0,0.07); border-radius:12px; padding:14px 18px; opacity:0; transform:translateY(10px); transition:all 0.4s ease; }
+.params-grid { display:flex; flex-direction:column; gap:0; border:2px solid #e5e7eb; border-radius:16px; overflow:hidden; }
+.param-item { display:flex; align-items:center; border-bottom:1.5px solid #e5e7eb; opacity:0; transform:translateY(6px); transition:all 0.4s ease; }
+.param-item:last-child { border-bottom:none; }
+.param-item:nth-child(even) { background:#f8fafc; }
+.param-item:nth-child(odd) { background:#ffffff; }
 .param-item.show { opacity:1; transform:translateY(0); }
-.param-label { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--accent); font-family:'JetBrains Mono',monospace; font-weight:500; margin-bottom:6px; }
-.param-value { font-size:15px; font-weight:600; }
-.param-item.full-width { grid-column:1/-1; }
-.popup-footer { margin-top:24px; padding-top:18px; border-top:1px solid rgba(0,0,0,0.07); display:flex; align-items:center; justify-content:space-between; }
-.popup-footer-tag { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim); display:flex; align-items:center; gap:8px; }
-.popup-footer-tag .status-dot { width:6px; height:6px; border-radius:50%; background:var(--success); box-shadow:0 0 6px var(--success); }
-.popup-footer-hint { font-size:11px; color:var(--text-dim); opacity:0.6; }
+.param-label { font-size:26px; font-weight:800; letter-spacing:0.3px; color:#111827; font-family:'DM Sans',sans-serif; padding:22px 28px; width:280px; flex-shrink:0; border-right:2px solid #e5e7eb; background:#f1f5f9; }
+.param-value { font-size:28px; font-weight:700; font-family:'JetBrains Mono',monospace; color:#1e3a8a; padding:22px 30px; flex:1; }
+.param-item.full-width { flex-direction:column; align-items:flex-start; }
+.param-item.full-width .param-label { width:100%; border-right:none; border-bottom:1.5px solid #e5e7eb; }
+.popup-footer { margin-top:28px; padding-top:22px; border-top:2px solid rgba(0,0,0,0.07); display:flex; align-items:center; justify-content:space-between; }
+.popup-footer-tag { font-family:'DM Sans',sans-serif; font-size:20px; color:var(--text-dim); display:flex; align-items:center; gap:10px; font-weight:600; }
+.popup-footer-tag .status-dot { width:8px; height:8px; border-radius:50%; background:var(--success); box-shadow:0 0 8px var(--success); }
+.popup-footer-hint { font-size:16px; color:var(--text-dim); opacity:0.6; }
 
 /* ─── PHASE 2 ─── */
-#phase2 { display:none; flex-direction:column; align-items:center; padding:60px 20px 120px; position:relative; z-index:1; }
+#phase2 { display:none; flex-direction:column; align-items:center; padding:60px 0 120px; position:relative; z-index:1; }
 #phase2.visible { display:flex; }
 
-.phase-label { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:24px; opacity:0; transform:translateY(10px); transition:all 0.5s ease; }
+.phase-label { font-family:'DM Sans',sans-serif; font-size:31px; letter-spacing:1px; font-weight:800; text-transform:uppercase; color:var(--accent); margin-bottom:24px; opacity:0; transform:translateY(10px); transition:all 0.5s ease; }
 .phase-label.show { opacity:1; transform:translateY(0); }
 
 /* Stage section (generic reveal) */
@@ -152,12 +156,12 @@ body::before {
 .mini-screen { width:100%; height:100%; background:#000; border-radius:5px; overflow:hidden; position:relative; }
 .mini-screen-bg { position:absolute; inset:0; background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460); animation:contentShift 8s ease-in-out infinite; }
 .mini-screen-text { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color:white; }
-.mini-screen-text span:first-child { font-size:14px; font-weight:700; letter-spacing:2px; }
-.mini-screen-text span:last-child { font-size:8px; color:rgba(255,255,255,0.5); letter-spacing:3px; margin-top:3px; }
+.mini-screen-text span:first-child { font-size:18px; font-weight:700; letter-spacing:2px; }
+.mini-screen-text span:last-child { font-size:12px; color:rgba(255,255,255,0.8); letter-spacing:3px; margin-top:4px; }
 .mini-tv-led { position:absolute; bottom:4px; right:10px; width:4px; height:4px; border-radius:50%; background:var(--success); box-shadow:0 0 6px var(--success); }
 .mini-stand-neck { width:20px; height:18px; background:linear-gradient(to right,#3a3a3c,#48484a,#3a3a3c); margin:0 auto; }
 .mini-stand-base { width:70px; height:5px; background:linear-gradient(to bottom,#48484a,#3a3a3c); margin:0 auto; border-radius:3px; }
-.section-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); margin-top:14px; }
+.section-label { font-family:'DM Sans',sans-serif; font-size:22px; letter-spacing:1px; font-weight:800; text-transform:uppercase; color:var(--text); margin-top:14px; }
 
 /* Vertical connectors */
 .vc { width:2px; background:linear-gradient(to bottom,rgba(0,0,0,0.12),rgba(0,0,0,0.06)); margin:0 auto; opacity:0; transition:opacity 0.5s ease 0.2s; position:relative; overflow:visible; }
@@ -167,10 +171,10 @@ body::before {
 .vc-60 { height:60px; }
 
 /* Ad Request card */
-.req-card { background:white; border:2px solid rgba(0,0,0,0.1); border-radius:16px; padding:18px 26px; box-shadow:0 8px 30px rgba(0,0,0,0.07); min-width:300px; text-align:center; }
-.req-card h3 { font-size:14px; font-weight:700; margin-bottom:8px; }
-.req-card-tags { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
-.req-card-tags .tag { font-family:'JetBrains Mono',monospace; font-size:10px; padding:3px 9px; background:rgba(0,0,0,0.04); border:1px solid rgba(0,0,0,0.08); border-radius:5px; color:var(--text-dim); }
+.req-card { background:white; border:2px solid rgba(0,0,0,0.1); border-radius:16px; padding:26px 40px; box-shadow:0 8px 30px rgba(0,0,0,0.07); min-width:420px; text-align:center; }
+.req-card h3 { font-size:30px; font-weight:800; margin-bottom:14px; font-family:'DM Sans',sans-serif; color:#111827; }
+.req-card-tags { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.req-card-tags .tag { font-family:'DM Sans',sans-serif; font-size:18px; font-weight:700; padding:8px 20px; background:rgba(0,0,0,0.04); border:1.5px solid rgba(0,0,0,0.15); border-radius:8px; color:#111827; }
 
 /* ─── REQUEST PILLS (used everywhere) ─── */
 .pill {
@@ -206,16 +210,16 @@ body::before {
 /* ─── AI ENGINE BOX ─── */
 .aie-box {
   background:linear-gradient(135deg,#1e1b4b,#312e81);
-  border-radius:20px; padding:24px 30px; width:480px;
+  border-radius:20px; padding:24px 30px; width:100%;
   text-align:center; box-shadow:0 10px 36px rgba(49,46,129,0.35);
 }
-.aie-title { font-size:16px; font-weight:700; color:white; display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:3px; }
-.aie-status { font-size:9px; font-family:'JetBrains Mono',monospace; color:#a5b4fc; letter-spacing:1px; text-transform:uppercase; animation:aieBlink 1.5s ease infinite; }
+.aie-title { font-size:30px; font-weight:700; color:white; display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:3px; }
+.aie-status { font-size:18px; font-family:'DM Sans',sans-serif; color:#a5b4fc; letter-spacing:1px; text-transform:uppercase; animation:aieBlink 1.5s ease infinite; font-weight:600; }
 @keyframes aieBlink { 0%,100%{opacity:1} 50%{opacity:0.35} }
 .aie-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:7px; margin:16px 0; padding:12px; background:rgba(255,255,255,0.05); border-radius:12px; }
 .aie-node { width:12px; height:12px; border-radius:3px; background:rgba(165,180,252,0.2); animation:aieNode 2s ease-in-out infinite; }
 @keyframes aieNode { 0%,100%{background:rgba(165,180,252,0.15)} 50%{background:rgba(165,180,252,0.95);box-shadow:0 0 8px rgba(165,180,252,0.5)} }
-.aie-desc { font-size:9px; font-family:'JetBrains Mono',monospace; color:rgba(165,180,252,0.6); letter-spacing:1px; }
+.aie-desc { font-size:17px; font-family:'JetBrains Mono',monospace; color:rgba(165,180,252,0.6); letter-spacing:1px; }
 /* ─── PILL LEGEND ─── */
 .pill-legend {
   position:fixed; right:18px; top:50%; transform:translateY(-50%);
@@ -247,24 +251,24 @@ body::before {
 /* ─── PARTNER CARDS ─── */
 .dist-section { display:flex; flex-direction:column; align-items:center; width:100%; opacity:0; transform:translateY(22px); transition:all 0.6s cubic-bezier(0.16,1,0.3,1) 0.8s; }
 .dist-section.show { opacity:1; transform:translateY(0); }
-.branch-svg { width:740px; height:60px; }
+.branch-svg { width:1400px; height:60px; }
 .branch-svg svg { width:100%; height:100%; }
-.partners-row { display:flex; justify-content:center; gap:40px; width:740px; }
-.partner-col { display:flex; flex-direction:column; align-items:center; width:220px; }
-.partner-card { width:100%; padding:18px; border-radius:14px; background:white; border:2px solid rgba(0,0,0,0.08); box-shadow:0 6px 24px rgba(0,0,0,0.06); text-align:center; }
+.partners-row { display:flex; justify-content:center; gap:70px; width:1400px; }
+.partner-col { display:flex; flex-direction:column; align-items:center; width:420px; }
+.partner-card { width:100%; padding:20px; border-radius:14px; background:white; border:2px solid rgba(0,0,0,0.08); box-shadow:0 6px 24px rgba(0,0,0,0.06); text-align:center; }
 .partner-card.btt { border-color:var(--tradedesk); }
 .partner-card.bpm { border-color:var(--pubmatic); }
 .partner-card.bir { border-color:var(--iris); }
-.partner-logo { width:44px; height:44px; border-radius:11px; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; font-weight:700; font-size:16px; color:white; }
+.partner-logo { width:54px; height:54px; border-radius:13px; display:flex; align-items:center; justify-content:center; margin:0 auto 10px; font-weight:700; font-size:18px; color:white; }
 .partner-logo.ltt { background:var(--tradedesk); }
 .partner-logo.lpm { background:var(--pubmatic); }
 .partner-logo.lir { background:var(--iris); }
-.partner-card h4 { font-size:13px; font-weight:700; margin-bottom:2px; }
-.partner-card .ptype { font-size:10px; color:var(--text-dim); font-family:'JetBrains Mono',monospace; letter-spacing:1px; text-transform:uppercase; }
-.partner-status { margin-top:10px; padding-top:8px; border-top:1px solid rgba(0,0,0,0.06); display:flex; align-items:center; justify-content:center; gap:5px; font-size:10px; color:var(--text-dim); font-family:'JetBrains Mono',monospace; }
+.partner-card h4 { font-size:27px; font-weight:700; margin-bottom:5px; }
+.partner-card .ptype { font-size:20px; color:var(--text); font-family:'DM Sans',sans-serif; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; }
+.partner-status { margin-top:10px; padding-top:8px; border-top:1px solid rgba(0,0,0,0.06); display:flex; align-items:center; justify-content:center; gap:5px; font-size:19px; color:var(--text-dim); font-family:'DM Sans',sans-serif; font-weight:500; }
 .live-dot { width:6px; height:6px; border-radius:50%; background:var(--success); box-shadow:0 0 6px var(--success); animation:blink 1.2s ease infinite; }
 .live-dot.off { background:#ccc; box-shadow:none; animation:none; }
-.ptoggle { margin-top:10px; padding:7px 16px; border-radius:8px; border:1.5px solid rgba(0,0,0,0.12); background:white; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s ease; display:flex; align-items:center; gap:6px; justify-content:center; width:100%; }
+.ptoggle { margin-top:10px; padding:9px 16px; border-radius:8px; border:1.5px solid rgba(0,0,0,0.12); background:white; font-family:'DM Sans',sans-serif; font-size:18px; font-weight:600; cursor:pointer; transition:all 0.2s ease; display:flex; align-items:center; gap:6px; justify-content:center; width:100%; }
 .ptoggle:hover { background:rgba(0,0,0,0.02); }
 .ptoggle.att.on { background:rgba(37,99,235,0.08); border-color:var(--tradedesk); color:var(--tradedesk); }
 .ptoggle.apm.on { background:rgba(220,38,38,0.08); border-color:var(--pubmatic); color:var(--pubmatic); }
@@ -275,16 +279,16 @@ body::before {
 .ptoggle.air.on .tgl-icon { background:var(--iris); border-color:var(--iris); }
 
 /* ─── MERGE (pills flowing OUT of partner cards → Data Sanity) ─── */
-.merge-wrap { position:relative; width:740px; height:90px; overflow:visible; }
+.merge-wrap { position:relative; width:1400px; height:90px; overflow:visible; }
 .merge-wrap > svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
 .merge-pill {
   position:absolute; left:0; top:0;
   offset-anchor:center center;
   animation:mergeFlow 2.4s ease-in-out infinite;
 }
-.merge-pill.c-tt { offset-path:path('M110,0 C110,60 370,60 370,90'); }
-.merge-pill.c-pm { offset-path:path('M370,0 L370,90'); }
-.merge-pill.c-ir { offset-path:path('M630,0 C630,60 370,60 370,90'); }
+.merge-pill.c-tt { offset-path:path('M210,0 C210,60 700,60 700,90'); }
+.merge-pill.c-pm { offset-path:path('M700,0 L700,90'); }
+.merge-pill.c-ir { offset-path:path('M1190,0 C1190,60 700,60 700,90'); }
 .merge-pill.d2 { animation-delay:1.2s; }
 @keyframes mergeFlow {
   0%  { offset-distance:0%;   opacity:0; }
@@ -296,11 +300,11 @@ body::before {
 /* ─── DATA SANITY ─── */
 .ds-box {
   background:white; border:2px solid #8b5cf6;
-  border-radius:20px; padding:26px 32px; width:520px;
+  border-radius:20px; padding:30px 50px; width:680px;
   text-align:center; box-shadow:0 8px 32px rgba(139,92,246,0.12);
 }
-.ds-box h3 { font-size:16px; font-weight:700; margin-bottom:4px; color:var(--text); }
-.ds-box > p { font-size:12px; color:var(--text-dim); margin-bottom:18px; }
+.ds-box h3 { font-size:31px; font-weight:800; margin-bottom:8px; color:#111827; font-family:'DM Sans',sans-serif; }
+.ds-box > p { font-size:21px; color:#374151; margin-bottom:20px; font-family:'DM Sans',sans-serif; font-weight:500; }
 .ds-lanes { display:flex; gap:10px; justify-content:center; height:88px; position:relative; align-items:flex-start; }
 .ds-lane { position:relative; width:56px; height:88px; overflow:visible; }
 .ds-lane-line { position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:2px; border-radius:2px; }
@@ -328,7 +332,7 @@ body::before {
   90%     { opacity:0; }
   100%    { opacity:0; }
 }
-.ds-legend { display:flex; justify-content:center; gap:24px; margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:10px; }
+.ds-legend { display:flex; justify-content:center; gap:24px; margin-top:12px; font-family:'DM Sans',sans-serif; font-size:17px; font-weight:600; color:#374151; }
 .ds-legend span { display:flex; align-items:center; gap:5px; }
 
 /* ─── VERIFIED CONNECTOR (pills with ✓ exiting Data Sanity) ─── */
@@ -359,18 +363,18 @@ body::before {
 .fork-svg-area { width:660px; }
 .fork-cards-row { display:flex; justify-content:space-between; width:660px; margin-top:0; }
 .fork-col { display:flex; flex-direction:column; align-items:center; width:280px; }
-.fork-badge { display:inline-block; padding:5px 14px; border-radius:20px; border:1.5px solid; font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:12px; text-align:center; }
-.fork-badge.processed { border-color:#d1d5db; color:#9ca3af; background:#f9fafb; }
-.fork-badge.newreq    { border-color:rgba(0,119,237,0.3); color:var(--accent); background:rgba(0,119,237,0.05); }
+.fork-badge { display:inline-block; padding:6px 16px; border-radius:20px; border:1.5px solid; font-family:'DM Sans',sans-serif; font-size:17px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; margin-bottom:12px; text-align:center; }
+.fork-badge.processed { border-color:#9ca3af; color:#374151; background:#f3f4f6; font-size:17px; }
+.fork-badge.newreq    { border-color:#3b82f6; color:#1e3a8a; background:#dbeafe; font-size:17px; }
 .fork-card { border-radius:16px; padding:20px 22px; text-align:center; width:100%; }
 .fork-card.fc-proc { background:#f9fafb; border:2px dashed #d1d5db; }
 .fork-card.fc-new  { background:rgba(0,119,237,0.04); border:2px solid rgba(0,119,237,0.2); }
 .fork-card .fc-icon { font-size:22px; margin-bottom:8px; }
-.fork-card h4 { font-size:13px; font-weight:700; margin-bottom:4px; }
-.fork-card.fc-proc h4 { color:#6b7280; }
+.fork-card h4 { font-size:20px; font-weight:800; margin-bottom:5px; font-family:'DM Sans',sans-serif; }
+.fork-card.fc-proc h4 { color:#374151; }
 .fork-card.fc-new  h4 { color:var(--accent); }
-.fork-card p { font-size:10px; font-family:'JetBrains Mono',monospace; color:#9ca3af; }
-.fork-card.fc-new p { color:var(--text-dim); }
+.fork-card p { font-size:17px; font-family:'DM Sans',sans-serif; color:#374151; font-weight:500; }
+.fork-card.fc-new p { color:#374151; }
 
 /* ─── CONTENT IDENTIFICATION MODEL ─── */
 .cid-stage-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent2); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
@@ -390,9 +394,9 @@ body::before {
 .cid-box-sub { font-size:10px; color:var(--text-dim); font-family:'JetBrains Mono',monospace; margin-bottom:14px; }
 .cid-section-head { font-size:8px; text-transform:uppercase; letter-spacing:2px; color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-weight:600; margin-bottom:5px; text-align:left; }
 .cid-tags-row { display:flex; flex-wrap:wrap; gap:4px; justify-content:center; }
-.cid-in-tag { font-size:9px; padding:2px 7px; border-radius:5px; background:rgba(0,119,237,0.07); border:1px solid rgba(0,119,237,0.2); color:var(--accent); font-family:'JetBrains Mono',monospace; font-weight:500; }
-.cid-divider { border:none; border-top:1px dashed rgba(124,58,237,0.2); margin:10px 0; }
-.cid-out-tag { font-size:9px; padding:2px 7px; border-radius:5px; background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.25); color:var(--accent2); font-family:'JetBrains Mono',monospace; font-weight:600; }
+.cid-in-tag { font-size:21px; padding:9px 22px; border-radius:30px; background:#dbeafe; border:2px solid #3b82f6; color:#1e3a8a; font-family:'DM Sans',sans-serif; font-weight:800; letter-spacing:0.3px; }
+.cid-divider { border:none; border-top:2px solid rgba(124,58,237,0.15); margin:12px 0; }
+.cid-out-tag { font-size:21px; padding:9px 22px; border-radius:30px; background:#ede9fe; border:2px solid #8b5cf6; color:#4c1d95; font-family:'DM Sans',sans-serif; font-weight:800; letter-spacing:0.3px; }
 
 /* Pulsing source dot */
 .src-pulse { animation:srcPulse 2s ease-in-out infinite; }
@@ -429,17 +433,21 @@ body::before {
 }
 .ds-info-overlay.show { opacity:1; pointer-events:all; }
 .ds-info-popup {
-  background:#fff; border-radius:22px; padding:32px 36px;
-  width:720px; max-width:95vw; max-height:92vh; overflow-y:auto;
-  transform:scale(0.92) translateY(18px); transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  background:#fff; border-radius:22px; padding:48px 64px;
+  width:1360px; max-width:96vw; max-height:96vh; overflow-y:auto;
+  transform:scale(0.95); transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
   box-shadow:0 40px 100px rgba(0,0,0,0.18);
 }
-.ds-info-overlay.show .ds-info-popup { transform:scale(1) translateY(0); }
-.ds-info-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px; }
-.ds-info-title { display:flex; align-items:center; gap:14px; }
-.ds-info-icon { width:46px; height:46px; border-radius:14px; background:linear-gradient(135deg,#8b5cf6,#6d28d9); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
-.ds-info-title h2 { font-size:20px; font-weight:700; margin-bottom:3px; }
-.ds-info-title p { font-size:12px; color:var(--text-dim); }
+.ds-info-overlay.show .ds-info-popup { transform:scale(1); }
+.ds-info-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:32px; }
+.ds-info-title { display:flex; align-items:center; gap:22px; }
+.ds-info-icon { width:70px; height:70px; border-radius:16px; background:linear-gradient(135deg,#8b5cf6,#6d28d9); display:flex; align-items:center; justify-content:center; font-size:36px; flex-shrink:0; }
+.ds-info-title h2 { font-size:48px; font-weight:800; margin-bottom:8px; }
+.ds-info-title p { font-size:26px; color:var(--text-dim); }
+/* Scale up all content inside ds popups (excludes header which uses CSS class sizes) */
+#dsSanityPopup .ds-info-popup > *:not(.ds-info-header),
+#cidPopup .ds-info-popup > *:not(.ds-info-header) { zoom: 1.28; }
+
 /* Mandatory note */
 .ds-mandatory { background:#d1fae5; border:1.5px solid #6ee7b7; border-radius:12px; padding:12px 18px; display:flex; align-items:center; gap:12px; margin-bottom:22px; }
 .ds-mandatory-icon { font-size:20px; }
@@ -469,18 +477,18 @@ body::before {
 .ds-example { margin-top:10px; padding:8px 12px; border-radius:8px; background:rgba(0,0,0,0.04); font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text-dim); line-height:1.6; }
 .ds-example .highlight { color:#f97316; font-weight:700; }
 /* Parameter matrix */
-.ds-matrix-title { font-size:13px; font-weight:700; letter-spacing:-0.3px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.ds-matrix-title { font-size:16px; font-weight:700; letter-spacing:-0.3px; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
 .ds-matrix { border:1px solid rgba(0,0,0,0.08); border-radius:14px; overflow:hidden; }
-.ds-matrix-row { display:grid; grid-template-columns:160px repeat(4,1fr); }
-.ds-matrix-row.header { background:#f8f8f8; font-size:10px; font-weight:700; font-family:'JetBrains Mono',monospace; letter-spacing:1px; text-transform:uppercase; }
+.ds-matrix-row { display:grid; grid-template-columns:190px repeat(4,1fr); }
+.ds-matrix-row.header { background:#f1f5f9; font-size:13px; font-weight:700; font-family:'DM Sans',sans-serif; letter-spacing:.5px; text-transform:uppercase; }
 .ds-matrix-row:not(.header):nth-child(even) { background:#fafafa; }
 .ds-matrix-row:not(.header):hover { background:#f0f4ff; }
-.ds-matrix-cell { padding:10px 12px; font-size:12px; display:flex; align-items:center; border-right:1px solid rgba(0,0,0,0.06); }
+.ds-matrix-cell { padding:13px 14px; font-size:14px; display:flex; align-items:center; border-right:1px solid rgba(0,0,0,0.06); }
 .ds-matrix-cell:last-child { border-right:none; }
-.ds-matrix-cell.param-name { font-weight:600; color:var(--text); }
-.ds-matrix-cell.param-name .mandatory-tag { font-size:8px; padding:1px 6px; border-radius:4px; background:#d1fae5; color:#065f46; font-family:'JetBrains Mono',monospace; margin-left:6px; font-weight:700; }
-.ds-cell-icon { font-size:15px; margin:0 auto; }
-.ds-matrix-row.header .ds-matrix-cell { padding:12px; justify-content:center; color:var(--text-dim); }
+.ds-matrix-cell.param-name { font-weight:700; color:#111827; font-family:'DM Sans',sans-serif; }
+.ds-matrix-cell.param-name .mandatory-tag { font-size:11px; padding:2px 7px; border-radius:4px; background:#d1fae5; color:#065f46; font-family:'DM Sans',sans-serif; margin-left:6px; font-weight:700; }
+.ds-cell-icon { font-size:20px; margin:0 auto; }
+.ds-matrix-row.header .ds-matrix-cell { padding:13px 14px; justify-content:center; color:#374151; }
 /* Column header colors */
 .ds-col-full    { color:#10b981 !important; }
 .ds-col-partial { color:#f59e0b !important; }
@@ -748,6 +756,7 @@ body::before {
 
   <div class="vc vc-50" id="vc2"></div>
 
+
   <!-- ─── DISTRIBUTION: Branch + Partner Cards ─── -->
   <div class="dist-section" id="distSection">
 
@@ -758,6 +767,23 @@ body::before {
         <path d="M370,0 L370,60" stroke="rgba(220,38,38,0.3)" stroke-width="2" fill="none"/>
         <path d="M370,0 C370,30 630,30 630,60" stroke="rgba(217,119,6,0.3)" stroke-width="2" fill="none"/>
       </svg>
+    </div>
+
+    <!-- Via SSPs intermediate row — TTD & IRIS get badge, PM gets a pass-through connector line -->
+    <div style="display:flex;justify-content:center;gap:70px;width:1400px;margin-bottom:0;align-items:center;">
+      <div style="width:420px;display:flex;flex-direction:column;align-items:center;">
+        <div style="width:2px;height:10px;background:rgba(37,99,235,0.2);"></div>
+        <div style="font-size:15px;font-weight:700;color:var(--tradedesk);padding:5px 24px;border:1.5px solid rgba(37,99,235,0.35);border-radius:20px;background:rgba(37,99,235,0.06);">via SSPs</div>
+        <div style="width:2px;height:10px;background:rgba(37,99,235,0.2);"></div>
+      </div>
+      <div style="width:420px;display:flex;justify-content:center;">
+        <div style="width:2px;height:52px;background:rgba(220,38,38,0.2);border-radius:2px;"></div>
+      </div>
+      <div style="width:420px;display:flex;flex-direction:column;align-items:center;">
+        <div style="width:2px;height:10px;background:rgba(217,119,6,0.2);"></div>
+        <div style="font-size:15px;font-weight:700;color:var(--iris);padding:5px 24px;border:1.5px solid rgba(217,119,6,0.35);border-radius:20px;background:rgba(217,119,6,0.07);">via SSPs</div>
+        <div style="width:2px;height:10px;background:rgba(217,119,6,0.2);"></div>
+      </div>
     </div>
 
     <!-- Partner columns -->
@@ -840,10 +866,10 @@ body::before {
 
     <!-- ─── MERGE: pills flow OUT of partner cards and converge into Data Sanity ─── -->
     <div class="merge-wrap" id="mergeWrap">
-      <svg viewBox="0 0 740 90" preserveAspectRatio="none">
-        <path d="M110,0 C110,60 370,60 370,90" stroke="rgba(37,99,235,0.25)" stroke-width="2" fill="none"/>
-        <path d="M370,0 L370,90" stroke="rgba(220,38,38,0.25)" stroke-width="2" fill="none"/>
-        <path d="M630,0 C630,60 370,60 370,90" stroke="rgba(217,119,6,0.25)" stroke-width="2" fill="none"/>
+      <svg viewBox="0 0 1400 90" preserveAspectRatio="none">
+        <path d="M210,0 C210,60 700,60 700,90" stroke="rgba(37,99,235,0.25)" stroke-width="2" fill="none"/>
+        <path d="M700,0 L700,90" stroke="rgba(220,38,38,0.25)" stroke-width="2" fill="none"/>
+        <path d="M1190,0 C1190,60 700,60 700,90" stroke="rgba(217,119,6,0.25)" stroke-width="2" fill="none"/>
       </svg>
       <!-- Merge pills — class pill-tt/pm/ir so toggle stops them -->
       <div class="pill c-tt merge-pill pill-tt">TT</div>
@@ -905,7 +931,7 @@ body::before {
   <div class="vc vc-40" id="vc3"></div>
 
   <div class="stage" id="verifiedConnStage">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--success);margin-bottom:8px;opacity:0.8;">&#x2713; Verified Requests</div>
+    <div style="font-family:'DM Sans',sans-serif;font-size:18px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--success);margin-bottom:8px;">&#x2713; Verified Requests</div>
     <div class="verified-conn">
       <div class="verified-conn-line"></div>
       <!-- Delays: DS pill exits at 26% × 7.2s = 1.87s after start → verified pill begins then -->
@@ -925,28 +951,28 @@ body::before {
   <!-- ═══ DUAL PATH SECTION ═══ -->
   <div class="stage" id="dualPathStage" style="display:flex;flex-direction:column;align-items:center;">
 
-    <!-- Fork: left=cache (x=130), right=new-request (x=630) -->
-    <div style="position:relative;width:920px;height:70px;overflow:visible;">
-      <svg width="920" height="70" viewBox="0 0 920 70" style="position:absolute;inset:0;width:100%;height:100%;">
-        <path d="M460,0 Q460,35 170,35 L170,70" stroke="#d1d5db" stroke-width="2" fill="none"/>
-        <path d="M460,0 Q460,35 660,35 L660,70" stroke="rgba(0,119,237,0.45)" stroke-width="2" fill="none"/>
-        <circle cx="460" cy="3" r="5" fill="#e5e7eb"/>
+    <!-- Fork: left=cache (x=250), right=new-request (x=1000) -->
+    <div style="position:relative;width:1400px;height:70px;overflow:visible;">
+      <svg width="1400" height="70" viewBox="0 0 1400 70" style="position:absolute;inset:0;width:100%;height:100%;">
+        <path d="M700,0 Q700,35 250,35 L250,70" stroke="#d1d5db" stroke-width="2" fill="none"/>
+        <path d="M700,0 Q700,35 1000,35 L1000,70" stroke="rgba(0,119,237,0.45)" stroke-width="2" fill="none"/>
+        <circle cx="700" cy="3" r="5" fill="#e5e7eb"/>
       </svg>
       <!-- LEFT cache path -->
-      <div class="pill c-tt ok pill-tt" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M460,0 Q460,35 170,35 L170,70');animation:mergeFlow 3.6s ease-in-out infinite;animation-delay:0.6s;"></div>
-      <div class="pill c-pm ok pill-pm" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M460,0 Q460,35 170,35 L170,70');animation:mergeFlow 3.6s ease-in-out infinite;animation-delay:1.8s;"></div>
-      <div class="pill c-ir ok pill-ir" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M460,0 Q460,35 170,35 L170,70');animation:mergeFlow 3.6s ease-in-out infinite;animation-delay:3.0s;"></div>
+      <div class="pill c-tt ok pill-tt" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M700,0 Q700,35 250,35 L250,70');animation:mergeFlow 3.6s ease-in-out infinite;animation-delay:0.6s;"></div>
+      <div class="pill c-pm ok pill-pm" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M700,0 Q700,35 250,35 L250,70');animation:mergeFlow 3.6s ease-in-out infinite;animation-delay:1.8s;"></div>
+      <div class="pill c-ir ok pill-ir" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M700,0 Q700,35 250,35 L250,70');animation:mergeFlow 3.6s ease-in-out infinite;animation-delay:3.0s;"></div>
       <!-- RIGHT new-request path -->
-      <div class="pill c-tt ok pill-tt" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M460,0 Q460,35 660,35 L660,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:0s;"></div>
-      <div class="pill c-pm ok pill-pm" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M460,0 Q460,35 660,35 L660,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:0.8s;"></div>
-      <div class="pill c-ir ok pill-ir" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M460,0 Q460,35 660,35 L660,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:1.6s;"></div>
+      <div class="pill c-tt ok pill-tt" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M700,0 Q700,35 1000,35 L1000,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:0s;"></div>
+      <div class="pill c-pm ok pill-pm" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M700,0 Q700,35 1000,35 L1000,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:0.8s;"></div>
+      <div class="pill c-ir ok pill-ir" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M700,0 Q700,35 1000,35 L1000,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:1.6s;"></div>
     </div>
 
-    <!-- Two columns: 340px cache | 60px gap | 520px new-request -->
-    <div style="display:flex;width:920px;gap:60px;align-items:stretch;">
+    <!-- Two columns: 500px cache | 100px gap | 800px new-request -->
+    <div style="display:flex;width:1400px;gap:100px;align-items:stretch;">
 
-      <!-- ── LEFT: Cache path (340px) ── -->
-      <div style="width:340px;display:flex;flex-direction:column;align-items:center;">
+      <!-- ── LEFT: Cache path (500px) ── -->
+      <div style="width:500px;display:flex;flex-direction:column;align-items:center;">
         <div class="fork-badge processed" style="margin-bottom:10px;">&#x267B;&#xFE0F; Already Processed</div>
 
         <!-- Into cache: ✓ pills -->
@@ -958,15 +984,15 @@ body::before {
         </div>
 
         <!-- Cache box -->
-        <div style="background:#f9fafb;border:2px dashed #d1d5db;border-radius:16px;padding:16px;width:100%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.04);">
-          <div style="font-size:22px;margin-bottom:5px;">&#x1F5C3;&#xFE0F;</div>
-          <h4 style="font-size:12px;font-weight:700;color:#6b7280;margin-bottom:3px;">Served from Cache</h4>
-          <p style="font-size:9px;color:#9ca3af;font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Already identified content</p>
-          <div style="display:flex;align-items:center;justify-content:center;gap:5px;padding-top:8px;border-top:1px solid #e5e7eb;">
-            <div class="pill c-tt ok" style="width:30px;height:18px;font-size:8px;"></div>
-            <span style="font-size:10px;color:#d1d5db;">&#x2192;</span>
-            <div class="pill c-tt ctx" style="width:30px;height:18px;font-size:8px;"></div>
-            <span style="font-size:8px;color:#9ca3af;font-family:'JetBrains Mono',monospace;">instant</span>
+        <div style="background:#f8fafc;border:2.5px solid #64748b;border-radius:16px;padding:20px;width:100%;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,0.08);">
+          <div style="font-size:30px;margin-bottom:8px;">&#x1F5C3;&#xFE0F;</div>
+          <h4 style="font-size:27px;font-weight:900;color:#0f172a;margin-bottom:6px;font-family:'DM Sans',sans-serif;">Served from Cache</h4>
+          <p style="font-size:17px;color:#334155;font-weight:600;font-family:'DM Sans',sans-serif;margin-bottom:12px;">Already identified content</p>
+          <div style="display:flex;align-items:center;justify-content:center;gap:6px;padding-top:8px;border-top:1px solid #e5e7eb;">
+            <div class="pill c-tt ok" style="width:34px;height:20px;font-size:9px;"></div>
+            <span style="font-size:13px;color:#9ca3af;">&#x2192;</span>
+            <div class="pill c-tt ctx" style="width:34px;height:20px;font-size:9px;"></div>
+            <span style="font-size:12px;color:#6b7280;font-family:'DM Sans',sans-serif;font-weight:600;">instant</span>
           </div>
         </div>
 
@@ -981,55 +1007,51 @@ body::before {
         </div>
       </div>
 
-      <!-- ── RIGHT: New Request → CID (with sources) → AI Engine (520px) ── -->
-      <div style="width:520px;display:flex;flex-direction:column;align-items:center;">
+      <!-- ── RIGHT: New Request → CID (with sources) → AI Engine (800px) ── -->
+      <div style="width:800px;display:flex;flex-direction:column;align-items:center;">
         <div class="fork-badge newreq" style="margin-bottom:10px;">&#x2728; New Request</div>
 
         <!-- Full CID with external sources and animated arrows -->
-        <div style="display:flex;align-items:center;width:100%;">
-          <!-- Left sources -->
-          <div style="display:flex;flex-direction:column;gap:8px;width:80px;flex-shrink:0;align-items:flex-end;">
-            <div style="padding:7px 9px;border-radius:10px;border:1.5px solid #fbbf24;background:#fef9c3;color:#92400e;text-align:center;font-size:10px;font-weight:700;width:72px;">
-              <div style="font-size:15px;">&#x1F3AC;</div>IMDb
-            </div>
-            <div style="padding:7px 9px;border-radius:10px;border:1.5px solid #93c5fd;background:#dbeafe;color:#1e40af;text-align:center;font-size:10px;font-weight:700;width:72px;">
-              <div style="font-size:15px;">&#x1F4FA;</div>TvDB
+        <div style="display:flex;align-items:center;width:100%;gap:0;">
+          <!-- Left: External Sources block -->
+          <div style="flex-shrink:0;align-items:center;display:flex;">
+            <div style="padding:16px 14px;border-radius:14px;border:2px solid #3b82f6;background:#dbeafe;color:#1e3a8a;text-align:center;font-size:20px;font-weight:800;font-family:'DM Sans',sans-serif;width:110px;">
+              <div style="font-size:26px;margin-bottom:6px;">&#x1F30D;</div>External<br>Sources
             </div>
           </div>
-          <!-- Left arrows SVG -->
-          <svg width="52" height="110" viewBox="0 0 52 110" style="flex-shrink:0;">
-            <defs><marker id="aLn" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(124,58,237,0.55)"/></marker></defs>
-            <path d="M4,22 Q26,22 48,55" stroke="rgba(124,58,237,0.35)" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#aLn)"/>
-            <path d="M4,88 Q26,88 48,55" stroke="rgba(124,58,237,0.35)" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#aLn)"/>
-            <circle r="4" fill="#fbbf24" opacity="0"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0s" path="M4,22 Q26,22 48,55"/><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite"/></circle>
-            <circle r="4" fill="#93c5fd" opacity="0"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s" path="M4,88 Q26,88 48,55"/><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="0.9s"/></circle>
+          <!-- Left arrow SVG — single centered path -->
+          <svg width="44" height="60" viewBox="0 0 44 60" style="flex-shrink:0;">
+            <defs><marker id="aLn" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(124,58,237,0.6)"/></marker></defs>
+            <path d="M4,30 L40,30" stroke="rgba(124,58,237,0.45)" stroke-width="2" fill="none" stroke-dasharray="4,3" marker-end="url(#aLn)"/>
+            <circle r="4" fill="#818cf8" opacity="0"><animateMotion dur="1.6s" repeatCount="indefinite" begin="0s" path="M4,30 L40,30"/><animate attributeName="opacity" values="0;1;1;0" dur="1.6s" repeatCount="indefinite"/></circle>
           </svg>
           <!-- Central CID box -->
-          <div style="flex:1;background:white;border:2px solid var(--accent2);border-radius:16px;padding:14px 12px;text-align:center;box-shadow:0 6px 20px rgba(124,58,237,0.1);">
-            <div style="font-size:20px;margin-bottom:4px;">&#x1F9E0;</div>
-            <div style="font-size:13px;font-weight:700;color:var(--accent2);margin-bottom:7px;">Content Identification</div>
-            <div style="display:flex;flex-wrap:wrap;gap:3px;justify-content:center;margin-bottom:6px;">
+          <div onclick="openCidPopup()" style="flex:1;background:white;border:3px solid var(--accent2);border-radius:20px;padding:20px 18px;text-align:center;box-shadow:0 8px 32px rgba(124,58,237,0.18);cursor:pointer;transition:box-shadow 0.2s ease,transform 0.2s ease;" onmouseover="this.style.boxShadow='0 14px 44px rgba(124,58,237,0.28)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='0 8px 32px rgba(124,58,237,0.18)';this.style.transform='translateY(0)'">
+            <div style="font-size:26px;margin-bottom:6px;">&#x1F9E0;</div>
+            <div style="font-size:27px;font-weight:900;color:var(--accent2);margin-bottom:14px;font-family:'DM Sans',sans-serif;letter-spacing:-0.3px;">Content Identification</div>
+            <!-- IN section -->
+            <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#6b7280;font-family:'JetBrains Mono',monospace;text-transform:uppercase;margin-bottom:8px;">▼ INPUT</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px;">
               <span class="cid-in-tag">Title</span><span class="cid-in-tag">Series</span><span class="cid-in-tag">Content ID</span>
             </div>
-            <div style="border-top:1px dashed rgba(124,58,237,0.2);padding-top:6px;display:flex;flex-wrap:wrap;gap:3px;justify-content:center;">
-              <span class="cid-out-tag">&#x1F4CB; Plot</span><span class="cid-out-tag">&#x1F4DD; Synopsis</span><span class="cid-out-tag">&#x1F3AC; Transcript</span>
+            <!-- OUT section -->
+            <div style="border-top:2px solid rgba(124,58,237,0.15);padding-top:12px;">
+              <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#6b7280;font-family:'JetBrains Mono',monospace;text-transform:uppercase;margin-bottom:8px;">▲ OUTPUT</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+                <span class="cid-out-tag">&#x1F4CB; Plot</span><span class="cid-out-tag">&#x1F4DD; Synopsis</span><span class="cid-out-tag">&#x1F3AC; Transcript</span>
+              </div>
             </div>
           </div>
-          <!-- Right arrows SVG -->
-          <svg width="52" height="110" viewBox="0 0 52 110" style="flex-shrink:0;">
-            <defs><marker id="aRn" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(124,58,237,0.55)"/></marker></defs>
-            <path d="M48,22 Q26,22 4,55" stroke="rgba(124,58,237,0.35)" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#aRn)"/>
-            <path d="M48,88 Q26,88 4,55" stroke="rgba(124,58,237,0.35)" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#aRn)"/>
-            <circle r="4" fill="#c084fc" opacity="0"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.45s" path="M48,22 Q26,22 4,55"/><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="0.45s"/></circle>
-            <circle r="4" fill="#86efac" opacity="0"><animateMotion dur="1.8s" repeatCount="indefinite" begin="1.35s" path="M48,88 Q26,88 4,55"/><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="1.35s"/></circle>
+          <!-- Right arrow SVG — single centered path -->
+          <svg width="44" height="60" viewBox="0 0 44 60" style="flex-shrink:0;">
+            <defs><marker id="aRn" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(124,58,237,0.6)"/></marker></defs>
+            <path d="M40,30 L4,30" stroke="rgba(124,58,237,0.45)" stroke-width="2" fill="none" stroke-dasharray="4,3" marker-end="url(#aRn)"/>
+            <circle r="4" fill="#c084fc" opacity="0"><animateMotion dur="1.6s" repeatCount="indefinite" begin="0.5s" path="M40,30 L4,30"/><animate attributeName="opacity" values="0;1;1;0" dur="1.6s" repeatCount="indefinite" begin="0.5s"/></circle>
           </svg>
-          <!-- Right sources -->
-          <div style="display:flex;flex-direction:column;gap:8px;width:80px;flex-shrink:0;align-items:flex-start;">
-            <div style="padding:7px 9px;border-radius:10px;border:1.5px solid #c084fc;background:#f3e8ff;color:#6b21a8;text-align:center;font-size:10px;font-weight:700;width:72px;">
-              <div style="font-size:15px;">&#x1F441;&#xFE0F;</div>IRIS ID
-            </div>
-            <div style="padding:7px 9px;border-radius:10px;border:1.5px solid #86efac;background:#dcfce7;color:#14532d;text-align:center;font-size:10px;font-weight:700;width:72px;">
-              <div style="font-size:15px;">&#x1F310;</div>OpenSrc
+          <!-- Right: IRIS ID only -->
+          <div style="flex-shrink:0;align-items:center;display:flex;">
+            <div style="padding:16px 14px;border-radius:14px;border:2px solid #8b5cf6;background:#ede9fe;color:#4c1d95;text-align:center;font-size:20px;font-weight:800;font-family:'DM Sans',sans-serif;width:110px;">
+              <div style="font-size:26px;margin-bottom:6px;">&#x1F441;&#xFE0F;</div>IRIS ID
             </div>
           </div>
         </div>
@@ -1065,95 +1087,95 @@ body::before {
       </div>
     </div>
 
-    <!-- Merge SVG: cache (x=170) + AI engine (x=660) → center (x=460) -->
-    <div style="position:relative;width:920px;height:70px;overflow:visible;margin-top:-2px;">
-      <svg width="920" height="70" viewBox="0 0 920 70" style="position:absolute;inset:0;width:100%;height:100%;">
-        <path d="M170,0 Q170,45 460,45 L460,70" stroke="rgba(0,0,0,0.1)" stroke-width="2" fill="none"/>
-        <path d="M660,0 Q660,45 460,45 L460,70" stroke="rgba(0,0,0,0.1)" stroke-width="2" fill="none"/>
+    <!-- Merge SVG: cache (x=250) + AI engine (x=1000) → center (x=700) -->
+    <div style="position:relative;width:1400px;height:70px;overflow:visible;margin-top:-2px;">
+      <svg width="1400" height="70" viewBox="0 0 1400 70" style="position:absolute;inset:0;width:100%;height:100%;">
+        <path d="M250,0 Q250,45 700,45 L700,70" stroke="rgba(0,0,0,0.1)" stroke-width="2" fill="none"/>
+        <path d="M1000,0 Q1000,45 700,45 L700,70" stroke="rgba(0,0,0,0.1)" stroke-width="2" fill="none"/>
       </svg>
       <!-- ⚑ ctx pills from cache -->
-      <div class="pill c-tt ctx pill-tt" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M170,0 Q170,45 460,45 L460,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:0s;"></div>
-      <div class="pill c-pm ctx pill-pm" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M170,0 Q170,45 460,45 L460,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:0.8s;"></div>
-      <div class="pill c-ir ctx pill-ir" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M170,0 Q170,45 460,45 L460,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:1.6s;"></div>
+      <div class="pill c-tt ctx pill-tt" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M250,0 Q250,45 700,45 L700,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:0s;"></div>
+      <div class="pill c-pm ctx pill-pm" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M250,0 Q250,45 700,45 L700,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:0.8s;"></div>
+      <div class="pill c-ir ctx pill-ir" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M250,0 Q250,45 700,45 L700,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:1.6s;"></div>
       <!-- ⚑ ctx pills from AI engine -->
-      <div class="pill c-tt ctx pill-tt" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M660,0 Q660,45 460,45 L460,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:0.4s;"></div>
-      <div class="pill c-pm ctx pill-pm" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M660,0 Q660,45 460,45 L460,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:1.2s;"></div>
-      <div class="pill c-ir ctx pill-ir" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M660,0 Q660,45 460,45 L460,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:2.0s;"></div>
+      <div class="pill c-tt ctx pill-tt" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M1000,0 Q1000,45 700,45 L700,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:0.4s;"></div>
+      <div class="pill c-pm ctx pill-pm" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M1000,0 Q1000,45 700,45 L700,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:1.2s;"></div>
+      <div class="pill c-ir ctx pill-ir" style="position:absolute;left:0;top:0;offset-anchor:center center;offset-path:path('M1000,0 Q1000,45 700,45 L700,70');animation:mergeFlow 2.4s ease-in-out infinite;animation-delay:2.0s;"></div>
     </div>
 
-    <!-- Branch SVG: center → 3 platform tracks (740px, cols at 110/370/630) -->
-    <div style="width:740px;height:60px;">
-      <svg viewBox="0 0 740 60" preserveAspectRatio="none" style="width:100%;height:100%;">
-        <path d="M370,0 C370,30 110,30 110,60" stroke="rgba(37,99,235,0.3)" stroke-width="2" fill="none"/>
-        <path d="M370,0 L370,60" stroke="rgba(220,38,38,0.3)" stroke-width="2" fill="none"/>
-        <path d="M370,0 C370,30 630,30 630,60" stroke="rgba(217,119,6,0.3)" stroke-width="2" fill="none"/>
+    <!-- Branch SVG: center → 3 platform tracks (1400px) -->
+    <div style="width:1400px;height:60px;">
+      <svg viewBox="0 0 1400 60" preserveAspectRatio="none" style="width:100%;height:100%;">
+        <path d="M700,0 C700,30 210,30 210,60" stroke="rgba(37,99,235,0.3)" stroke-width="2" fill="none"/>
+        <path d="M700,0 L700,60" stroke="rgba(220,38,38,0.3)" stroke-width="2" fill="none"/>
+        <path d="M700,0 C700,30 1190,30 1190,60" stroke="rgba(217,119,6,0.3)" stroke-width="2" fill="none"/>
       </svg>
     </div>
 
     <!-- 3 Platform output boxes — same fixed height, correct role labels -->
-    <div style="display:flex;justify-content:center;gap:40px;width:740px;align-items:stretch;">
+    <div style="display:flex;justify-content:center;gap:70px;width:1400px;align-items:stretch;">
 
       <!-- TT output -->
-      <div style="width:220px;display:flex;flex-direction:column;align-items:center;">
+      <div style="width:420px;display:flex;flex-direction:column;align-items:center;">
         <div style="position:relative;width:2px;height:50px;overflow:visible;margin-bottom:10px;">
           <div style="position:absolute;top:0;bottom:0;left:0;width:2px;background:rgba(37,99,235,0.12);border-radius:2px;"></div>
           <div class="pill c-tt ctx pill-tt" style="position:absolute;left:50%;transform:translateX(-50%);top:-13px;animation:trackDown 2.4s ease-in-out infinite;animation-delay:0s;"></div>
           <div class="pill c-tt ctx pill-tt" style="position:absolute;left:50%;transform:translateX(-50%);top:-13px;animation:trackDown 2.4s ease-in-out infinite;animation-delay:1.2s;"></div>
         </div>
-        <div style="width:100%;flex:1;padding:16px;border-radius:14px;background:white;border:2px solid var(--tradedesk);box-shadow:0 6px 20px rgba(37,99,235,0.08);text-align:center;">
-          <div style="width:40px;height:40px;border-radius:10px;background:var(--tradedesk);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin:0 auto 8px;">TT</div>
-          <h4 style="font-size:13px;font-weight:700;margin-bottom:2px;">The Trade Desk</h4>
-          <div style="font-size:10px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:10px;">DSP</div>
-          <div style="display:flex;flex-wrap:wrap;gap:3px;justify-content:center;">
-            <span style="font-size:8px;padding:2px 6px;border-radius:4px;background:#e0f2fe;border:1px solid #7dd3fc;color:#0369a1;font-family:'JetBrains Mono',monospace;">Brand Safe</span>
-            <span style="font-size:8px;padding:2px 6px;border-radius:4px;background:#ede9fe;border:1px solid #c4b5fd;color:#6d28d9;font-family:'JetBrains Mono',monospace;">Sci-Fi</span>
-            <span style="font-size:8px;padding:2px 6px;border-radius:4px;background:#fdf4ff;border:1px solid #e879f9;color:#86198f;font-family:'JetBrains Mono',monospace;">Premium</span>
+        <div style="width:100%;flex:1;padding:20px;border-radius:14px;background:white;border:2px solid var(--tradedesk);box-shadow:0 6px 20px rgba(37,99,235,0.08);text-align:center;">
+          <div style="width:50px;height:50px;border-radius:12px;background:var(--tradedesk);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;margin:0 auto 10px;">TT</div>
+          <h4 style="font-size:22px;font-weight:800;margin-bottom:4px;font-family:'DM Sans',sans-serif;color:#111827;">The Trade Desk</h4>
+          <div style="font-size:17px;color:#374151;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.3px;margin-bottom:12px;">DSP</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+            <span style="font-size:16px;padding:7px 16px;border-radius:20px;background:#e0f2fe;border:2px solid #38bdf8;color:#0c4a6e;font-family:'DM Sans',sans-serif;font-weight:700;">Brand Safe</span>
+            <span style="font-size:16px;padding:7px 16px;border-radius:20px;background:#ede9fe;border:2px solid #a78bfa;color:#3b0764;font-family:'DM Sans',sans-serif;font-weight:700;">Sci-Fi</span>
+            <span style="font-size:16px;padding:7px 16px;border-radius:20px;background:#fdf4ff;border:2px solid #d946ef;color:#701a75;font-family:'DM Sans',sans-serif;font-weight:700;">Premium</span>
           </div>
-          <div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;gap:5px;font-size:10px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;gap:6px;font-size:17px;color:#374151;font-family:'DM Sans',sans-serif;font-weight:600;">
             <div class="live-dot"></div> Context Ready
           </div>
         </div>
       </div>
 
       <!-- PM output -->
-      <div style="width:220px;display:flex;flex-direction:column;align-items:center;">
+      <div style="width:420px;display:flex;flex-direction:column;align-items:center;">
         <div style="position:relative;width:2px;height:50px;overflow:visible;margin-bottom:10px;">
           <div style="position:absolute;top:0;bottom:0;left:0;width:2px;background:rgba(220,38,38,0.12);border-radius:2px;"></div>
           <div class="pill c-pm ctx pill-pm" style="position:absolute;left:50%;transform:translateX(-50%);top:-13px;animation:trackDown 2.4s ease-in-out infinite;animation-delay:0.4s;"></div>
           <div class="pill c-pm ctx pill-pm" style="position:absolute;left:50%;transform:translateX(-50%);top:-13px;animation:trackDown 2.4s ease-in-out infinite;animation-delay:1.6s;"></div>
         </div>
-        <div style="width:100%;flex:1;padding:16px;border-radius:14px;background:white;border:2px solid var(--pubmatic);box-shadow:0 6px 20px rgba(220,38,38,0.08);text-align:center;">
-          <div style="width:40px;height:40px;border-radius:10px;background:var(--pubmatic);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin:0 auto 8px;">PM</div>
-          <h4 style="font-size:13px;font-weight:700;margin-bottom:2px;">Pubmatic SSP</h4>
-          <div style="font-size:10px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:10px;">SSP</div>
-          <div style="display:flex;flex-wrap:wrap;gap:3px;justify-content:center;">
-            <span style="font-size:8px;padding:2px 6px;border-radius:4px;background:#e0f2fe;border:1px solid #7dd3fc;color:#0369a1;font-family:'JetBrains Mono',monospace;">Brand Safe</span>
-            <span style="font-size:8px;padding:2px 6px;border-radius:4px;background:#fff7ed;border:1px solid #fdba74;color:#9a3412;font-family:'JetBrains Mono',monospace;">Adventure</span>
-            <span style="font-size:8px;padding:2px 6px;border-radius:4px;background:#dcfce7;border:1px solid #86efac;color:#166534;font-family:'JetBrains Mono',monospace;">Beauty</span>
+        <div style="width:100%;flex:1;padding:20px;border-radius:14px;background:white;border:2px solid var(--pubmatic);box-shadow:0 6px 20px rgba(220,38,38,0.08);text-align:center;">
+          <div style="width:50px;height:50px;border-radius:12px;background:var(--pubmatic);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;margin:0 auto 10px;">PM</div>
+          <h4 style="font-size:22px;font-weight:800;margin-bottom:4px;font-family:'DM Sans',sans-serif;color:#111827;">Pubmatic SSP</h4>
+          <div style="font-size:17px;color:#374151;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.3px;margin-bottom:12px;">SSP</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+            <span style="font-size:16px;padding:7px 16px;border-radius:20px;background:#e0f2fe;border:2px solid #38bdf8;color:#0c4a6e;font-family:'DM Sans',sans-serif;font-weight:700;">Brand Safe</span>
+            <span style="font-size:16px;padding:7px 16px;border-radius:20px;background:#fff7ed;border:2px solid #fb923c;color:#7c2d12;font-family:'DM Sans',sans-serif;font-weight:700;">Adventure</span>
+            <span style="font-size:16px;padding:7px 16px;border-radius:20px;background:#dcfce7;border:2px solid #4ade80;color:#14532d;font-family:'DM Sans',sans-serif;font-weight:700;">Beauty</span>
           </div>
-          <div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;gap:5px;font-size:10px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;gap:6px;font-size:17px;color:#374151;font-family:'DM Sans',sans-serif;font-weight:600;">
             <div class="live-dot"></div> Context Ready
           </div>
         </div>
       </div>
 
       <!-- IR output -->
-      <div style="width:220px;display:flex;flex-direction:column;align-items:center;">
+      <div style="width:420px;display:flex;flex-direction:column;align-items:center;">
         <div style="position:relative;width:2px;height:50px;overflow:visible;margin-bottom:10px;">
           <div style="position:absolute;top:0;bottom:0;left:0;width:2px;background:rgba(217,119,6,0.12);border-radius:2px;"></div>
           <div class="pill c-ir ctx pill-ir" style="position:absolute;left:50%;transform:translateX(-50%);top:-13px;animation:trackDown 2.4s ease-in-out infinite;animation-delay:0.8s;"></div>
           <div class="pill c-ir ctx pill-ir" style="position:absolute;left:50%;transform:translateX(-50%);top:-13px;animation:trackDown 2.4s ease-in-out infinite;animation-delay:2.0s;"></div>
         </div>
-        <div style="width:100%;flex:1;padding:16px;border-radius:14px;background:white;border:2px solid var(--iris);box-shadow:0 6px 20px rgba(217,119,6,0.08);text-align:center;">
-          <div style="width:40px;height:40px;border-radius:10px;background:var(--iris);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin:0 auto 8px;">IR</div>
-          <h4 style="font-size:13px;font-weight:700;margin-bottom:2px;">IRIS TV</h4>
-          <div style="font-size:10px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:10px;">IRIS Partnered SSP</div>
-          <div style="display:flex;flex-wrap:wrap;gap:3px;justify-content:center;">
-            <span style="font-size:8px;padding:2px 6px;border-radius:4px;background:#e0f2fe;border:1px solid #7dd3fc;color:#0369a1;font-family:'JetBrains Mono',monospace;">Brand Safe</span>
-            <span style="font-size:8px;padding:2px 6px;border-radius:4px;background:#fef3c7;border:1px solid #fcd34d;color:#92400e;font-family:'JetBrains Mono',monospace;">Sci-Fi</span>
-            <span style="font-size:8px;padding:2px 6px;border-radius:4px;background:#fdf4ff;border:1px solid #e879f9;color:#86198f;font-family:'JetBrains Mono',monospace;">Binge Watcher</span>
+        <div style="width:100%;flex:1;padding:20px;border-radius:14px;background:white;border:2px solid var(--iris);box-shadow:0 6px 20px rgba(217,119,6,0.08);text-align:center;">
+          <div style="width:50px;height:50px;border-radius:12px;background:var(--iris);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;margin:0 auto 10px;">IR</div>
+          <h4 style="font-size:22px;font-weight:800;margin-bottom:4px;font-family:'DM Sans',sans-serif;color:#111827;">IRIS TV</h4>
+          <div style="font-size:17px;color:#374151;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.3px;margin-bottom:12px;">IRIS Partnered SSP</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+            <span style="font-size:16px;padding:7px 16px;border-radius:20px;background:#e0f2fe;border:2px solid #38bdf8;color:#0c4a6e;font-family:'DM Sans',sans-serif;font-weight:700;">Brand Safe</span>
+            <span style="font-size:16px;padding:7px 16px;border-radius:20px;background:#fef3c7;border:2px solid #facc15;color:#713f12;font-family:'DM Sans',sans-serif;font-weight:700;">Sci-Fi</span>
+            <span style="font-size:16px;padding:7px 16px;border-radius:20px;background:#fdf4ff;border:2px solid #d946ef;color:#701a75;font-family:'DM Sans',sans-serif;font-weight:700;">Binge Watcher</span>
           </div>
-          <div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;gap:5px;font-size:10px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;">
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;gap:6px;font-size:17px;color:#374151;font-family:'DM Sans',sans-serif;font-weight:600;">
             <div class="live-dot"></div> Context Ready
           </div>
         </div>
@@ -1349,7 +1371,7 @@ body::before {
               <div style="position:absolute;top:-8px;right:-8px;width:16px;height:16px;border-radius:50%;background:#f59e0b;color:white;font-size:10px;font-weight:900;line-height:16px;text-align:center;">&#x2605;</div>
             </div>
             <div style="font-size:14px;font-weight:700;margin-bottom:6px;color:#92400e;">Full Metadata</div>
-            <div style="font-size:11px;color:#6b7280;line-height:1.5;">Enriched by the Content Identification model. Now includes Plot, Synopsis, and Transcript from IMDb, TvDB, IRIS ID and OpenSources.</div>
+            <div style="font-size:11px;color:#6b7280;line-height:1.5;">Enriched by the Content Identification model. Now includes Plot, Synopsis, and Transcript from External Sources and IRIS ID.</div>
           </div>
 
           <!-- Context-ready request -->
@@ -1426,117 +1448,266 @@ body::before {
     </div>
 
     <!-- Example-based table: columns = patterns, cells = actual values -->
-    <div style="display:grid;grid-template-columns:110px repeat(4,1fr);gap:6px;">
+    <div style="display:grid;grid-template-columns:180px repeat(4,1fr);gap:10px;">
 
       <!-- Column headers (pattern names) -->
       <div></div>
-      <div style="background:#d1fae5;border-radius:12px;padding:12px 8px;text-align:center;border:2px solid #6ee7b7;">
-        <div style="font-size:20px;margin-bottom:4px;">&#x2705;</div>
-        <div style="font-size:12px;font-weight:800;color:#065f46;">Full Data</div>
-        <div style="font-size:9px;color:#10b981;margin-top:2px;font-family:'JetBrains Mono',monospace;">All correct</div>
+      <div style="background:#f0fdf4;border-radius:12px;padding:10px 10px;text-align:center;border:2px solid #86efac;">
+        <div style="font-size:22px;margin-bottom:4px;">&#x2705;</div>
+        <div style="font-size:25px;font-weight:800;color:#14532d;font-family:'DM Sans',sans-serif;">Full Data</div>
+        <div style="font-size:19px;color:#166534;margin-top:3px;font-weight:700;font-family:'DM Sans',sans-serif;">All correct</div>
       </div>
-      <div style="background:#fef3c7;border-radius:12px;padding:12px 8px;text-align:center;border:2px solid #fcd34d;">
-        <div style="font-size:20px;margin-bottom:4px;">&#x26A1;</div>
-        <div style="font-size:12px;font-weight:800;color:#92400e;">Partial Data</div>
-        <div style="font-size:9px;color:#f59e0b;margin-top:2px;font-family:'JetBrains Mono',monospace;">Core fields only</div>
+      <div style="background:#fefce8;border-radius:12px;padding:10px 10px;text-align:center;border:2px solid #fde047;">
+        <div style="font-size:22px;margin-bottom:4px;">&#x26A1;</div>
+        <div style="font-size:25px;font-weight:800;color:#713f12;font-family:'DM Sans',sans-serif;">Partial Data</div>
+        <div style="font-size:19px;color:#78350f;margin-top:3px;font-weight:700;font-family:'DM Sans',sans-serif;">Core fields only</div>
       </div>
-      <div style="background:#ffedd5;border-radius:12px;padding:12px 8px;text-align:center;border:2px solid #fdba74;">
-        <div style="font-size:20px;margin-bottom:4px;">&#x26A0;&#xFE0F;</div>
-        <div style="font-size:12px;font-weight:800;color:#9a3412;">Mixed-Up Fields</div>
-        <div style="font-size:9px;color:#f97316;margin-top:2px;font-family:'JetBrains Mono',monospace;">Wrong boxes</div>
+      <div style="background:#fff7ed;border-radius:12px;padding:10px 10px;text-align:center;border:2px solid #fdba74;">
+        <div style="font-size:22px;margin-bottom:4px;">&#x26A0;&#xFE0F;</div>
+        <div style="font-size:25px;font-weight:800;color:#7c2d12;font-family:'DM Sans',sans-serif;">Mixed-Up Fields</div>
+        <div style="font-size:19px;color:#9a3412;margin-top:3px;font-weight:700;font-family:'DM Sans',sans-serif;">Wrong field boxes</div>
       </div>
-      <div style="background:#fee2e2;border-radius:12px;padding:12px 8px;text-align:center;border:2px solid #fca5a5;">
-        <div style="font-size:20px;margin-bottom:4px;">&#x1F6AB;</div>
-        <div style="font-size:12px;font-weight:800;color:#991b1b;">Bare Minimum</div>
-        <div style="font-size:9px;color:#ef4444;margin-top:2px;font-family:'JetBrains Mono',monospace;">ID only</div>
+      <div style="background:#fef2f2;border-radius:12px;padding:10px 10px;text-align:center;border:2px solid #fca5a5;">
+        <div style="font-size:22px;margin-bottom:4px;">&#x1F6AB;</div>
+        <div style="font-size:25px;font-weight:800;color:#7f1d1d;font-family:'DM Sans',sans-serif;">Bare Minimum</div>
+        <div style="font-size:19px;color:#991b1b;margin-top:5px;font-weight:700;font-family:'DM Sans',sans-serif;">ID only</div>
       </div>
 
       <!-- Content ID — spans all, always present -->
-      <div style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#374151;padding:0 4px;">
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:25px;font-weight:900;color:#111827;padding:6px 10px;font-family:'DM Sans',sans-serif;background:#f1f5f9;border-radius:8px;">
         Content ID
-        <span style="background:#065f46;color:white;font-size:7px;padding:2px 5px;border-radius:3px;font-family:'JetBrains Mono',monospace;flex-shrink:0;">ALWAYS</span>
+        <span style="background:#065f46;color:white;font-size:13px;padding:4px 10px;border-radius:4px;font-weight:700;width:fit-content;font-family:'DM Sans',sans-serif;">ALWAYS</span>
       </div>
-      <div style="background:#bbf7d0;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#065f46;display:flex;align-items:center;justify-content:center;">CTX-90847</div>
-      <div style="background:#bbf7d0;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#065f46;display:flex;align-items:center;justify-content:center;">CTX-90847</div>
-      <div style="background:#bbf7d0;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#065f46;display:flex;align-items:center;justify-content:center;">CTX-90847</div>
-      <div style="background:#bbf7d0;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#065f46;display:flex;align-items:center;justify-content:center;">CTX-90847</div>
+      <div style="background:#dcfce7;border-radius:8px;padding:14px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:2px solid #86efac;">CTX-90847</div>
+      <div style="background:#dcfce7;border-radius:8px;padding:14px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:2px solid #86efac;">CTX-90847</div>
+      <div style="background:#dcfce7;border-radius:8px;padding:14px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:2px solid #86efac;">CTX-90847</div>
+      <div style="background:#dcfce7;border-radius:8px;padding:14px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:2px solid #86efac;">CTX-90847</div>
 
       <!-- Title -->
-      <div style="font-size:11px;font-weight:600;color:#6b7280;display:flex;align-items:center;padding:0 4px;">Title</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">"Odyssey: Lost Signal"</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">"Odyssey: Lost Signal"</div>
+      <div style="font-size:25px;font-weight:900;color:#111827;display:flex;align-items:center;padding:6px 10px;font-family:'DM Sans',sans-serif;background:#f1f5f9;border-radius:8px;">Title</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">"Odyssey: Lost Signal"</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">"Odyssey: Lost Signal"</div>
       <!-- Type C: wrong — contains series+episode -->
-      <div style="background:#ffedd5;border-radius:8px;padding:7px 6px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#9a3412;display:flex;flex-direction:column;align-items:center;gap:3px;border:1.5px dashed #fdba74;">
-        <span style="font-weight:700;">"Odyssey S3&middot;Ep7"</span>
-        <span style="font-size:8px;color:#f97316;">&#x2935; Series+Ep crammed in</span>
+      <div style="background:#ffedd5;border-radius:8px;padding:10px 8px;text-align:center;font-size:15px;display:flex;flex-direction:column;align-items:center;gap:5px;border:1.5px dashed #fdba74;">
+        <span style="font-size:18px;font-weight:800;font-family:'JetBrains Mono',monospace;color:#7c2d12;">"Odyssey S3·Ep7"</span>
+        <span style="font-size:20px;color:#7c2d12;font-family:'DM Sans',sans-serif;font-weight:800;">↳ Series+Ep crammed in</span>
       </div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
 
       <!-- Series -->
-      <div style="font-size:11px;font-weight:600;color:#6b7280;display:flex;align-items:center;padding:0 4px;">Series</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">"Odyssey"</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">"Odyssey"</div>
+      <div style="font-size:25px;font-weight:900;color:#111827;display:flex;align-items:center;padding:6px 10px;font-family:'DM Sans',sans-serif;background:#f1f5f9;border-radius:8px;">Series</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">"Odyssey"</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">"Odyssey"</div>
       <!-- Type C: missing because it was in Title -->
-      <div style="background:#f9fafb;border-radius:8px;padding:7px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:1.5px dashed #fdba74;">
-        <span style="color:#d1d5db;font-size:16px;">&#x25CB;</span>
-        <span style="font-size:8px;color:#f97316;font-family:'JetBrains Mono',monospace;">&#x2934; hidden in Title</span>
+      <div style="background:#f9fafb;border-radius:8px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1.5px dashed #fdba74;">
+        <span style="color:#111827;font-size:34px;font-weight:900;">&#x25CB;</span>
+        <span style="font-size:20px;color:#7c2d12;font-family:'DM Sans',sans-serif;font-weight:800;">↑ hidden in Title</span>
       </div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
 
       <!-- Genre -->
-      <div style="font-size:11px;font-weight:600;color:#6b7280;display:flex;align-items:center;padding:0 4px;">Genre</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">"Sci-Fi"</div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
+      <div style="font-size:25px;font-weight:900;color:#111827;display:flex;align-items:center;padding:6px 10px;font-family:'DM Sans',sans-serif;background:#f1f5f9;border-radius:8px;">Genre</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">"Sci-Fi"</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
 
       <!-- Rating -->
-      <div style="font-size:11px;font-weight:600;color:#6b7280;display:flex;align-items:center;padding:0 4px;">Rating</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">TV-MA</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">TV-MA</div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
+      <div style="font-size:25px;font-weight:900;color:#111827;display:flex;align-items:center;padding:6px 10px;font-family:'DM Sans',sans-serif;background:#f1f5f9;border-radius:8px;">Rating</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">TV-MA</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">TV-MA</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
 
       <!-- Season -->
-      <div style="font-size:11px;font-weight:600;color:#6b7280;display:flex;align-items:center;padding:0 4px;">Season</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">Season 3</div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
-      <div style="background:#f9fafb;border-radius:8px;padding:7px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:1.5px dashed #fdba74;">
-        <span style="color:#d1d5db;font-size:16px;">&#x25CB;</span>
-        <span style="font-size:8px;color:#f97316;font-family:'JetBrains Mono',monospace;">&#x2934; in Title</span>
+      <div style="font-size:25px;font-weight:900;color:#111827;display:flex;align-items:center;padding:6px 10px;font-family:'DM Sans',sans-serif;background:#f1f5f9;border-radius:8px;">Season</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">Season 3</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1.5px dashed #fdba74;">
+        <span style="color:#111827;font-size:34px;font-weight:900;">&#x25CB;</span>
+        <span style="font-size:20px;color:#7c2d12;font-family:'DM Sans',sans-serif;font-weight:800;">↑ in Title</span>
       </div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
 
       <!-- Episode -->
-      <div style="font-size:11px;font-weight:600;color:#6b7280;display:flex;align-items:center;padding:0 4px;">Episode</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">Episode 7</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">Episode 7</div>
-      <div style="background:#f9fafb;border-radius:8px;padding:7px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:1.5px dashed #fdba74;">
-        <span style="color:#d1d5db;font-size:16px;">&#x25CB;</span>
-        <span style="font-size:8px;color:#f97316;font-family:'JetBrains Mono',monospace;">&#x2934; in Title</span>
+      <div style="font-size:25px;font-weight:900;color:#111827;display:flex;align-items:center;padding:6px 10px;font-family:'DM Sans',sans-serif;background:#f1f5f9;border-radius:8px;">Episode</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">Episode 7</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">Episode 7</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1.5px dashed #fdba74;">
+        <span style="color:#111827;font-size:34px;font-weight:900;">&#x25CB;</span>
+        <span style="font-size:20px;color:#7c2d12;font-family:'DM Sans',sans-serif;font-weight:800;">↑ in Title</span>
       </div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
 
       <!-- Language -->
-      <div style="font-size:11px;font-weight:600;color:#6b7280;display:flex;align-items:center;padding:0 4px;">Language</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">en-US</div>
-      <div style="background:#d1fae5;border-radius:8px;padding:8px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065f46;display:flex;align-items:center;justify-content:center;">en-US</div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
-      <div style="background:#f9fafb;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center;color:#d1d5db;font-size:18px;">&#x25CB;</div>
+      <div style="font-size:25px;font-weight:900;color:#111827;display:flex;align-items:center;padding:6px 10px;font-family:'DM Sans',sans-serif;background:#f1f5f9;border-radius:8px;">Language</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">en-US</div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:11px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:900;color:#14532d;display:flex;align-items:center;justify-content:center;border:1.5px solid #86efac;">en-US</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
+      <div style="background:#f9fafb;border-radius:8px;padding:11px;display:flex;align-items:center;justify-content:center;color:#111827;font-size:37px;font-weight:900;">&#x25CB;</div>
 
     </div><!-- /table grid -->
 
     <!-- Minimal legend -->
-    <div style="display:flex;gap:22px;margin-top:16px;justify-content:center;align-items:center;flex-wrap:wrap;padding-top:14px;border-top:1px solid #f3f4f6;">
-      <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:#374151;">
-        <div style="width:12px;height:12px;border-radius:3px;background:#d1fae5;border:1px solid #6ee7b7;"></div>Value shared
+    <div style="display:flex;gap:36px;margin-top:24px;justify-content:center;align-items:center;flex-wrap:wrap;padding-top:20px;border-top:2px solid #e5e7eb;">
+      <div style="display:flex;align-items:center;gap:12px;font-size:21px;color:#111827;font-weight:700;font-family:'DM Sans',sans-serif;">
+        <div style="width:22px;height:22px;border-radius:5px;background:#dcfce7;border:2px solid #86efac;"></div>Value shared
       </div>
-      <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:#374151;">
-        <div style="width:12px;height:12px;border-radius:3px;background:#ffedd5;border:1.5px dashed #fdba74;"></div>In wrong field
+      <div style="display:flex;align-items:center;gap:12px;font-size:21px;color:#111827;font-weight:700;font-family:'DM Sans',sans-serif;">
+        <div style="width:22px;height:22px;border-radius:5px;background:#ffedd5;border:2px dashed #fdba74;"></div>In wrong field
       </div>
-      <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:#374151;">
-        <span style="color:#d1d5db;font-size:14px;">&#x25CB;</span>Not shared
+      <div style="display:flex;align-items:center;gap:12px;font-size:21px;color:#111827;font-weight:700;font-family:'DM Sans',sans-serif;">
+        <span style="color:#111827;font-size:29px;font-weight:900;">&#x25CB;</span>Not shared
       </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ CONTENT IDENTIFICATION POPUP ═══ -->
+<div class="ds-info-overlay" id="cidPopup">
+  <div class="ds-info-popup">
+
+    <!-- Header -->
+    <div class="ds-info-header">
+      <div class="ds-info-title">
+        <div class="ds-info-icon" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">&#x1F9E0;</div>
+        <div>
+          <h2>Content Identification Engine</h2>
+          <p>How Silverpush decodes content from incomplete ad requests</p>
+        </div>
+      </div>
+      <div class="close-btn" onclick="closeCidPopup()">&#x2715;</div>
+    </div>
+
+    <!-- Two-panel diagram layout -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+      <!-- ══ LEFT PANEL: Bare Minimum Case ══ -->
+      <div style="background:#ffffff;border:2px solid #e5e7eb;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:0;">
+
+        <!-- Panel header -->
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1.5px solid #e5e7eb;">
+          <div style="background:#fee2e2;border:2px solid #fca5a5;border-radius:8px;padding:8px 16px;font-size:20px;font-weight:700;color:#991b1b;font-family:'DM Sans',sans-serif;">&#x1F6AB; Bare Minimum</div>
+          <div style="font-size:20px;color:#374151;font-family:'DM Sans',sans-serif;font-weight:600;">Only Content ID sent</div>
+        </div>
+
+        <!-- Step 1: Content ID received -->
+        <div style="background:#eef2ff;border:2px solid #818cf8;border-radius:12px;padding:20px 24px;margin-bottom:14px;">
+          <div style="font-size:18px;font-weight:700;color:#3730a3;font-family:'DM Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Content ID Received</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:29px;font-weight:800;color:#1e1b4b;letter-spacing:1px;">200000010545390</div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="text-align:center;font-size:25px;color:#7c3aed;line-height:1;margin:6px 0;">&#x25BC;</div>
+
+        <!-- Step 2: Decode split -->
+        <div style="display:flex;gap:10px;margin-bottom:8px;">
+          <div style="flex:1;background:#faf5ff;border:1.5px solid #c4b5fd;border-radius:12px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:800;color:#3b0764;">2000000</div>
+            <div style="font-size:18px;font-weight:700;color:#4c1d95;font-family:'DM Sans',sans-serif;margin-top:6px;">Publisher Prefix</div>
+            <div style="font-size:21px;font-weight:800;color:#5b21b6;font-family:'DM Sans',sans-serif;margin-top:5px;">→ Fawesome</div>
+          </div>
+          <div style="display:flex;align-items:center;font-size:29px;color:#374151;font-weight:800;">+</div>
+          <div style="flex:1;background:#f0f9ff;border:1.5px solid #93c5fd;border-radius:12px;padding:16px;text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:800;color:#1e3a8a;">10545390</div>
+            <div style="font-size:18px;font-weight:700;color:#1d4ed8;font-family:'DM Sans',sans-serif;margin-top:6px;">Title ID</div>
+            <div style="font-size:21px;font-weight:800;color:#2563eb;font-family:'DM Sans',sans-serif;margin-top:5px;">→ Content Ref</div>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="text-align:center;font-size:25px;color:#7c3aed;line-height:1;margin:6px 0;">&#x25BC;</div>
+
+        <!-- Step 3: URL resolved -->
+        <div style="background:#f0fdf4;border:1.5px solid #6ee7b7;border-radius:12px;padding:16px 18px;margin-bottom:8px;display:flex;align-items:center;gap:12px;">
+          <span style="font-size:24px;">&#x1F517;</span>
+          <div>
+            <div style="font-size:17px;font-weight:700;color:#065f46;font-family:'DM Sans',sans-serif;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">URL Resolved</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:800;color:#14532d;">fawesome.tv/movies/10545390/</div>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="text-align:center;font-size:25px;color:#7c3aed;line-height:1;margin:6px 0;">&#x25BC;</div>
+
+        <!-- Step 4: Sources -->
+        <div style="display:flex;gap:10px;justify-content:center;margin-bottom:8px;">
+          <span style="background:#eef2ff;border:1.5px solid #a5b4fc;border-radius:10px;padding:9px 18px;font-size:20px;font-weight:700;color:#312e81;font-family:'DM Sans',sans-serif;">&#x1F30D; External Sources</span>
+          <span style="background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:10px;padding:9px 18px;font-size:20px;font-weight:700;color:#4c1d95;font-family:'DM Sans',sans-serif;">&#x1F441;&#xFE0F; IRIS ID</span>
+        </div>
+
+        <!-- Arrow -->
+        <div style="text-align:center;font-size:25px;color:#10b981;line-height:1;margin:6px 0;">&#x25BC;</div>
+
+        <!-- Step 5: Result -->
+        <div style="background:#f0fdf4;border:1.5px solid #6ee7b7;border-radius:12px;padding:18px 20px;">
+          <div style="font-size:17px;font-weight:700;color:#065f46;font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;">✅ Resolved Metadata</div>
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:10px 16px;align-items:center;">
+            <span style="font-size:19px;font-weight:700;color:#374151;font-family:'DM Sans',sans-serif;">Title</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;color:#064e3b;">Inner Beauty</span>
+            <span style="font-size:19px;font-weight:700;color:#374151;font-family:'DM Sans',sans-serif;">Type</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;color:#064e3b;">Movie</span>
+            <span style="font-size:19px;font-weight:700;color:#374151;font-family:'DM Sans',sans-serif;">Publisher</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;color:#064e3b;">Fawesome</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ RIGHT PANEL: Mixed-Up Fields Case ══ -->
+      <div style="background:#ffffff;border:2px solid #e5e7eb;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:0;">
+
+        <!-- Panel header -->
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1.5px solid #e5e7eb;">
+          <div style="background:#ffedd5;border:2px solid #fdba74;border-radius:8px;padding:8px 16px;font-size:20px;font-weight:700;color:#9a3412;font-family:'DM Sans',sans-serif;">&#x26A0;&#xFE0F; Mixed-Up Fields</div>
+          <div style="font-size:20px;color:#374151;font-family:'DM Sans',sans-serif;font-weight:600;">Fields crammed together</div>
+        </div>
+
+        <!-- Step 1: Bad data received -->
+        <div style="border:1.5px dashed #fcd34d;border-radius:12px;padding:18px 20px;background:#fefce8;margin-bottom:14px;">
+          <div style="font-size:18px;font-weight:700;color:#78350f;font-family:'DM Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;">Ad Request Received</div>
+          <div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center;">
+            <span style="font-size:19px;font-weight:700;color:#78350f;font-family:'DM Sans',sans-serif;background:#fef3c7;border:1.5px solid #fcd34d;border-radius:6px;padding:7px 10px;text-align:center;">Title</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;color:#7c2d12;background:#fff7ed;border:1.5px solid #fdba74;border-radius:8px;padding:9px 14px;">"Odyssey S3·Ep7"</span>
+            <span style="font-size:19px;font-weight:700;color:#374151;font-family:'DM Sans',sans-serif;background:#f3f4f6;border:1.5px solid #d1d5db;border-radius:6px;padding:7px 10px;text-align:center;">Series</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:21px;color:#6b7280;background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:8px;padding:9px 14px;">○ empty</span>
+            <span style="font-size:19px;font-weight:700;color:#374151;font-family:'DM Sans',sans-serif;background:#f3f4f6;border:1.5px solid #d1d5db;border-radius:6px;padding:7px 10px;text-align:center;">Episode</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:21px;color:#6b7280;background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:8px;padding:9px 14px;">○ empty</span>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="text-align:center;font-size:25px;color:#7c3aed;line-height:1;margin:6px 0;">&#x25BC;</div>
+
+        <!-- Step 2: Analytics Engine -->
+        <div style="background:#faf5ff;border:1.5px solid #c4b5fd;border-radius:12px;padding:18px 20px;margin-bottom:8px;">
+          <div style="font-size:22px;font-weight:800;color:#3b0764;font-family:'DM Sans',sans-serif;text-align:center;margin-bottom:14px;">&#x1F4CA; Data Analytics Pipeline</div>
+          <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+            <span style="background:white;border:2px solid #8b5cf6;border-radius:20px;padding:9px 18px;font-size:19px;font-weight:700;color:#5b21b6;font-family:'DM Sans',sans-serif;">Pattern Detection</span>
+            <span style="background:white;border:2px solid #8b5cf6;border-radius:20px;padding:9px 18px;font-size:19px;font-weight:700;color:#5b21b6;font-family:'DM Sans',sans-serif;">NLP Parsing</span>
+            <span style="background:white;border:2px solid #8b5cf6;border-radius:20px;padding:9px 18px;font-size:19px;font-weight:700;color:#5b21b6;font-family:'DM Sans',sans-serif;">Field Splitting</span>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="text-align:center;font-size:25px;color:#10b981;line-height:1;margin:6px 0;">&#x25BC;</div>
+
+        <!-- Step 3: Corrected result -->
+        <div style="background:#f0fdf4;border:1.5px solid #6ee7b7;border-radius:12px;padding:18px 20px;flex:1;">
+          <div style="font-size:17px;font-weight:700;color:#065f46;font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;">✅ Auto-Corrected Fields</div>
+          <div style="display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center;">
+            <span style="font-size:19px;font-weight:700;color:#14532d;font-family:'DM Sans',sans-serif;background:#dcfce7;border:1.5px solid #86efac;border-radius:6px;padding:7px 10px;text-align:center;">Title</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;color:#14532d;">"Odyssey"</span>
+            <span style="font-size:19px;font-weight:700;color:#14532d;font-family:'DM Sans',sans-serif;background:#dcfce7;border:1.5px solid #86efac;border-radius:6px;padding:7px 10px;text-align:center;">Series</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;color:#14532d;">Odyssey</span>
+            <span style="font-size:19px;font-weight:700;color:#14532d;font-family:'DM Sans',sans-serif;background:#dcfce7;border:1.5px solid #86efac;border-radius:6px;padding:7px 10px;text-align:center;">Season</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;color:#14532d;">S3</span>
+            <span style="font-size:19px;font-weight:700;color:#14532d;font-family:'DM Sans',sans-serif;background:#dcfce7;border:1.5px solid #86efac;border-radius:6px;padding:7px 10px;text-align:center;">Episode</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;color:#14532d;">Ep7</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -1645,6 +1816,8 @@ function downloadPDF(){
 // ─── DATA SANITY INFO POPUP ───
 function openDsPopup(){ document.getElementById('dsSanityPopup').classList.add('show'); }
 function closeDsPopup(){ document.getElementById('dsSanityPopup').classList.remove('show'); }
+function openCidPopup(){ document.getElementById('cidPopup').classList.add('show'); }
+function closeCidPopup(){ document.getElementById('cidPopup').classList.remove('show'); }
 
 // ─── LEGEND POPUP (reference view only, no phase transition) ───
 function openLegendPopup(){
