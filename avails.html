@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silverpush — CTV Avails by Country</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sp:#4eaf9c; --sp-dark:#2d8f7b; --sp-light:#eaf7f5;
+    --navy:#0a1628; --mid:#4b5563; --border:#e5e7eb;
+    --bg:#f8fafb; --white:#ffffff;
+    --ttd:#2563eb; --ttd-bg:#eff6ff; --ttd-border:#bfdbfe;
+    --pub:#7c3aed; --pub-bg:#f5f3ff; --pub-border:#ddd6fe;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);min-height:100vh;}
+
+  /* ── HEADER ── */
+  .header{background:var(--navy);padding:22px 40px;display:flex;align-items:center;justify-content:space-between;}
+  .header-brand{display:flex;align-items:center;gap:14px;}
+  .header-logo{width:40px;height:40px;background:var(--sp);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:18px;}
+  .header-title{color:#fff;font-size:24px;font-weight:800;}
+  .header-sub{color:rgba(255,255,255,0.6);font-size:15px;font-weight:500;margin-top:2px;}
+  .header-tag{background:rgba(78,175,156,0.2);border:1px solid rgba(78,175,156,0.4);color:var(--sp);font-size:13px;font-weight:700;padding:6px 16px;border-radius:20px;font-family:'IBM Plex Mono',monospace;letter-spacing:.5px;}
+
+  /* ── CONTROLS ── */
+  .controls{background:var(--white);border-bottom:1px solid var(--border);padding:18px 40px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:10;}
+  .view-toggle{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+  .view-btn{padding:10px 22px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;border:none;background:transparent;cursor:pointer;color:var(--mid);transition:all .2s;}
+  .view-btn.active{background:var(--navy);color:#fff;}
+  .region-filters{display:flex;gap:8px;flex-wrap:wrap;}
+  .rf-btn{padding:8px 18px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);font-size:14px;font-weight:700;cursor:pointer;color:var(--mid);transition:all .2s;font-family:'DM Sans',sans-serif;}
+  .rf-btn.active{background:var(--sp);border-color:var(--sp);color:#fff;}
+  .sort-wrap{margin-left:auto;display:flex;align-items:center;gap:10px;}
+  .sort-label{font-size:14px;color:var(--mid);font-weight:600;}
+  .sort-sel{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;border:1.5px solid var(--border);border-radius:6px;padding:8px 12px;background:var(--white);color:var(--navy);cursor:pointer;}
+  .count-badge{font-size:14px;color:var(--mid);font-weight:600;white-space:nowrap;}
+
+  /* ── MAIN ── */
+  .main{padding:28px 40px 60px;}
+
+  /* ── TABLE VIEW ── */
+  .tbl-wrap{overflow-x:auto;border-radius:16px;border:2px solid var(--border);background:var(--white);box-shadow:0 4px 24px rgba(0,0,0,0.08);}
+  table{width:100%;border-collapse:collapse;font-size:19px;}
+  thead{position:sticky;top:0;z-index:5;}
+  thead tr:first-child th{background:var(--navy);color:#fff;padding:24px 28px;font-weight:900;font-size:24px;letter-spacing:1.2px;text-align:center;text-transform:uppercase;position:sticky;top:0;}
+  thead tr:first-child th:first-child{text-align:left;border-radius:14px 0 0 0;}
+  thead tr:first-child th:last-child{border-radius:0 14px 0 0;}
+  thead tr:nth-child(2) th{background:#0f172a;color:#fff;padding:14px 28px;font-size:20px;font-weight:800;text-align:right;border-bottom:3px solid var(--sp);letter-spacing:.3px;position:sticky;top:73px;}
+  thead tr:nth-child(2) th:first-child{text-align:left;}
+  .ttd-hdr{color:#60a5fa !important;}
+  .pub-hdr{color:#a78bfa !important;}
+  .tbl-region-row td{background:#0f172a;font-size:18px;font-weight:800;color:#4eaf9c;text-transform:uppercase;letter-spacing:2px;padding:12px 28px;text-align:left;border-top:none;}
+  tbody tr{border-bottom:1px solid var(--border);transition:background .15s;}
+  tbody tr:nth-child(even){background:#fafbfc;}
+  tbody tr:hover{background:#f0fdf9;}
+  tbody tr:last-child{border-bottom:none;}
+  td{padding:16px 28px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:700;color:#0a0a0a;}
+  td:first-child{text-align:left;font-family:'DM Sans',sans-serif;font-size:20px;font-weight:800;color:#0a0a0a;}
+  .ttd-col{color:#0a0a0a;}
+  .pub-col{color:#0a0a0a;}
+  .open-col{font-size:20px;font-weight:800;}
+
+  /* ── CARDS VIEW ── */
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:20px;}
+  .country-card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;transition:all .2s;cursor:default;}
+  .country-card:hover{border-color:var(--sp);box-shadow:0 6px 24px rgba(78,175,156,0.15);transform:translateY(-2px);}
+  .card-header{padding:18px 20px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);}
+  .card-flag{font-size:34px;line-height:1;}
+  .card-info{flex:1;}
+  .card-country{font-size:20px;font-weight:800;color:var(--navy);}
+  .card-region{font-size:13px;font-weight:700;color:var(--sp);text-transform:uppercase;letter-spacing:.8px;margin-top:2px;}
+  .card-body{padding:16px 20px 18px;display:flex;flex-direction:column;gap:12px;}
+  .dsp-block{background:var(--bg);border-radius:8px;padding:14px 16px;}
+  .dsp-block.ttd-block{background:var(--ttd-bg);border:1px solid var(--ttd-border);}
+  .dsp-block.pub-block{background:var(--pub-bg);border:1px solid var(--pub-border);}
+  .dsp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .dsp-name{font-size:14px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
+  .ttd-block .dsp-name{color:var(--ttd);}
+  .pub-block .dsp-name{color:var(--pub);}
+  .dsp-total{font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;}
+  .ttd-block .dsp-total{color:var(--ttd);}
+  .pub-block .dsp-total{color:var(--pub);}
+  .seg-rows{display:flex;flex-direction:column;gap:7px;}
+  .seg-row{display:flex;align-items:center;gap:10px;}
+  .seg-label{font-size:13px;font-weight:600;color:var(--mid);width:100px;flex-shrink:0;}
+  .seg-bar-wrap{flex:1;height:8px;background:rgba(0,0,0,0.06);border-radius:4px;overflow:hidden;}
+  .seg-bar{height:100%;border-radius:4px;transition:width .6s ease;}
+  .ttd-block .seg-bar{background:var(--ttd);}
+  .pub-block .seg-bar{background:var(--pub);}
+  .seg-val{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;width:60px;text-align:right;flex-shrink:0;}
+  .ttd-block .seg-val{color:var(--ttd);}
+  .pub-block .seg-val{color:var(--pub);}
+
+  /* ── EMPTY ── */
+  .empty{text-align:center;padding:60px 20px;color:var(--mid);font-size:18px;}
+
+  /* ── LEGEND ── */
+  .legend{display:flex;gap:24px;margin-bottom:24px;flex-wrap:wrap;}
+  .leg-item{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--mid);}
+  .leg-dot{width:12px;height:12px;border-radius:3px;}
+  .leg-dot.ttd{background:var(--ttd);}
+  .leg-dot.pub{background:var(--pub);}
+
+  /* scrollbar */
+  ::-webkit-scrollbar{width:6px;height:6px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-brand">
+    <div class="header-logo">SP</div>
+    <div>
+      <div class="header-title">CTV Avails — Country Level</div>
+      <div class="header-sub">TTD &amp; PubMatic · Marketing Projection 2025–26</div>
+    </div>
+  </div>
+  <div class="header-tag">INTERNAL · SALES USE</div>
+</div>
+
+<div class="controls" id="controls">
+  <div class="region-filters" id="regionFilters">
+    <button class="rf-btn active" onclick="setRegion('all',this)">All</button>
+    <button class="rf-btn" onclick="setRegion('Americas',this)">🌎 Americas</button>
+    <button class="rf-btn" onclick="setRegion('Europe',this)">🌍 Europe</button>
+    <button class="rf-btn" onclick="setRegion('APAC',this)">🌏 APAC</button>
+    <button class="rf-btn" onclick="setRegion('Africa',this)">🌍 Africa</button>
+    <button class="rf-btn" onclick="setRegion('Middle East',this)">🕌 Middle East</button>
+  </div>
+  <div class="sort-wrap">
+    <span class="sort-label">Sort by:</span>
+    <select class="sort-sel" onchange="setSort(this.value)">
+      <option value="pubOpen">PubMatic Open</option>
+      <option value="ttdOpen">TTD Open</option>
+      <option value="pubTotal">PubMatic Total</option>
+      <option value="ttdTotal">TTD Total</option>
+      <option value="name">Country Name</option>
+    </select>
+    <span class="count-badge" id="countBadge">34 countries</span>
+  </div>
+</div>
+
+<div class="main">
+  <div id="cardsView" style="display:none;">
+    <div class="cards-grid" id="cardsGrid"></div>
+  </div>
+  <div id="tableView">
+    <div class="tbl-wrap">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th rowspan="2" style="text-align:left;">Country</th>
+            <th colspan="3" class="ttd-hdr">TTD</th>
+            <th colspan="3" class="pub-hdr">PubMatic</th>
+          </tr>
+          <tr>
+            <th class="ttd-hdr">Movies &amp; TV</th>
+            <th class="ttd-hdr">Brand Safety</th>
+            <th class="ttd-hdr open-col">Open</th>
+            <th class="pub-hdr">Movies &amp; TV</th>
+            <th class="pub-hdr">Brand Safety</th>
+            <th class="pub-hdr open-col">Open</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA (all values in millions) ──
+const DATA = [
+  { country:'Australia',      flag:'🇦🇺', region:'APAC',        ttd:[7.5,2,213.7],       pub:[93.4,47,9600] },
+  { country:'Canada',         flag:'🇨🇦', region:'Americas',    ttd:[12.6,5.5,67.3],     pub:[1200,718,58400] },
+  { country:'Dominican Rep.', flag:'🇩🇴', region:'Americas',    ttd:[1.6,0.715,1.1],     pub:[7.1,4.9,1100] },
+  { country:'Ghana',          flag:'🇬🇭', region:'Africa',      ttd:[1.1,1.1,0.2133],    pub:[2.7,0.67,98] },
+  { country:'Indonesia',      flag:'🇮🇩', region:'APAC',        ttd:[2.4,1.1,16.7],      pub:[11,2.8,8600] },
+  { country:'Japan',          flag:'🇯🇵', region:'APAC',        ttd:[2.5,1.1,43.1],      pub:[1.5,0.673,4000] },
+  { country:'Kenya',          flag:'🇰🇪', region:'Africa',      ttd:[2.1,2.1,0.2797],    pub:[1.8,0.966,765] },
+  { country:'Malaysia',       flag:'🇲🇾', region:'APAC',        ttd:[1.4,0.566,3.3],     pub:[4.1,1.5,3100] },
+  { country:'Middle East',    flag:'🕌',  region:'Middle East', ttd:[4.8,1.7,1.6],       pub:[0.417,0.401,3200] },
+  { country:'New Zealand',    flag:'🇳🇿', region:'APAC',        ttd:[3.4,1.5,9.5],       pub:[14,5.8,599] },
+  { country:'Nigeria',        flag:'🇳🇬', region:'Africa',      ttd:[4.3,2.9,0.5913],    pub:[1.7,0.793,239] },
+  { country:'Philippines',    flag:'🇵🇭', region:'APAC',        ttd:[3.5,1.5,12.5],      pub:[7.6,3.2,2500] },
+  { country:'Rwanda',         flag:'🇷🇼', region:'Africa',      ttd:[145,0.103,0.0149],  pub:[0.074,0.017,9.9] },
+  { country:'Singapore',      flag:'🇸🇬', region:'APAC',        ttd:[3.6,1.6,2.4],       pub:[2.3,1,368] },
+  { country:'South Africa',   flag:'🇿🇦', region:'Africa',      ttd:[3.2,1.2,1.3],       pub:[0.145,0.141,0.912] },
+  { country:'Tanzania',       flag:'🇹🇿', region:'Africa',      ttd:[0.64,0.566,0.097],  pub:[0.568,0.171,86] },
+  { country:'Thailand',       flag:'🇹🇭', region:'APAC',        ttd:[1.8,0.75,10.7],     pub:[3,0.541,4000] },
+  { country:'USA',            flag:'🇺🇸', region:'Americas',    ttd:[238,118,2100],      pub:[1000,900,60000] },
+  { country:'Vietnam',        flag:'🇻🇳', region:'APAC',        ttd:[5.4,2.3,29.7],      pub:[1.6,0.357,1300] },
+  { country:'Zambia',         flag:'🇿🇲', region:'Africa',      ttd:[0.481,0.316,0.0853],pub:[1.3,0.6,72] },
+  { country:'France',         flag:'🇫🇷', region:'Europe',      ttd:[20,3.9,47.3],       pub:[61,48,16000] },
+  { country:'Germany',        flag:'🇩🇪', region:'Europe',      ttd:[28,8.5,697],        pub:[114,101,57000] },
+  { country:'India',          flag:'🇮🇳', region:'APAC',        ttd:[15,6.2,519.3],      pub:[8.8,1.5,36000] },
+  { country:'Portugal',       flag:'🇵🇹', region:'Europe',      ttd:[3.4,1.6,2.5],       pub:[4,1.7,510] },
+  { country:'Spain',          flag:'🇪🇸', region:'Europe',      ttd:[8.7,2.5,57],        pub:[108,85,19000] },
+  { country:'Sweden',         flag:'🇸🇪', region:'Europe',      ttd:[7.7,2.2,17.4],      pub:[19,13,1200] },
+  { country:'UK',             flag:'🇬🇧', region:'Europe',      ttd:[36,9.5,81.1],       pub:[508,126,39000] },
+  { country:'Netherlands',    flag:'🇳🇱', region:'Europe',      ttd:[4.5,2.3,14.1],      pub:[8,4.7,1500] },
+  { country:'Denmark',        flag:'🇩🇰', region:'Europe',      ttd:[3.9,2.1,4.1],       pub:[11,3.7,373] },
+  { country:'Finland',        flag:'🇫🇮', region:'Europe',      ttd:[2.5,1.7,8.6],       pub:[3,1.7,825] },
+  { country:'Iceland',        flag:'🇮🇸', region:'Europe',      ttd:[0.489,0.338,0.0282],pub:[1.2,0.561,65] },
+  { country:'Norway',         flag:'🇳🇴', region:'Europe',      ttd:[4.7,2.9,2.9],       pub:[2.5,1.5,440] },
+  { country:'Brazil',         flag:'🇧🇷', region:'Americas',    ttd:[32,7.5,76.6],       pub:[149,70,41000] },
+  { country:'Pakistan',       flag:'🇵🇰', region:'APAC',        ttd:[9.3,4,3.7],         pub:[0.895,0.226,658] },
+];
+
+const SEG_LABELS = ['Movies & TV','Brand Safety','Open'];
+let currentRegion = 'all';
+let currentSort = 'pubOpen';
+let currentView = 'table';
+
+// Format millions to readable
+function fmt(m) {
+  if (m >= 1000) return (m/1000).toFixed(m>=10000?0:1).replace(/\.0$/,'') + 'B';
+  if (m >= 1)    return m.toFixed(m>=100?0:m>=10?1:1).replace(/\.0$/,'') + 'M';
+  return (m*1000).toFixed(0) + 'K';
+}
+
+function total(arr) { return arr.reduce((a,b)=>a+b,0); }
+
+function getMaxSegValues() {
+  const max = [0,0,0];
+  DATA.forEach(d=>{
+    d.ttd.forEach((v,i)=>{ if(v>max[i]) max[i]=v; });
+    d.pub.forEach((v,i)=>{ if(v>max[i]) max[i]=v; });
+  });
+  return max;
+}
+const MAX_SEG = getMaxSegValues();
+
+function filtered() {
+  let d = currentRegion === 'all' ? [...DATA] : DATA.filter(r=>r.region===currentRegion);
+  d.sort((a,b)=>{
+    if(currentSort==='name')    return a.country.localeCompare(b.country);
+    if(currentSort==='pubOpen') return b.pub[2]-a.pub[2];
+    if(currentSort==='ttdOpen') return b.ttd[2]-a.ttd[2];
+    if(currentSort==='pubTotal')return total(b.pub)-total(a.pub);
+    if(currentSort==='ttdTotal')return total(b.ttd)-total(a.ttd);
+    return 0;
+  });
+  return d;
+}
+
+function renderCards() {
+  const data = filtered();
+  document.getElementById('countBadge').textContent = data.length + ' countr' + (data.length===1?'y':'ies');
+  const grid = document.getElementById('cardsGrid');
+  if(!data.length){ grid.innerHTML='<div class="empty">No countries found</div>'; return; }
+  grid.innerHTML = data.map(d => {
+    const ttdRows = d.ttd.map((v,i)=>`
+      <div class="seg-row">
+        <span class="seg-label">${SEG_LABELS[i]}</span>
+        <div class="seg-bar-wrap"><div class="seg-bar" style="width:${Math.round(v/MAX_SEG[i]*100)}%"></div></div>
+        <span class="seg-val">${fmt(v)}</span>
+      </div>`).join('');
+    const pubRows = d.pub.map((v,i)=>`
+      <div class="seg-row">
+        <span class="seg-label">${SEG_LABELS[i]}</span>
+        <div class="seg-bar-wrap"><div class="seg-bar" style="width:${Math.round(v/MAX_SEG[i]*100)}%"></div></div>
+        <span class="seg-val">${fmt(v)}</span>
+      </div>`).join('');
+    return `
+    <div class="country-card">
+      <div class="card-header">
+        <div class="card-flag">${d.flag}</div>
+        <div class="card-info">
+          <div class="card-country">${d.country}</div>
+          <div class="card-region">${d.region}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="dsp-block ttd-block">
+          <div class="dsp-header">
+            <span class="dsp-name">TTD</span>
+            <span class="dsp-total">Total: ${fmt(total(d.ttd))}</span>
+          </div>
+          <div class="seg-rows">${ttdRows}</div>
+        </div>
+        <div class="dsp-block pub-block">
+          <div class="dsp-header">
+            <span class="dsp-name">PubMatic</span>
+            <span class="dsp-total">Total: ${fmt(total(d.pub))}</span>
+          </div>
+          <div class="seg-rows">${pubRows}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderTable() {
+  const data = filtered();
+  document.getElementById('countBadge').textContent = data.length + ' countr' + (data.length===1?'y':'ies');
+  const regions = [...new Set(data.map(d=>d.region))];
+  let html = '';
+  if(currentRegion === 'all') {
+    const regionOrder = ['Americas','Europe','APAC','Africa','Middle East'];
+    regionOrder.forEach(region => {
+      const rows = data.filter(d=>d.region===region);
+      if(!rows.length) return;
+      html += `<tr class="tbl-region-row"><td colspan="7">${region}</td></tr>`;
+      rows.forEach(d => {
+        html += `<tr>
+          <td>${d.flag} ${d.country}</td>
+          <td class="ttd-col">${fmt(d.ttd[0])}</td>
+          <td class="ttd-col">${fmt(d.ttd[1])}</td>
+          <td class="ttd-col open-col">${fmt(d.ttd[2])}</td>
+          <td class="pub-col">${fmt(d.pub[0])}</td>
+          <td class="pub-col">${fmt(d.pub[1])}</td>
+          <td class="pub-col open-col">${fmt(d.pub[2])}</td>
+        </tr>`;
+      });
+    });
+  } else {
+    data.forEach(d => {
+      html += `<tr>
+        <td>${d.flag} ${d.country}</td>
+        <td class="ttd-col">${fmt(d.ttd[0])}</td>
+        <td class="ttd-col">${fmt(d.ttd[1])}</td>
+        <td class="ttd-col open-col">${fmt(d.ttd[2])}</td>
+        <td class="pub-col">${fmt(d.pub[0])}</td>
+        <td class="pub-col">${fmt(d.pub[1])}</td>
+        <td class="pub-col open-col">${fmt(d.pub[2])}</td>
+      </tr>`;
+    });
+  }
+  document.getElementById('tableBody').innerHTML = html;
+}
+
+function render() {
+  if(currentView === 'cards') renderCards();
+  else renderTable();
+}
+
+function setView(v) {
+  currentView = v;
+  document.getElementById('cardsView').style.display = v==='cards'?'block':'none';
+  document.getElementById('tableView').style.display = v==='table'?'block':'none';
+  document.getElementById('btn-cards').classList.toggle('active', v==='cards');
+  document.getElementById('btn-table').classList.toggle('active', v==='table');
+  render();
+}
+
+function setRegion(r, btn) {
+  currentRegion = r;
+  document.querySelectorAll('.rf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function setSort(v) {
+  currentSort = v;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
