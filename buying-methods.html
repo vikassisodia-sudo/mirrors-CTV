@@ -89,7 +89,7 @@
 
   /* ═══════════ KEY CONCEPTS ═══════════ */
   .concepts { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:20px; }
-  .concept { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-mid); }
+  .concept { display:flex; align-items:center; gap:8px; font-size:18px; color:var(--ink-mid); }
   .concept-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:14px; }
   .concept-icon.c1 { background:var(--m1-bg); }
   .concept-icon.c2 { background:var(--m2-bg); }
@@ -251,7 +251,7 @@
 
   /* Platform / DSP block — compact, centered */
   .mr-vdsp {
-    background:var(--white); border:1.5px solid var(--border);
+    background:var(--white); border:2px solid #334155;
     border-radius:10px; padding:9px 13px; display:flex; align-items:center; gap:10px;
     align-self:center; width:fit-content; min-width:clamp(200px,55%,360px);
   }
@@ -264,7 +264,7 @@
   .mr-vdsp-icon.iris { background:linear-gradient(135deg,#7c3aed,#8b5cf6); }
   .mr-vdsp-info { flex:1; min-width:0; }
   .mr-vdsp-name { font-size:0.82em; font-weight:800; color:var(--ink); }
-  .mr-vdsp-sub  { font-size:0.57em; color:var(--ink-light); margin-top:2px; }
+  .mr-vdsp-sub  { font-size:0.57em; color:var(--ink-mid); margin-top:2px; }
   .mr-vdsp-chips { display:flex; gap:5px; flex-wrap:wrap; margin-top:6px; }
   .mr-vdsp-chip {
     font-family:'IBM Plex Mono',monospace; font-size:0.5em; font-weight:700;
@@ -801,21 +801,31 @@
   /* ═══ DSP BLOCK — compact ═══ */
   .mr-vdsp { padding:8px 12px !important; }
 
-  /* ═══ CAMPAIGN LIVE — subdued ═══ */
-  .mr-vlive, .mr-vlive.data-only {
+  /* ═══ CAMPAIGN LIVE — dark border + dark text ═══ */
+  .mr-vlive {
     background:var(--white) !important;
-    border:1.5px solid var(--border) !important;
+    border:2px solid #059669 !important;
     box-shadow:none !important;
     padding:8px 12px !important;
-    opacity:0.72;
+    opacity:1 !important;
+  }
+  .mr-vlive.data-only {
+    background:var(--white) !important;
+    border:2px solid #d97706 !important;
+    box-shadow:none !important;
+    padding:8px 12px !important;
+    opacity:1 !important;
   }
   .mr-vlive .mr-vlive-title, .mr-vlive.data-only .mr-vlive-title {
-    color:var(--ink-mid) !important; font-size:0.78em !important;
+    color:var(--ink) !important; font-size:0.78em !important;
     font-family:'Manrope',sans-serif !important; font-style:normal !important;
   }
-  .mr-vlive .mr-vlive-sub, .mr-vlive.data-only .mr-vlive-sub { color:var(--ink-faint) !important; }
-  .mr-vlive .mr-vlive-play, .mr-vlive.data-only .mr-vlive-play { border-color:var(--border) !important; color:var(--ink-faint) !important; width:28px !important; height:28px !important; }
-  .mr-vlive .mr-vlive-check, .mr-vlive.data-only .mr-vlive-check { border-color:var(--border) !important; color:var(--ink-faint) !important; width:22px !important; height:22px !important; }
+  .mr-vlive .mr-vlive-sub { color:var(--ink-mid) !important; }
+  .mr-vlive.data-only .mr-vlive-sub { color:var(--ink-mid) !important; }
+  .mr-vlive .mr-vlive-play { border-color:#059669 !important; color:#059669 !important; width:28px !important; height:28px !important; }
+  .mr-vlive.data-only .mr-vlive-play { border-color:#d97706 !important; color:#d97706 !important; width:28px !important; height:28px !important; }
+  .mr-vlive .mr-vlive-check { border-color:#059669 !important; color:#059669 !important; width:22px !important; height:22px !important; }
+  .mr-vlive.data-only .mr-vlive-check { border-color:#d97706 !important; color:#d97706 !important; width:22px !important; height:22px !important; }
 
   /* ═══ ARROW CONNECTIVITY — remove gaps ═══ */
   .mr-varr-col { padding:0 !important; }
@@ -1257,7 +1267,6 @@
                 <div class="mr-vdsp-sub">The Trade Desk Platform</div>
                 <div class="mr-vdsp-chips">
                   <span class="mr-vdsp-chip c-seg">✓ Segment</span>
-                  <span class="mr-vdsp-chip c-data">Data Only</span>
                 </div>
               </div>
             </div>
@@ -1318,7 +1327,6 @@
                 <div class="mr-vdsp-sub">Any DSP via IRIS-partnered SSPs</div>
                 <div class="mr-vdsp-chips">
                   <span class="mr-vdsp-chip c-ctx">✓ Segment</span>
-                  <span class="mr-vdsp-chip c-data">Data Only</span>
                 </div>
               </div>
             </div>
