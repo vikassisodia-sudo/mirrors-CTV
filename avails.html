@@ -306,7 +306,6 @@ function renderTable() {
     regionOrder.forEach(region => {
       const rows = data.filter(d=>d.region===region);
       if(!rows.length) return;
-      html += `<tr class="tbl-region-row"><td colspan="7">${region}</td></tr>`;
       rows.forEach(d => {
         html += `<tr>
           <td>${d.flag} ${d.country}</td>
