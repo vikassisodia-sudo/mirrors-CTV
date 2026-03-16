@@ -2107,6 +2107,11 @@ function calcUpdateSspNote() {
 
 function calcOnInput() { calcUpdateSegPreview(); }
 
+// Prevent number inputs from changing value on scroll
+document.querySelectorAll('.calc-input[type="number"]').forEach(el => {
+  el.addEventListener('wheel', e => { e.preventDefault(); }, { passive: false });
+});
+
 function calcAddRow(rows, label, value, cls='', est=false) {
   rows.push(`<div class="calc-out-row ${cls}"><span>${label}${est?'<span class="calc-flag">est.</span>':''}</span><span class="calc-result-val">${value}</span></div>`);
 }
