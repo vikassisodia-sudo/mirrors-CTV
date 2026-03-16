@@ -972,58 +972,74 @@
   .calc-divider-line { flex:1; height:1.5px; background:var(--border); }
 
   .calc-card { background:var(--white); border:1.5px solid var(--border); border-radius:14px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
-  .calc-section { padding:20px 24px; border-bottom:1px solid var(--border-light); }
-  .calc-section-hdr { font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.4px; color:var(--ink-light); margin-bottom:16px; }
-  .calc-label { font-family:'Manrope',sans-serif; font-size:clamp(13px,1.1vw,15px); font-weight:700; color:var(--ink); margin-bottom:7px; display:flex; align-items:center; gap:6px; }
-  .calc-hint { font-size:10px; font-weight:600; color:var(--ink-faint); }
+  .calc-section { padding:20px 24px; border-bottom:1px solid var(--border-light); border-left:3px solid transparent; }
+  #calc-s1 { border-left-color:var(--m1); background:linear-gradient(to right,rgba(37,99,235,0.025),transparent 60px); }
+  #calc-s2 { border-left-color:var(--m2); background:linear-gradient(to right,rgba(5,150,105,0.025),transparent 60px); }
+  #calc-s3 { border-left-color:var(--m3); background:linear-gradient(to right,rgba(217,119,6,0.025),transparent 60px); }
+  .calc-section-hdr { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .calc-s-badge { width:clamp(22px,2vw,28px); height:clamp(22px,2vw,28px); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:clamp(11px,0.9vw,13px); font-weight:800; color:#fff; flex-shrink:0; }
+  #calc-s1 .calc-s-badge { background:var(--m1); }
+  #calc-s2 .calc-s-badge { background:var(--m2); }
+  #calc-s3 .calc-s-badge { background:var(--m3); }
+  .calc-s-title { font-family:'Manrope',sans-serif; font-size:clamp(15px,1.4vw,19px); font-weight:800; color:var(--ink); }
+  .calc-s-sub { font-family:'Manrope',sans-serif; font-size:clamp(11px,0.9vw,13px); font-weight:600; color:var(--ink-faint); margin-left:2px; }
+
+  /* Nested panel — shown when a radio with sub-content is active */
+  .calc-nested-panel { border-left:3px solid var(--border); border-radius:0 10px 10px 10px; padding:14px 18px; margin:4px 0 8px 4px; background:var(--bg); transition:border-color .2s; }
+  #calc-s2 .calc-nested-panel { border-left-color:var(--m2); background:rgba(5,150,105,0.03); }
+  #calc-s3 .calc-nested-panel { border-left-color:var(--m3); background:rgba(217,119,6,0.03); }
+  .calc-label { font-family:'Manrope',sans-serif; font-size:clamp(14px,1.3vw,18px); font-weight:700; color:var(--ink); margin-bottom:9px; display:flex; align-items:center; gap:6px; }
+  .calc-hint { font-size:clamp(10px,0.8vw,12px); font-weight:600; color:var(--ink-faint); }
 
   .calc-input, .calc-select {
-    width:100%; padding:11px 14px; border:1.5px solid var(--border); border-radius:9px;
+    width:100%; padding:13px 16px; border:1.5px solid var(--border); border-radius:9px;
     background:var(--bg); color:var(--ink);
-    font-family:'IBM Plex Mono',monospace; font-size:clamp(13px,1.1vw,15px); font-weight:600;
-    transition:border-color .2s; outline:none; margin-bottom:14px; -webkit-appearance:none;
+    font-family:'IBM Plex Mono',monospace; font-size:clamp(14px,1.3vw,18px); font-weight:600;
+    transition:border-color .2s; outline:none; margin-bottom:16px; -webkit-appearance:none;
   }
   .calc-input:focus, .calc-select:focus { border-color:var(--m1-border); }
 
-  .calc-radio-group { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:14px; }
+  .calc-radio-group { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
   .calc-radio-group label {
-    font-family:'Manrope',sans-serif; font-size:clamp(12px,1vw,14px); font-weight:700;
-    padding:8px 15px; border:1.5px solid var(--border); border-radius:8px;
+    font-family:'Manrope',sans-serif; font-size:clamp(13px,1.1vw,16px); font-weight:700;
+    padding:10px 18px; border:1.5px solid var(--border); border-radius:9px;
     background:var(--bg); color:var(--ink-mid);
-    cursor:pointer; transition:all .18s; display:flex; align-items:center; gap:6px; line-height:1;
+    cursor:pointer; transition:all .18s; display:flex; align-items:center; gap:7px; line-height:1;
   }
   .calc-radio-group label:has(input:checked) { background:var(--ink); color:#fff; border-color:var(--ink); }
   .calc-radio-group label.calc-disabled { opacity:.35; pointer-events:none; }
   .calc-radio-group input[type=radio] { display:none; }
 
-  .calc-sub { background:var(--bg); border:1px dashed var(--border); border-radius:9px; padding:14px 18px; margin:-4px 0 14px; }
-  .calc-row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .calc-sub { background:var(--bg); border:1px dashed var(--border); border-radius:9px; padding:16px 20px; margin:-4px 0 16px; }
+  .calc-row2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
   @media(max-width:600px){ .calc-row2{grid-template-columns:1fr;} }
 
-  .calc-note { font-size:clamp(11px,0.9vw,13px); color:var(--ink-mid); padding:8px 12px; border-radius:7px; border:1px solid var(--border); background:var(--bg); margin:-8px 0 14px; line-height:1.5; font-family:'Manrope',sans-serif; }
+  .calc-note { font-size:clamp(12px,1vw,14px); color:var(--ink-mid); padding:10px 14px; border-radius:8px; border:1px solid var(--border); background:var(--bg); margin:-8px 0 16px; line-height:1.6; font-family:'Manrope',sans-serif; }
   .calc-note.green { background:var(--green-bg); border-color:#a7f3d0; color:#065f46; }
   .calc-note.red   { background:var(--red-bg); border-color:#fca5a5; color:#991b1b; }
   .calc-note.amber { background:#fffbeb; border-color:#fde68a; color:#92400e; }
   .calc-note.blue  { background:var(--m1-bg); border-color:var(--m1-border); color:var(--m1-accent); }
 
-  .calc-actions { padding:20px 24px; }
-  .calc-btn { width:100%; padding:14px; background:var(--ink); border:none; border-radius:10px; color:#fff; font-family:'Manrope',sans-serif; font-size:clamp(14px,1.2vw,17px); font-weight:700; cursor:pointer; transition:all .25s; }
+  .calc-actions { padding:20px 24px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .calc-btn { padding:14px 36px; background:var(--ink); border:none; border-radius:10px; color:#fff; font-family:'Manrope',sans-serif; font-size:clamp(14px,1.2vw,17px); font-weight:700; cursor:pointer; transition:all .25s; white-space:nowrap; }
   .calc-btn:hover { background:#1f2937; transform:translateY(-1px); }
-  .calc-error { font-size:13px; color:var(--red); margin-top:8px; display:none; font-family:'Manrope',sans-serif; }
+  .calc-error { font-size:clamp(12px,1vw,14px); color:var(--red); display:none; font-family:'Manrope',sans-serif; }
 
-  .calc-output { display:none; padding:20px 24px; border-top:2px solid var(--ink); }
+  .calc-output { display:none; padding:28px 32px; border-top:2px solid var(--ink); background:#fafbfc; }
   .calc-output.show { display:block; animation:fadeUp .4s ease-out; }
-  .calc-out-hdr { font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.4px; color:var(--ink-light); margin-bottom:14px; }
-  .calc-out-row { display:flex; justify-content:space-between; align-items:center; font-family:'Manrope',sans-serif; font-size:clamp(12px,1vw,14px); padding:5px 0; border-bottom:1px dotted var(--border-light); gap:12px; }
+  .calc-out-hdr { font-family:'IBM Plex Mono',monospace; font-size:clamp(12px,1vw,14px); font-weight:800; text-transform:uppercase; letter-spacing:2px; color:var(--ink); margin-bottom:20px; }
+  .calc-out-row { display:flex; justify-content:space-between; align-items:center; font-family:'Manrope',sans-serif; font-size:clamp(17px,1.4vw,20px); font-weight:600; color:var(--ink); padding:11px 0; border-bottom:1px solid var(--border); gap:16px; }
   .calc-out-row:last-child { border-bottom:none; }
-  .calc-out-row.indent { padding-left:16px; font-size:clamp(11px,0.9vw,13px); color:var(--ink-light); }
-  .calc-out-row.neg    { color:var(--red); }
-  .calc-out-row.pos    { color:var(--green); font-weight:700; }
-  .calc-out-row.total  { font-size:clamp(14px,1.3vw,18px); font-weight:800; font-family:'IBM Plex Mono',monospace; border-top:2px solid var(--ink); border-bottom:none; margin-top:8px; padding-top:10px; color:var(--ink); }
-  .calc-out-row.meta   { font-size:11px; color:var(--ink-faint); border-bottom:none; }
-  .calc-out-row.hdr    { font-size:11px; color:var(--ink-faint); font-style:italic; margin-top:6px; border-bottom:none; }
-  .calc-out-row .calc-result-val { font-family:'IBM Plex Mono',monospace; font-weight:700; white-space:nowrap; }
-  .calc-est-note { font-size:11px; color:#92400e; border-top:1px solid var(--border); padding-top:8px; margin-top:8px; font-family:'Manrope',sans-serif; }
+  .calc-out-row.indent { padding-left:22px; font-size:clamp(16px,1.3vw,19px); color:#374151; font-weight:500; }
+  .calc-out-row.neg    { color:#b91c1c; font-weight:700; }
+  .calc-out-row.pos    { color:#065f46; font-weight:800; }
+  .calc-out-row.total  { font-size:clamp(19px,1.8vw,24px); font-weight:800; font-family:'IBM Plex Mono',monospace; border-top:2px solid var(--ink); border-bottom:none; margin-top:10px; padding-top:16px; color:var(--ink); }
+  .calc-out-row.meta   { font-size:clamp(14px,1.1vw,17px); color:var(--ink-light); font-weight:500; border-bottom:none; }
+  .calc-out-row.sp-pct { background:linear-gradient(135deg,#dcfce7,#dbeafe); border-radius:10px; padding:14px 18px; margin-top:10px; border:2px solid #4ade80; border-bottom:2px solid #4ade80 !important; }
+  .calc-out-row.sp-pct .calc-result-val { font-size:clamp(22px,2.2vw,30px); color:#14532d; font-weight:900; }
+  .calc-out-row.hdr    { font-size:clamp(12px,1vw,14px); color:var(--ink-mid); font-weight:700; font-style:normal; letter-spacing:.3px; margin-top:10px; border-bottom:1px solid var(--border-light); padding-bottom:4px; }
+  .calc-out-row .calc-result-val { font-family:'IBM Plex Mono',monospace; font-weight:800; white-space:nowrap; }
+  .calc-est-note { font-size:clamp(13px,1vw,15px); color:#92400e; border-top:1px solid var(--border); padding-top:10px; margin-top:10px; font-family:'Manrope',sans-serif; }
   .calc-flag { font-size:9px; color:#92400e; background:#fffbeb; border:1px solid #fde68a; border-radius:3px; padding:1px 5px; margin-left:4px; }
 </style>
 </head>
@@ -1624,9 +1640,13 @@
 
       <div class="calc-card">
 
-        <!-- 1. Deal Basis -->
-        <div class="calc-section">
-          <div class="calc-section-hdr">1 · Deal Basis</div>
+        <!-- 1. Campaign Inputs -->
+        <div class="calc-section" id="calc-s1">
+          <div class="calc-section-hdr">
+            <span class="calc-s-badge">1</span>
+            <span class="calc-s-title">Campaign Inputs</span>
+            <span class="calc-s-sub">Client CPM &amp; DSP</span>
+          </div>
           <div class="calc-label">Client CPM ($)</div>
           <input type="number" class="calc-input" id="c-clientCPM" min="0" step="0.01" placeholder="e.g. 20.00" value="20" oninput="calcOnInput()">
           <div class="calc-label">DSP</div>
@@ -1649,16 +1669,20 @@
         </div>
 
         <!-- 2. Deal & Media Margin -->
-        <div class="calc-section">
-          <div class="calc-section-hdr">2 · Deal &amp; Media Margin</div>
+        <div class="calc-section" id="calc-s2">
+          <div class="calc-section-hdr">
+            <span class="calc-s-badge">2</span>
+            <span class="calc-s-title">Deal &amp; Media Margin</span>
+            <span class="calc-s-sub">SSP deal + SP margin</span>
+          </div>
           <div id="c-dealToggleRow">
-            <div class="calc-label">Deal used?</div>
+            <div class="calc-label">Is a deal being used?</div>
             <div class="calc-radio-group">
               <label><input type="radio" name="c-dealUsed" value="no" checked onchange="calcOnDealChange()"> No deal</label>
               <label><input type="radio" name="c-dealUsed" value="yes" onchange="calcOnDealChange()"> Yes, deal active</label>
             </div>
           </div>
-          <div id="c-dealSection" style="display:none;">
+          <div id="c-dealSection" class="calc-nested-panel" style="display:none;">
             <div class="calc-label">SSP / Deal Partner</div>
             <select class="calc-select" id="c-ssp" onchange="calcOnSspChange()">
               <option value="pubmatic">Pubmatic</option>
@@ -1669,7 +1693,7 @@
               <option value="nexxen">Nexxen</option>
             </select>
             <div id="c-sspNote" class="calc-note green"></div>
-            <div class="calc-label" style="margin-top:14px;">Media Margin</div>
+            <div class="calc-label" style="margin-top:14px;">SP Media Margin</div>
             <div class="calc-radio-group">
               <label><input type="radio" name="c-marginMode" value="pct" checked onchange="calcOnMarginModeChange()"> % of Client CPM</label>
               <label><input type="radio" name="c-marginMode" value="fixed" onchange="calcOnMarginModeChange()"> Fixed CPM ($)</label>
@@ -1686,8 +1710,12 @@
         </div>
 
         <!-- 3. Contextual Segment -->
-        <div class="calc-section">
-          <div class="calc-section-hdr">3 · Contextual Segment</div>
+        <div class="calc-section" id="calc-s3">
+          <div class="calc-section-hdr">
+            <span class="calc-s-badge">3</span>
+            <span class="calc-s-title">Contextual Segment</span>
+            <span class="calc-s-sub">Where &amp; how it's applied</span>
+          </div>
           <div class="calc-label">Where is the segment applied?</div>
           <div class="calc-radio-group" id="c-segLocGroup">
             <label id="c-opt-none"><input type="radio" name="c-segLoc" value="none" checked onchange="calcOnSegLocChange()"> Not applied</label>
@@ -1696,8 +1724,8 @@
           </div>
           <div id="c-segLocNote" class="calc-note red" style="display:none;"></div>
 
-          <div id="c-segFeeSection" style="display:none;">
-            <div class="calc-label">Segment Fee Mode</div>
+          <div id="c-segFeeSection" class="calc-nested-panel" style="display:none;">
+            <div class="calc-label">Segment Fee</div>
             <div class="calc-radio-group">
               <label><input type="radio" name="c-segMode" value="pct" checked onchange="calcOnSegModeChange()"> % of CPM with cap</label>
               <label><input type="radio" name="c-segMode" value="fixed" onchange="calcOnSegModeChange()"> Fixed CPM ($)</label>
@@ -1709,7 +1737,7 @@
                   <input type="number" class="calc-input" id="c-segRate" min="0" max="100" step="0.1" placeholder="e.g. 15" oninput="calcOnInput()" style="margin-bottom:0;">
                 </div>
                 <div>
-                  <div class="calc-label">Cap ($) <span class="calc-hint">max segment CPM</span></div>
+                  <div class="calc-label">Cap ($) <span class="calc-hint">max CPM</span></div>
                   <input type="number" class="calc-input" id="c-segCap" min="0" step="0.01" placeholder="e.g. 3.00" oninput="calcOnInput()" style="margin-bottom:0;">
                 </div>
               </div>
@@ -1932,12 +1960,12 @@ const CALC_DSP = {
 };
 
 const CALC_SSP = {
-  pubmatic:{ name:'Pubmatic', cutType:'on_margin',    cutPct:15, allowsSegInDeal:true,  est:false, note:'15% on margin earned by SP (or 15% of combined segment+margin if segment inside deal)' },
-  xandr:   { name:'Xandr',   cutType:'on_revenue',   cutPct:12, allowsSegInDeal:false, est:false, note:'12% of total SP revenue, irrespective of margin split' },
-  equativ: { name:'Equativ', cutType:'included',     cutPct:15, allowsSegInDeal:false, est:false, note:'15% tech fee already included in media price — no additional deduction applied' },
-  criteo:  { name:'Criteo',  cutType:'on_margin',    cutPct:15, allowsSegInDeal:false, est:true,  note:'15% on margin (structure estimated — confirm with Criteo agreement)' },
-  openx:   { name:'OpenX',   cutType:'on_margin',    cutPct:10, allowsSegInDeal:false, est:true,  note:'10% on margin (structure estimated — confirm with OpenX agreement)' },
-  nexxen:  { name:'Nexxen',  cutType:'on_non_margin',cutPct:5,  allowsSegInDeal:false, est:false, note:'5% of (client CPM − media margin)' },
+  pubmatic:{ name:'Pubmatic', cutType:'on_margin',     cutPct:15, allowsSegInDeal:true,  est:false, note:'15% on margin earned by SP (or 15% of combined segment+margin if segment inside deal)' },
+  xandr:   { name:'Xandr',   cutType:'on_client_cpm', cutPct:12, allowsSegInDeal:false, est:false, note:'12% of client CPM' },
+  equativ: { name:'Equativ', cutType:'on_client_cpm', cutPct:3,  allowsSegInDeal:false, est:false, note:'3% of client CPM (max)' },
+  criteo:  { name:'Criteo',  cutType:'on_margin',     cutPct:15, allowsSegInDeal:false, est:true,  note:'15% on margin (structure estimated — confirm with Criteo agreement)' },
+  openx:   { name:'OpenX',   cutType:'on_margin',     cutPct:10, allowsSegInDeal:false, est:true,  note:'10% on margin (structure estimated — confirm with OpenX agreement)' },
+  nexxen:  { name:'Nexxen',  cutType:'on_margin',     cutPct:5,  allowsSegInDeal:false, est:false, note:'5% of media margin' },
 };
 
 function calcSSPDeduction(sspCfg, { spRevBeforeSSP, segmentGross, marginGross, clientCPM, segLoc }) {
@@ -1949,13 +1977,10 @@ function calcSSPDeduction(sspCfg, { spRevBeforeSSP, segmentGross, marginGross, c
         return { base:combined, cut:combined*(pct/100), label:`${pct}% of combined pool (segment + margin)` };
       }
       return { base:marginGross, cut:marginGross*(pct/100), label:`${pct}% of media margin` };
-    case 'on_revenue':
-      return { base:spRevBeforeSSP, cut:spRevBeforeSSP*(pct/100), label:`${pct}% of total SP revenue` };
+    case 'on_client_cpm':
+      return { base:clientCPM, cut:clientCPM*(pct/100), label:`${pct}% of client CPM` };
     case 'included':
       return { base:0, cut:0, label:`${pct}% tech fee already in media price` };
-    case 'on_non_margin':
-      const nonMargin = Math.max(0, clientCPM - marginGross);
-      return { base:nonMargin, cut:nonMargin*(pct/100), label:`${pct}% of (CPM ${calcFmt(clientCPM)} − margin ${calcFmt(marginGross)})` };
     default:
       return { base:0, cut:0, label:'Unknown' };
   }
@@ -2017,8 +2042,14 @@ function calcRefreshSegmentOptions() {
 
 function calcOnSegLocChange() {
   const loc = cRadio('c-segLoc');
-  if (loc === 'none') { cHide('c-segFeeSection'); }
-  else { cShow('c-segFeeSection'); calcUpdateSegPlatformNote(); calcUpdateSegPreview(); }
+  // Fee inputs always stay in section 3 — just show/hide
+  if (loc === 'none') {
+    cHide('c-segFeeSection');
+  } else {
+    cShow('c-segFeeSection');
+    calcUpdateSegPlatformNote(); calcUpdateSegPreview();
+  }
+  // "Inside Deal" forces deal section open in section 2
   if (loc === 'ssp') {
     document.querySelector('input[name="c-dealUsed"][value="yes"]').checked = true;
     cShow('c-dealSection'); c$('c-ssp').value = 'pubmatic';
@@ -2100,41 +2131,47 @@ function calcCalculate() {
   const r = calcCompute({ clientCPM, dspKey:cSel('c-dsp'), segLoc, segMode, segRate, segCap, segFixed, hasDeal, sspKey, marginMode, marginPct, marginFixed });
   const rows = [];
   calcAddRow(rows, 'Client CPM (advertiser pays)', calcFmt(r.clientCPM));
-  if (r.segLoc !== 'none') {
-    rows.push(`<div class="calc-out-row hdr"><span>── Contextual Segment ──</span></div>`);
+
+  // ── Segment on DSP path (TTD) ──
+  if (r.segLoc === 'dsp') {
+    rows.push(`<div class="calc-out-row hdr"><span>── Contextual Segment (On TTD DSP) ──</span></div>`);
     const capNote = r.segMode === 'pct' ? (() => { const raw=r.clientCPM*(r.segRate/100); const capped=r.segCap>0&&raw>r.segCap; return `${r.segRate}% of ${calcFmt(r.clientCPM)}`+(r.segCap?`, cap ${calcFmt(r.segCap)}`:'')+( capped?' ← capped':''); })() : 'fixed';
     calcAddRow(rows, `  Segment fee (${capNote})`, calcFmt(r.segmentGross), 'indent');
-    if (r.segLoc === 'dsp') {
-      calcAddRow(rows, `  TTD cut (30%)`, '− ' + calcFmt(r.dspCut), 'indent neg');
-      calcAddRow(rows, '  SP segment net after TTD', calcFmt(r.segNetAfterDsp), 'indent pos');
-    }
+    calcAddRow(rows, `  TTD cut (30%)`, '− ' + calcFmt(r.dspCut), 'indent neg');
+    calcAddRow(rows, '  SP net after TTD', calcFmt(r.segNetAfterDsp), 'indent pos');
   }
+
+  // ── Deal / Margin section ──
   if (r.sspCfg) {
-    rows.push(`<div class="calc-out-row hdr"><span>── Deal / Media Margin${r.segLoc==='ssp'?' + Segment (combined)':''} ──</span></div>`);
     const modeLabel = cRadio('c-marginMode') === 'pct' ? `${cVal('c-marginPct')}% of ${calcFmt(r.clientCPM)}` : 'fixed CPM';
     if (r.segLoc === 'ssp') {
-      calcAddRow(rows, `  Segment fee`, calcFmt(r.segmentGross), 'indent');
+      // Segment inside deal — single combined block
+      rows.push(`<div class="calc-out-row hdr"><span>── Deal: Segment + Media Margin (Pubmatic combined pool) ──</span></div>`);
+      calcAddRow(rows, `  Contextual segment fee`, calcFmt(r.segmentGross), 'indent');
       calcAddRow(rows, `  Media margin (${modeLabel})`, calcFmt(r.marginGross), 'indent');
       calcAddRow(rows, `  Combined gross`, calcFmt(r.sspResult.base), 'indent');
-      calcAddRow(rows, `  ${r.sspCfg.name} cut — ${r.sspResult.label}`, '− ' + calcFmt(r.sspResult.cut), 'indent neg', r.sspCfg.est);
-      calcAddRow(rows, '  SP in-hand (combined net)', calcFmt(r.totalSP), 'indent pos');
+      calcAddRow(rows, `  Pubmatic cut — ${r.sspResult.label}`, '− ' + calcFmt(r.sspResult.cut), 'indent neg', r.sspCfg.est);
     } else {
+      rows.push(`<div class="calc-out-row hdr"><span>── Deal / Media Margin ──</span></div>`);
       calcAddRow(rows, `  Media margin (${modeLabel})`, calcFmt(r.marginGross), 'indent');
       if (r.sspResult.cut === 0 && r.sspCfg.cutType === 'included') {
         calcAddRow(rows, `  ${r.sspCfg.name} — ${r.sspResult.label}`, '−  $0.00', 'indent');
       } else {
         calcAddRow(rows, `  ${r.sspCfg.name} cut — ${r.sspResult.label}`, '− ' + calcFmt(r.sspResult.cut), 'indent neg', r.sspCfg.est);
       }
+      // Show SP deal net only when segment was on DSP (pairing TTD net + SSP deal net)
+      if (r.segLoc === 'dsp') {
+        const dealNet = r.marginGross - r.sspResult.cut;
+        calcAddRow(rows, `  SP net after ${r.sspCfg.name}`, calcFmt(dealNet), 'indent pos');
+      }
     }
   }
-  if (r.sspCfg?.cutType === 'on_non_margin') {
-    calcAddRow(rows, `  Base = CPM ${calcFmt(r.clientCPM)} − margin ${calcFmt(r.marginGross)}`, calcFmt(r.sspResult.base), 'indent meta');
-  }
   calcAddRow(rows, 'TOTAL SP In-Hand CPM', calcFmt(r.totalSP), 'total');
-  calcAddRow(rows, 'SP revenue as % of client CPM', calcFmtPct(r.totalSPPct), 'meta');
+  calcAddRow(rows, '🎯 SP Revenue % of Client CPM', calcFmtPct(r.totalSPPct), 'sp-pct');
   if (r.estFlags.length) rows.push(`<div class="calc-est-note">⚠ Estimated structures: ${r.estFlags.join(', ')}. Confirm before using in proposals.</div>`);
   c$('c-breakdown').innerHTML = rows.join('');
-  const out = c$('c-output'); out.classList.add('show');
+  const out = c$('c-output');
+  out.classList.add('show');
   out.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
 
